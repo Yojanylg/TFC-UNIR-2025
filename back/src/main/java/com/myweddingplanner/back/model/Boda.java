@@ -23,12 +23,13 @@ public class Boda {
     private String fecha;
 
     // RELACION CON ITINERARIO
-    @OneToOne(mappedBy = "boda")
+    @OneToOne
+    @JoinColumn(name = "id_boda")
     private Itinerario itinerario;
 
     // RELACION CON REGALO BODA
     @OneToMany(mappedBy = "boda")
-    private List<RegaloBoda> regaloBoda;
+    private List<RegaloBoda> regalosBoda;
 
     // RELACION CON USUARIOS POR MEDIO DE INVITACION-USUARIO
     @OneToMany(mappedBy = "boda")

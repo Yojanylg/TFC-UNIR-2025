@@ -18,7 +18,6 @@ public class Itinerario {
     private String descripcion;
 
     // RELACION CON BODA
-    @OneToOne
-    @JoinColumn(name = "id_boda")
+    @OneToOne(mappedBy = "itinerario")
     private Boda boda;
 }

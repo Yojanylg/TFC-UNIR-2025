@@ -1,5 +1,6 @@
 package com.myweddingplanner.back.service;
 
+import com.myweddingplanner.back.dto.BodaDTO;
 import com.myweddingplanner.back.model.Alergeno;
 import com.myweddingplanner.back.model.Boda;
 import org.springframework.stereotype.Service;
@@ -7,14 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public interface BodaService {
 
-    Optional<Boda> findById(Long id);
+    Optional<BodaDTO> findById(Long id);
 
-    List<Boda> findAll();
+    List<BodaDTO> findAll();
 
-    Boda save(Boda boda);
+    BodaDTO save(BodaDTO dto);
 
     void deleteById (Long id);
 }

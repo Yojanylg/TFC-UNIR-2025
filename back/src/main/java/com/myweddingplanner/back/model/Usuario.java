@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
+@Table(name = "usuarios")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,19 +30,17 @@ public class Usuario {
 
     private String telefono;
 
-    @ManyToMany
-    @JoinTable(name = "usuario_alergeno",
-            joinColumns = @JoinColumn(name = "id_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "id_alergeno"))
-    private List<Alergeno> alergenos;
+    // RELACIONES
 
-    @ManyToMany
-    @JoinTable(name = "usuario_boda",
-            joinColumns = @JoinColumn(name = "id_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "id_boda"))
-    private List<Usuario> novios;
+    @OneToMany(mappedBy = "usuario")
+    private List<UsuarioAlergeno> alergenos;
+
+    // RELACION CON BODA POR MEDIO DE BODA-USUARIO
+    @OneToMany(mappedBy = "usuario")
+    private List<BodaUsuario> bodas;
 
 
+    // RELACION CON BODA POR MEDIO DE INVITACION-USUARIO
     @OneToMany(mappedBy = "usuario")
     private List<InvitacionUsuario> invitaciones;
 

@@ -1,6 +1,5 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.model.Alergeno;
 import com.myweddingplanner.back.model.ImagenProducto;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public interface ImagenProductoServide {
+public interface ImagenProductoService {
 
     Optional<ImagenProducto> findById(Long id);
 

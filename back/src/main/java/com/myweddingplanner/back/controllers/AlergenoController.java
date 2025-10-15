@@ -1,7 +1,8 @@
 package com.myweddingplanner.back.controllers;
 
+import com.myweddingplanner.back.dto.AlergenoDTO;
 import com.myweddingplanner.back.dto.UsuarioDTO;
-import com.myweddingplanner.back.service.UsuarioService;
+import com.myweddingplanner.back.service.AlergenoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,15 +12,15 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuarios")
-@Tag(name = "API Usuarios",
-description = "CRUD usuarios de la App")
-public class UsuarioController {
+@RequestMapping("/alergenos")
+@Tag(name = "API Alergenos",
+        description = "CRUD alergenos de la App")
+public class AlergenoController {
 
-    private final UsuarioService usuarioService;
+    private final AlergenoService alergenoService;
 
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
+    public AlergenoController(AlergenoService alergenoService) {
+        this.alergenoService = alergenoService;
     }
 
     @GetMapping("error")
@@ -27,10 +28,11 @@ public class UsuarioController {
         return "Error en la api";
     }
 
+
     // CREATE
     @PostMapping
-    public ResponseEntity<UsuarioDTO> create(@RequestBody UsuarioDTO dto){
-        UsuarioDTO creado = usuarioService.save(dto);
+    public ResponseEntity<AlergenoDTO> create(@RequestBody AlergenoDTO dto){
+        AlergenoDTO creado = alergenoService.save(dto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -42,25 +44,25 @@ public class UsuarioController {
 
     // READ ALL
     @GetMapping
-    public ResponseEntity<List<UsuarioDTO>> getAll(){
-        return ResponseEntity.ok(usuarioService.findAll());
+    public ResponseEntity<List<AlergenoDTO>> getAll(){
+        return ResponseEntity.ok(alergenoService.findAll());
     }
 
     // READ ONE
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> getById(@PathVariable Long id){
-        return usuarioService.findById(id)
+    public ResponseEntity<AlergenoDTO> getById(@PathVariable Long id){
+        return alergenoService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // UPDATE
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> update(@PathVariable Long id, @RequestBody UsuarioDTO dto){
-        return usuarioService.findById(id)
+    public ResponseEntity<AlergenoDTO> update(@PathVariable Long id, @RequestBody AlergenoDTO dto){
+        return alergenoService.findById(id)
                 .map(existing -> {
                     dto.setId(id);
-                    UsuarioDTO actualizado = usuarioService.save(dto);
+                    AlergenoDTO actualizado = alergenoService.save(dto);
                     return ResponseEntity.ok(actualizado);
                 }).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -68,11 +70,12 @@ public class UsuarioController {
     // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
-        return usuarioService.findById(id)
+        return alergenoService.findById(id)
                 .map(existing -> {
-                    usuarioService.deleteById(id);
+                    alergenoService.deleteById(id);
                     return ResponseEntity.noContent().build();})
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
 
 }

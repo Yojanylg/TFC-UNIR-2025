@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "itinerarios")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +17,7 @@ public class Itinerario {
     private Long id;
     private String descripcion;
 
+    // RELACION CON BODA
     @OneToOne
     @JoinColumn(name = "id_boda")
     private Boda boda;

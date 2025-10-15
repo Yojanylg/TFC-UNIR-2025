@@ -23,4 +23,7 @@ public class Alergeno {
     @OneToMany(mappedBy = "alergeno")
     private List<ImagenAlergeno> imagenes;
 
+    @OneToMany(mappedBy = "alergeno")
+    private List<UsuarioAlergeno> usuarios;
+
 }

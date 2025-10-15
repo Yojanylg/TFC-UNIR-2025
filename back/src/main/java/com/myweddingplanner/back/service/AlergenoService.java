@@ -1,19 +1,17 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.model.Alergeno;
-import org.springframework.stereotype.Service;
+import com.myweddingplanner.back.dto.AlergenoDTO;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public interface AlergenoService {
 
-    Optional<Alergeno> findById(Long id);
+    Optional<AlergenoDTO> findById(Long id);
 
-    List<Alergeno> findAll();
+    List<AlergenoDTO> findAll();
 
-    Alergeno save(Alergeno alergeno);
+    AlergenoDTO save(AlergenoDTO dto);
 
     void deleteById (Long id);
 }

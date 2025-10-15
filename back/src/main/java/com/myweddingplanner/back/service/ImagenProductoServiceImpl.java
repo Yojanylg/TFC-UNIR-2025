@@ -6,7 +6,7 @@ import com.myweddingplanner.back.repository.ImagenProductoRepository;
 import java.util.List;
 import java.util.Optional;
 
-public class ImagenProductoServiceImpl implements ImagenProductoServide{
+public class ImagenProductoServiceImpl implements ImagenProductoService {
 
     private final ImagenProductoRepository repository;
 

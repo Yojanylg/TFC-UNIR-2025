@@ -33,7 +33,7 @@ CREATE TABLE alergenos (
 
 CREATE TABLE imagen_alergenos (
     id BIGINT not null auto_increment PRIMARY KEY,
-    url VARCHAR(255) NOT NULL,
+    enlace VARCHAR(255) NOT NULL,
     tipo VARCHAR(255) NOT NULL,
     id_alergeno BIGINT,
     FOREIGN KEY (id_alergeno) REFERENCES alergenos(id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -50,7 +50,7 @@ CREATE TABLE productos (
 
 CREATE TABLE imagen_productos (
     id BIGINT not null auto_increment PRIMARY KEY,
-    url VARCHAR(255) NOT NULL,
+    enlace VARCHAR(255) NOT NULL,
     tipo VARCHAR(255) NOT NULL,
     id_producto BIGINT,
     FOREIGN KEY (id_producto) REFERENCES productos(id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -80,22 +80,37 @@ CREATE TABLE regalos_boda (
     FOREIGN KEY (id_producto) REFERENCES productos(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE usuarios_alergenos (
+	id BIGINT auto_increment NOT NULL PRIMARY KEY,
+	id_usuario BIGINT NULL,
+	id_alergeno BIGINT NULL,
+	FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (id_alergeno) REFERENCES alergenos(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE bodas_usuario (
+    id BIGINT auto_increment NOT NULL PRIMARY KEY,
+    id_usuario BIGINT NULL,
+    id_boda BIGINT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_boda) REFERENCES bodas(id) ON DELETE CASCADE ON UPDATE CASCADE,
+);
 
 
-INSERT INTO itinerario (descripcion)
+INSERT INTO itinerarios (descripcion)
 VALUES 
 ('Ceremonia y recepción en el mismo lugar'),
 ('Ceremonia en iglesia y banquete en hotel'),
 ('Boda en la playa con cena al aire libre');
 
 
-INSERT INTO boda (lugar, fecha, id_itinerario)
+INSERT INTO bodas (lugar, fecha, id_itinerario)
 VALUES 
 ('Hotel Mediterráneo', '2025-06-14', 1),
 ('Iglesia San Jorge y Hotel Palace', '2025-08-22', 2),
 ('Playa del Sol', '2025-09-10', 3);
 
-INSERT INTO usuario (nombre, apellido_1, apellido_2, email, telefono)
+INSERT INTO usuarios (nombre, apellido_1, apellido_2, email, telefono)
 VALUES
 ('Laura', 'Martínez', 'Gómez', 'laura.martinez@example.com', '+34611122334'),
 ('Carlos', 'Pérez', 'Ruiz', 'carlos.perez@example.com', '+34622233445'),
@@ -110,7 +125,7 @@ VALUES
 ('Mariscos');
 
 
-INSERT INTO imagen_alergeno (url, tipo, id_alergeno)
+INSERT INTO imagen_alergenos (enlace, tipo, id_alergeno)
 VALUES 
 ('https://cdn.example.com/img/alergenos/gluten.png', 'png', 1),
 ('https://cdn.example.com/img/alergenos/lacteos.jpg', 'jpg', 2),
@@ -124,14 +139,14 @@ VALUES
 ('Juego de toallas premium', 'https://shop.example.com/toallas', 'Set de 6 toallas de algodón egipcio', 85.00),
 ('Set de copas de vino', 'https://shop.example.com/copas', 'Copas de cristal soplado artesanalmente', 60.00);
 
-INSERT INTO imagen_producto (url, tipo, id_producto)
+INSERT INTO imagen_productos (enlace, tipo, id_producto)
 VALUES
 ('https://cdn.example.com/img/productos/vajilla.png', 'png', 1),
 ('https://cdn.example.com/img/productos/cafetera.jpg', 'jpg', 2),
 ('https://cdn.example.com/img/productos/toallas.jpg', 'jpg', 3),
 ('https://cdn.example.com/img/productos/copas.png', 'png', 4);
 
-INSERT INTO invitacion_usuario (id_usuario, id_boda, acompanantes_mayores, acompanantes_menores, confirmado)
+INSERT INTO invitacion_usuarios (id_usuario, id_boda, acompanantes_mayores, acompanantes_menores, confirmado)
 VALUES 
 (1, 1, 1, 0, TRUE),
 (2, 1, 0, 0, FALSE),
@@ -144,3 +159,21 @@ VALUES
 (2, 1, 4, 60.00, FALSE),
 (3, 2, 1, 120.50, TRUE),
 (4, 3, 3, 85.00, TRUE);
+
+INSERT INTO usuarios_alergenos (id_usuario, id_alergeno)
+VALUES 
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 1),
+(3, 2),
+(4, 3);
+
+INSERT INTO bodas_usuario (id_usuario, id_boda)
+VALUES 
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 1),
+(3, 2),
+(4, 3);

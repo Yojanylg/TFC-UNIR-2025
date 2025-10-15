@@ -6,26 +6,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "invitacion_usuarios")
+@Table(name = "bodas_usuario")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InvitacionUsuario {
+public class BodaUsuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "acompanantes_menores")
-    private int acomptesMenores;
-    @Column(name = "acompanantes_mayores")
-    private int acomptesMayores;
-    private boolean confirmado;
-
     @ManyToOne
     @JoinColumn(name = "id_boda")
     private Boda boda;
 
+    // Relacion con Usuario
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "imagen_productos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,7 +15,7 @@ public class ImagenProducto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String url;
+    private String enlace;
     // TODO Enum
     private String tipo;
 

@@ -1,19 +1,18 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.model.Usuario;
+import com.myweddingplanner.back.dto.UsuarioDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public interface UsuarioService {
 
-    Optional<Usuario> findById(Long id);
+    Optional<UsuarioDTO> findById(Long id);
 
-    List<Usuario> findAll();
+    List<UsuarioDTO> findAll();
 
-    Usuario save(Usuario usuario);
+    UsuarioDTO save(UsuarioDTO dto);
 
     void deleteById (Long id);
 }

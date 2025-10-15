@@ -1,26 +1,24 @@
 package com.myweddingplanner.back.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Table(name = "imagen_alergenos")
-@Data
-@NoArgsConstructor
+@Table(name = "usuarios_alergenos")
 @AllArgsConstructor
-public class ImagenAlergeno {
+@NoArgsConstructor
+@Data
+public class UsuarioAlergeno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String enlace;
-    // TODO Enum
-    private String tipo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_alergeno")
     private Alergeno alergeno;
-
 }

@@ -1,26 +1,28 @@
 package com.myweddingplanner.back.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "imagen_alergenos")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(exclude = {})
 public class ImagenAlergeno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
     private String enlace;
-    // TODO Enum
     private String tipo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_alergeno")
-    private Alergeno alergeno;
+    //bidireccional
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "id_alergeno")
+    //private Alergeno alergeno;
 
 }

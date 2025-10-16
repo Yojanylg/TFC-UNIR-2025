@@ -1,6 +1,9 @@
 package com.myweddingplanner.back.controllers;
 
 import com.myweddingplanner.back.dto.AlergenoDTO;
+import com.myweddingplanner.back.dto.AlergenoRUDTO;
+import com.myweddingplanner.back.dto.UsuarioDTO;
+import com.myweddingplanner.back.model.Alergeno;
 import com.myweddingplanner.back.service.AlergenoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/alergenos")
@@ -17,6 +22,7 @@ import java.util.List;
 public class AlergenoController {
 
     private final AlergenoService alergenoService;
+
 
     public AlergenoController(AlergenoService alergenoService) {
         this.alergenoService = alergenoService;
@@ -27,53 +33,47 @@ public class AlergenoController {
         return "Error en la api";
     }
 
-    // CREATE
-    @PostMapping
-    public ResponseEntity<AlergenoDTO> create(@RequestBody AlergenoDTO dto){
-        AlergenoDTO creado = alergenoService.save(dto);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(creado.getId())
-                .toUri();
+    // READ ONE
+    @GetMapping("/{id}")
+    public ResponseEntity<AlergenoRUDTO> getById(@PathVariable Long id){
 
-        return ResponseEntity.created(location).build();
+        Optional<Alergeno> alergenoOpt = alergenoService.findById(id);
+
+        if (alergenoOpt.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        Alergeno alergeno = alergenoOpt.get();
+
+        return ResponseEntity.ok(alergenoService.toRUDTO(alergeno));
     }
 
     // READ ALL
     @GetMapping
-    public ResponseEntity<List<AlergenoDTO>> getAll(){
-        return ResponseEntity.ok(alergenoService.findAll());
-    }
+    public ResponseEntity<List<AlergenoRUDTO>> getAll(){
 
-    // READ ONE
-    @GetMapping("/{id}")
-    public ResponseEntity<AlergenoDTO> getById(@PathVariable Long id){
-        return alergenoService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        List<AlergenoRUDTO> list = new ArrayList<>();
+
+        for (Alergeno alergeno : alergenoService.findAll()){
+            list.add(alergenoService.toRUDTO(alergeno));
+        }
+
+        return ResponseEntity.ok(list);
     }
 
     // UPDATE
     @PutMapping("/{id}")
-    public ResponseEntity<AlergenoDTO> update(@PathVariable Long id, @RequestBody AlergenoDTO dto){
-        return alergenoService.findById(id)
-                .map(existing -> {
-                    dto.setId(id);
-                    AlergenoDTO actualizado = alergenoService.save(dto);
-                    return ResponseEntity.ok(actualizado);
-                }).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+    public ResponseEntity<AlergenoRUDTO> update(@PathVariable Long id, @RequestBody AlergenoRUDTO dto){
 
-    // DELETE
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id){
-        return alergenoService.findById(id)
-                .map(existing -> {
-                    alergenoService.deleteById(id);
-                    return ResponseEntity.noContent().build();})
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
+        Optional<Alergeno> alergenoOpt = alergenoService.findById(id);
 
+        if (alergenoOpt.isEmpty()) return ResponseEntity.notFound().build();
+
+        if (dto.getId() != null && !dto.getId().equals(id)) return ResponseEntity.badRequest().build();
+
+        Alergeno alergenoActualizado = alergenoService.mergeAndSave(alergenoOpt.get(), dto);
+
+        return ResponseEntity.ok(alergenoService.toRUDTO(alergenoActualizado));
+    }
 
 }

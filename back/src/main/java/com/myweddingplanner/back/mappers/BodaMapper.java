@@ -1,13 +1,7 @@
 package com.myweddingplanner.back.mappers;
 
-import com.myweddingplanner.back.dto.BodaDTO;
-import com.myweddingplanner.back.dto.InvitacionUsuarioDTO;
-import com.myweddingplanner.back.dto.ItinerarioDTO;
-import com.myweddingplanner.back.dto.RegaloBodaDTO;
-import com.myweddingplanner.back.model.Boda;
-import com.myweddingplanner.back.model.InvitacionUsuario;
-import com.myweddingplanner.back.model.Itinerario;
-import com.myweddingplanner.back.model.RegaloBoda;
+import com.myweddingplanner.back.dto.*;
+import com.myweddingplanner.back.model.*;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -84,6 +78,18 @@ public interface BodaMapper {
     default List<InvitacionUsuario> toInvitacionEntityList(List<InvitacionUsuarioDTO> list) {
         if (list == null) return null;
         return list.stream().map(this::toEntity).collect(Collectors.toList());
+    }
+
+    // ------------ BodaUsuario  ------------
+    default BodaUsuarioDTO toDTO(BodaUsuario bu) {
+        if (bu == null) return null;
+        return new BodaUsuarioDTO(bu.getId());
+    }
+    default BodaUsuario toEntity(BodaUsuarioDTO dto) {
+        if (dto == null) return null;
+        BodaUsuario bu = new BodaUsuario();
+        bu.setId(dto.getId());
+        return bu;
     }
 
 }

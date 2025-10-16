@@ -1,26 +1,34 @@
 package com.myweddingplanner.back.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
+@Table(name = "alergenos")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "alergenos")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(exclude = {})
 public class Alergeno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     private String nombre;
 
-    @OneToMany(mappedBy = "alergeno")
+    // bidirecional
+    //@OneToMany(mappedBy = "alergeno")
+    //private List<ImagenAlergeno> imagenes;
+
+    // unidireccional
+    @OneToMany
+    @JoinColumn(name = "id_alergeno")
     private List<ImagenAlergeno> imagenes;
 
     @OneToMany(mappedBy = "alergeno")

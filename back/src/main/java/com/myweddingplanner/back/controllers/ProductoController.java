@@ -1,7 +1,8 @@
 package com.myweddingplanner.back.controllers;
 
 import com.myweddingplanner.back.dto.AlergenoDTO;
-import com.myweddingplanner.back.service.AlergenoService;
+import com.myweddingplanner.back.dto.ProductoDTO;
+import com.myweddingplanner.back.service.ProductoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,18 +11,17 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-
 @RestController
-@RequestMapping("/alergenos")
-@Tag(name = "API Alergenos",
-        description = "CRUD alergenos de la App")
-public class AlergenoController {
+@RequestMapping("/productos")
+@Tag(name = "API Productos",
+        description = "CRUD productos de la App")
+public class ProductoController {
 
-    private final AlergenoService alergenoService;
+    private final ProductoService productoService;
 
 
-    public AlergenoController(AlergenoService alergenoService) {
-        this.alergenoService = alergenoService;
+    public ProductoController(ProductoService productoService) {
+        this.productoService = productoService;
     }
 
     @GetMapping("error")
@@ -31,36 +31,36 @@ public class AlergenoController {
 
     // READ ALL
     @GetMapping
-    public ResponseEntity<List<AlergenoDTO>> getall(){
-        return ResponseEntity.ok(alergenoService.findAll());
+    public ResponseEntity<List<ProductoDTO>> getall(){
+        return ResponseEntity.ok(productoService.findAll());
     }
 
     // READ ONE
     @GetMapping("/{id}")
-    public ResponseEntity<AlergenoDTO> getById(@PathVariable Long id){
-        if (alergenoService.findById(id).isEmpty()){
+    public ResponseEntity<ProductoDTO> getById(@PathVariable Long id){
+        if (productoService.findById(id).isEmpty()){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(alergenoService.findById(id).get());
+        return ResponseEntity.ok(productoService.findById(id).get());
     }
 
     // UPDATE
     @PutMapping("/{id}")
-    public ResponseEntity<AlergenoDTO> update(@PathVariable Long id, @RequestBody AlergenoDTO dto){
+    public ResponseEntity<ProductoDTO> update(@PathVariable Long id, @RequestBody ProductoDTO dto){
 
-        return alergenoService.findById(id)
+        return productoService.findById(id)
                 .map(existing -> {
                     dto.setId(id);
-                    AlergenoDTO actualizado = alergenoService.save(dto);
+                    ProductoDTO actualizado = productoService.save(dto);
                     return ResponseEntity.ok(actualizado);
                 }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // CREATE
     @PostMapping
-    public ResponseEntity<AlergenoDTO> create(@RequestBody AlergenoDTO dto){
+    public ResponseEntity<ProductoDTO> create(@RequestBody ProductoDTO dto){
 
-        AlergenoDTO nuevo = alergenoService.save(dto);
+        ProductoDTO nuevo = productoService.save(dto);
 
 
         URI location = ServletUriComponentsBuilder
@@ -75,11 +75,12 @@ public class AlergenoController {
     // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        if (alergenoService.findById(id).isEmpty()){
+        if (productoService.findById(id).isEmpty()){
             return ResponseEntity.notFound().build();
         }
-        alergenoService.deleteById(id);
+        productoService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
 
 }

@@ -1,13 +1,18 @@
 package com.myweddingplanner.back.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
-public class InvitacionUsuarioDTO {
+@Getter
+@Setter
+public class ImagenAlergenoDTO {
 
     private Long id;
+    private String enlace;
+    private String tipo;
 }

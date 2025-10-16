@@ -1,13 +1,13 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.model.Alergeno;
 import com.myweddingplanner.back.model.ImagenAlergeno;
-import com.myweddingplanner.back.model.ImagenProducto;
 import com.myweddingplanner.back.repository.ImagenAlergenoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ImagenAlergenoServiceImpl implements ImagenAlergenoService{
 
     private final ImagenAlergenoRepository repository;

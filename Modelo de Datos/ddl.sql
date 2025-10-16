@@ -26,10 +26,14 @@ CREATE TABLE usuarios (
     telefono VARCHAR(255) NOT NULL
 );
 
+-- Adecuado a Modelo 2
+
 CREATE TABLE alergenos (
     id BIGINT not null auto_increment PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL
 );
+
+-- Adecuado a Modelo 2
 
 CREATE TABLE imagen_alergenos (
     id BIGINT not null auto_increment PRIMARY KEY,
@@ -39,6 +43,7 @@ CREATE TABLE imagen_alergenos (
     FOREIGN KEY (id_alergeno) REFERENCES alergenos(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- Adecuado a Modelo 2
 
 CREATE TABLE productos (
     id BIGINT not null auto_increment PRIMARY KEY,
@@ -47,6 +52,8 @@ CREATE TABLE productos (
     descripcion VARCHAR(255) NOT NULL,
     valor DECIMAL(10,2)
 );
+
+-- Adecuado a Modelo 2
 
 CREATE TABLE imagen_productos (
     id BIGINT not null auto_increment PRIMARY KEY,

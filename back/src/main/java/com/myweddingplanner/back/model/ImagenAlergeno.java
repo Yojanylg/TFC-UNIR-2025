@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {})
+@ToString(exclude = {"alergeno"})
 public class ImagenAlergeno {
 
     @Id
@@ -21,8 +21,8 @@ public class ImagenAlergeno {
     private String tipo;
 
     //bidireccional
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "id_alergeno")
-    //private Alergeno alergeno;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_alergeno", nullable = false)
+    private Alergeno alergeno;
 
 }

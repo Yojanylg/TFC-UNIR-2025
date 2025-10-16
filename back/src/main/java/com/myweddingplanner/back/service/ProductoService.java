@@ -1,5 +1,6 @@
 package com.myweddingplanner.back.service;
 
+import com.myweddingplanner.back.dto.ProductoDTO;
 import com.myweddingplanner.back.model.Producto;
 import org.springframework.stereotype.Service;
 
@@ -9,12 +10,15 @@ import java.util.Optional;
 @Service
 public interface ProductoService {
 
-    Optional<Producto> findById(Long id);
+    Optional<ProductoDTO> findById(Long id);
 
-    List<Producto> findAll();
+    List<ProductoDTO> findAll();
 
-    Producto save(Producto producto);
+    ProductoDTO save(ProductoDTO dto);
 
     void deleteById (Long id);
 
+    ProductoDTO toDTO(Producto producto);
+
+    Producto toEntity(ProductoDTO dto);
 }

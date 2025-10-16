@@ -3,6 +3,7 @@ package com.myweddingplanner.back.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {})
+@ToString(exclude = {"imagenes"})
 public class Alergeno {
 
     @Id
@@ -22,16 +23,25 @@ public class Alergeno {
 
     private String nombre;
 
-    // bidirecional
-    //@OneToMany(mappedBy = "alergeno")
-    //private List<ImagenAlergeno> imagenes;
+    @OneToMany(mappedBy = "alergeno", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ImagenAlergeno> imagenes = new ArrayList<>();
 
-    // unidireccional
-    @OneToMany
-    @JoinColumn(name = "id_alergeno")
-    private List<ImagenAlergeno> imagenes;
+    public void setImagenes (List<ImagenAlergeno> nuevas){
+        this.imagenes.clear();
+        if (nuevas != null){
+            nuevas.forEach(this::addImagen);
+        }
+    }
 
-    @OneToMany(mappedBy = "alergeno")
-    private List<UsuarioAlergeno> usuarios;
+    public void addImagen(ImagenAlergeno img){
+        img.setAlergeno(this);
+        this.imagenes.add(img);
+    }
+
+    public void removeImagen(ImagenAlergeno img){
+        this.imagenes.remove(img);
+        img.setAlergeno(null);
+    }
+
 
 }

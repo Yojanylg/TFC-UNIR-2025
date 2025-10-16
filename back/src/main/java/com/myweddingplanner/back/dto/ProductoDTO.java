@@ -1,7 +1,5 @@
 package com.myweddingplanner.back.dto;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProductoDTO {
 
     private Long id;
@@ -22,11 +20,8 @@ public class ProductoDTO {
 
     private String enlaceCompra;
 
-    @NotNull
-    @PositiveOrZero
-    private Double valor;
+    private double valor;
 
-    private List<ImagenProductoDTO> imagenes = new ArrayList<>();
-
+   private List<ImagenProductoDTO> imagenes = new ArrayList<>();
 
 }

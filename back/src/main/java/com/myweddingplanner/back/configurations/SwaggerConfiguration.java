@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 title = "My Wedding Planner API",
                 description = "pendiente"
         ),
-        servers = @Server(url = "httpd://localhost:8080")
+        servers = @Server(url = "http://localhost:8080")
 )
 public class SwaggerConfiguration {
 }

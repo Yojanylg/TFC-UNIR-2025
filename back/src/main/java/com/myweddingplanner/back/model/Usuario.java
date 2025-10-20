@@ -3,6 +3,7 @@ package com.myweddingplanner.back.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"bodas", "invitaciones"})
+@ToString(exclude = {"alergenos"})
 public class Usuario {
 
     @Id
@@ -34,17 +35,36 @@ public class Usuario {
 
     // RELACIONES
 
-    @OneToMany(mappedBy = "usuario")
-    private List<UsuarioAlergeno> alergenos;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UsuarioAlergeno> alergenos = new ArrayList<>();
+
+    public void setAlergenos (List<UsuarioAlergeno> nuevas){
+        this.alergenos.clear();
+        if (nuevas != null){
+            nuevas.forEach(this::addAlergeno);
+        }
+    }
+
+    public void addAlergeno(UsuarioAlergeno alergia){
+        alergia.setUsuario(this);
+        this.alergenos.add(alergia);
+    }
+
+    public void removeAlergeno(UsuarioAlergeno alergia){
+        this.alergenos.remove(alergia);
+        alergia.setUsuario(null);
+    }
 
     // RELACION CON BODA POR MEDIO DE BODA-USUARIO
-    @OneToMany(mappedBy = "usuario")
-    private List<BodaUsuario> bodas;
+    // Relacion modelo 1
+    //@OneToMany(mappedBy = "usuario")
+    //private List<BodaUsuario> bodas;
 
 
     // RELACION CON BODA POR MEDIO DE INVITACION-USUARIO
-    @OneToMany(mappedBy = "usuario")
-    private List<InvitacionUsuario> invitaciones;
+    // Relacion modelo 1
+    //@OneToMany(mappedBy = "usuario")
+    //private List<InvitacionUsuario> invitaciones;
 
 
 

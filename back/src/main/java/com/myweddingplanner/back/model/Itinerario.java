@@ -20,6 +20,6 @@ public class Itinerario {
     private String descripcion;
 
     // RELACION CON BODA
-    @OneToOne(mappedBy = "itinerario")
+    @OneToOne(mappedBy = "itinerario", fetch = FetchType.LAZY)
     private Boda boda;
 }

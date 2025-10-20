@@ -14,7 +14,7 @@ public interface AlergenoService {
 
     AlergenoDTO save(AlergenoDTO dto);
 
-    void deleteById (Long id);
+    void deleteById(Long id);
 
     AlergenoDTO toDTO(Alergeno a);
 

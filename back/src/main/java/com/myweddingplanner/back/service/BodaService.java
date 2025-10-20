@@ -1,17 +1,17 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.model.Boda;
-
+import com.myweddingplanner.back.dto.BodaDTO;
 import java.util.List;
 import java.util.Optional;
 
 public interface BodaService {
 
-    Optional<Boda> findById(Long id);
+    Optional<BodaDTO> findById(Long id);
 
-    List<Boda> findAll();
+    List<BodaDTO> findAll();
 
-    Boda save(Boda dto);
+    BodaDTO save(BodaDTO dto);
 
     void deleteById (Long id);
+
 }

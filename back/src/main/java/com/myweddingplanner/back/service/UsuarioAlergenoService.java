@@ -1,6 +1,9 @@
 package com.myweddingplanner.back.service;
 
+import com.myweddingplanner.back.dto.UsuarioAlergenoDTO;
+import com.myweddingplanner.back.dto.UsuarioDTO;
 import com.myweddingplanner.back.model.Boda;
+import com.myweddingplanner.back.model.Usuario;
 import com.myweddingplanner.back.model.UsuarioAlergeno;
 
 import java.util.List;
@@ -15,4 +18,5 @@ public interface UsuarioAlergenoService {
     UsuarioAlergeno save(UsuarioAlergeno usuarioAlergeno);
 
     void deleteById (Long id);
+
 }

@@ -10,13 +10,26 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"usuario", "alergeno"})
+@ToString(exclude = {"usuario"})
 public class UsuarioAlergeno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+
+    private Long id_alergeno;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
+    private String nombre;
+
+
+    /*
+
+    // RELACIONES MODELO 1
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
@@ -25,4 +38,6 @@ public class UsuarioAlergeno {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_alergeno")
     private Alergeno alergeno;
+
+    */
 }

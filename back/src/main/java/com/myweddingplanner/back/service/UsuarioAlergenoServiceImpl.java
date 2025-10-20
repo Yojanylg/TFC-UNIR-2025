@@ -1,5 +1,6 @@
 package com.myweddingplanner.back.service;
 
+import com.myweddingplanner.back.dto.UsuarioAlergenoDTO;
 import com.myweddingplanner.back.model.UsuarioAlergeno;
 import com.myweddingplanner.back.repository.UsuarioAlergenoRepository;
 import org.springframework.stereotype.Service;
@@ -18,21 +19,22 @@ public class UsuarioAlergenoServiceImpl implements UsuarioAlergenoService{
 
     @Override
     public Optional<UsuarioAlergeno> findById(Long id) {
-        return Optional.empty();
+        return usuarioAlergenoRepository.findById(id);
     }
 
     @Override
     public List<UsuarioAlergeno> findAll() {
-        return List.of();
+        return usuarioAlergenoRepository.findAll();
     }
 
     @Override
     public UsuarioAlergeno save(UsuarioAlergeno usuarioAlergeno) {
-        return null;
+        return usuarioAlergenoRepository.save(usuarioAlergeno);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        usuarioAlergenoRepository.deleteById(id);
     }
+
 }

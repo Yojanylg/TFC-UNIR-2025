@@ -52,10 +52,17 @@ public class AlergenoServiceImpl implements AlergenoService{
 
         entity.setNombre(dto.getNombre());
 
+
+
         List<ImagenAlergeno> imgs = (dto.getImagenes() == null) ? List.of()
                 : dto.getImagenes().stream().map(this::toEntityImagen).toList();
 
         entity.setImagenes(imgs);
+
+
+
+
+
         Alergeno saved = repository.save(entity);
         return toDTO(saved);
     }

@@ -33,6 +33,9 @@ public class Usuario {
 
     private String telefono;
 
+    private String password;
+
+
     // RELACIONES
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -54,6 +57,11 @@ public class Usuario {
         this.alergenos.remove(alergia);
         alergia.setUsuario(null);
     }
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_rol")
+    private Rol rol;
 
     // RELACION CON BODA POR MEDIO DE BODA-USUARIO
     // Relacion modelo 1

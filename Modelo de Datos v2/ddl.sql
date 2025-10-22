@@ -1,6 +1,9 @@
+/* 
+*/
+
 CREATE DATABASE mywedding;
 
-\c mywedding;
+USE mywedding;
 
 -- Modelo de datos V2 
 -- 19-10-2025

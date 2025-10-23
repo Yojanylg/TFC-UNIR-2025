@@ -1,6 +1,5 @@
 package com.myweddingplanner.back.controllers;
 
-import com.myweddingplanner.back.dto.AlergenoDTO;
 import com.myweddingplanner.back.dto.BodaDTO;
 import com.myweddingplanner.back.service.BodaService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/bodas")
+@RequestMapping("/api/auth/bodas")
 @Tag(name = "API bodas",
         description = "CRUD bodas de la App")
 public class BodaController {

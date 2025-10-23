@@ -1,6 +1,6 @@
 package com.myweddingplanner.back.security;
 
-import com.myweddingplanner.back.service.CustomUserDtailsService;
+import com.myweddingplanner.back.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,10 +20,10 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtFilter;
     private final RestAuthEntryPoint restAuthEntryPoint;
-    private final CustomUserDtailsService userDetailsService;
+    private final CustomUserDetailsService userDetailsService;
 
 
-    public SecurityConfig(JwtAuthenticationFilter jwtFilter, RestAuthEntryPoint restAuthEntryPoint, CustomUserDtailsService userDtailsService) {
+    public SecurityConfig(JwtAuthenticationFilter jwtFilter, RestAuthEntryPoint restAuthEntryPoint, CustomUserDetailsService userDtailsService) {
         this.jwtFilter = jwtFilter;
         this.restAuthEntryPoint = restAuthEntryPoint;
         this.userDetailsService = userDtailsService;
@@ -33,26 +33,30 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                .cors(cors -> {}) // usa configuración por defecto o define un CorsConfigurationSource
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(e -> e.authenticationEntryPoint(restAuthEntryPoint))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()   // login/registro públicos
-                        .requestMatchers("/actuator/health").permitAll()
+                .authorizeHttpRequests(reg -> reg
+                        .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .authenticationProvider(daoAuthenticationProvider())
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(restAuthEntryPoint))
+                .authenticationProvider(daoAuthenticationProvider());
+
+        http.addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-        var provider = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 
     @Bean
@@ -60,10 +64,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
-    }
+
 
 
 }

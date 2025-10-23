@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/alergenos")
+@RequestMapping("/api/auth/alergenos")
 @Tag(name = "API Alergenos",
         description = "CRUD alergenos de la App")
 public class AlergenoController {

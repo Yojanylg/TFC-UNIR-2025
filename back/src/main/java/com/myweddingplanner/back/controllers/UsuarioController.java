@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/api/auth/usuarios")
 @Tag(name = "API usuarios",
         description = "CRUD usuarios de la App")
 public class UsuarioController {

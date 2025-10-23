@@ -1,11 +1,11 @@
 package com.myweddingplanner.back.security;
 
-import com.myweddingplanner.back.service.CustomUserDtailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,11 +19,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
     private final JwtService jwtService;
-    private final CustomUserDtailsService userDtailsService;
+    private final UserDetailsService userDtailsService;
 
-    public JwtAuthenticationFilter(JwtService jwtService, CustomUserDtailsService userDtailsService) {
+    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService) {
         this.jwtService = jwtService;
-        this.userDtailsService = userDtailsService;
+        this.userDtailsService = userDetailsService;
     }
 
 
@@ -55,6 +55,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return path.startsWith("/api/auth/");
     }
 
 }

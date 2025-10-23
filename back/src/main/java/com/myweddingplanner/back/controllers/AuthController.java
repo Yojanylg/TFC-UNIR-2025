@@ -8,11 +8,15 @@ import com.myweddingplanner.back.model.Usuario;
 import com.myweddingplanner.back.repository.RolRepository;
 import com.myweddingplanner.back.repository.UsuarioRepository;
 import com.myweddingplanner.back.security.JwtService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.Map;
 
 @RestController
@@ -36,14 +40,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public AuthResponse register(@RequestBody RegisterRequest req) {
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest req) {
         if (usuarioRepo.existsByEmail(req.getEmail())) {
-            throw new RuntimeException("Email en uso");
+            // evita user enumeration: puedes usar un 409 y mensaje genérico si prefieres
+            return ResponseEntity.status(409).build();
         }
 
-        // Busca el rol por nombre
         Rol rolUser = rolRepo.findByNombre("ROLE_USER")
-                .orElseThrow(() -> new RuntimeException("Rol ROLE_USER no existe, crea datos iniciales"));
+                .orElseThrow(() -> new IllegalStateException("Falta semilla: crea ROLE_USER"));
 
         var u = new Usuario();
         u.setEmail(req.getEmail());
@@ -52,24 +56,39 @@ public class AuthController {
         usuarioRepo.save(u);
 
         String access = jwtService.generateToken(
-                u.getEmail(),
-                Map.of("role", u.getRol().getNombre(), "uid", u.getId())
-        );
+                u.getEmail(), Map.of("role", u.getRol().getNombre(), "uid", u.getId()));
         String refresh = jwtService.generateRefreshToken(u.getEmail());
-        return new AuthResponse(access, refresh);
+
+        // 201 Created + Location (opcional)
+        return ResponseEntity.created(URI.create("/api/users/" + u.getId()))
+                .body(new AuthResponse(access, refresh));
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest req) {
-        var authToken = new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword());
-        authManager.authenticate(authToken);
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest req) {
+        try {
+            var authToken = new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword());
+            authManager.authenticate(authToken); // lanza excepción si falla
+        } catch (BadCredentialsException ex) {
+            // respuesta uniforme (evita revelar si el email existe)
+            return ResponseEntity.status(401).build();
+        }
 
-        var u = usuarioRepo.findByEmail(req.getEmail()).orElseThrow();
+        // +++ ver sección 2 para cargar el rol de forma EAGER/segura
+        var u = usuarioRepo.findWithRolByEmail(req.getEmail()) //
+                .orElseThrow(); //  debería existir tras authenticate
+
         String access = jwtService.generateToken(
-                u.getEmail(),
-                Map.of("role", u.getRol().getNombre(), "uid", u.getId())
-        );
+                u.getEmail(), Map.of("role", u.getRol().getNombre(), "uid", u.getId()));
         String refresh = jwtService.generateRefreshToken(u.getEmail());
-        return new AuthResponse(access, refresh);
+        return ResponseEntity.ok(new AuthResponse(access, refresh));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthResponse> refresh(@RequestParam String refreshToken) {
+        var username = jwtService.extractUsername(refreshToken);
+        // aquí podrías validar revocación en BD/lista blanca
+        String access = jwtService.generateToken(username, Map.of());
+        return ResponseEntity.ok(new AuthResponse(access, refreshToken));
     }
 }

@@ -39,7 +39,7 @@ CREATE TABLE usuarios (
     apellido_2 VARCHAR(255),
     email VARCHAR(255) NOT NULL,
     telefono VARCHAR(255) NOT NULL,
-    id_rol BIGINT DEFAULT 0,
+    id_rol BIGINT DEFAULT 1,
     FOREIGN KEY (id_rol) REFERENCES roles(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

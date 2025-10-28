@@ -21,9 +21,9 @@ public class Boda {
     @EqualsAndHashCode.Include
     private Long id;
 
-    private String lugar;
-
     private String fecha;
+
+    private String lugar;
 
     // RELACION CON ITINERARIO
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
@@ -71,10 +71,6 @@ public class Boda {
         this.invitados.remove(invitado);
         invitado.setBoda(null);
     }
-
-    // RELACION CON USUARIOS POR MEDIO DE BODAS-USUARIO
-    //@OneToMany(mappedBy = "boda", cascade = CascadeType.ALL, orphanRemoval = true)
-    //private List<BodaUsuario> novios;
 
     // RELACION CON NOVIOS
     @OneToMany(mappedBy = "boda", cascade = CascadeType.ALL, orphanRemoval = true)

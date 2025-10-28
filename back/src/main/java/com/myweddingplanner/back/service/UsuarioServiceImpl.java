@@ -15,11 +15,11 @@ import java.util.Optional;
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 
-    private final UsuarioRepository repository;
+    private final UsuarioRepository usuarioRepository;
 
 
     public UsuarioServiceImpl(UsuarioRepository repository) {
-        this.repository = repository;
+        this.usuarioRepository = repository;
 
     }
 
@@ -27,7 +27,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Transactional(readOnly = true)
     public Optional<UsuarioDTO> findById(Long id) {
 
-        Optional<Usuario> opt = repository.findById(id);
+        Optional<Usuario> opt = usuarioRepository.findById(id);
 
         return (opt.isEmpty()) ? Optional.empty() : Optional.of(toDTO(opt.get()));
     }
@@ -37,7 +37,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
         List<UsuarioDTO> list = new ArrayList<>();
 
-        for (Usuario u: repository.findAll()){
+        for (Usuario u: usuarioRepository.findAll()){
             list.add(toDTO(u));
         }
         return list;
@@ -47,7 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     public UsuarioDTO save(UsuarioDTO dto) {
 
         Usuario entity = (dto.getId() != null)
-                ? repository.findById(dto.getId()).orElseGet(Usuario::new)
+                ? usuarioRepository.findById(dto.getId()).orElseGet(Usuario::new)
                 : new Usuario();
 
         entity.setNombre(dto.getNombre());
@@ -56,21 +56,26 @@ public class UsuarioServiceImpl implements UsuarioService{
         entity.setEmail(dto.getEmail());
         entity.setTelefono(dto.getTelefono());
 
-        List<UsuarioAlergeno> alergenos = (dto.getAlergenos() == null) ? List.of()
-                : dto.getAlergenos().stream().map(this::toEntityUsuarioAlergeno).toList();
+        List<UsuarioAlergeno> alergenos = (dto.getAlergias() == null) ? List.of()
+                : dto.getAlergias().stream().map(this::toEntityUsuarioAlergeno).toList();
 
-        entity.setAlergenos(alergenos);
+        entity.setAlergias(alergenos);
 
 
-        Usuario saved = repository.save(entity);
+        Usuario saved = usuarioRepository.save(entity);
         return toDTO(saved);
     }
 
     @Override
     public void deleteById(Long id) {
 
-        repository.deleteById(id);
+        usuarioRepository.deleteById(id);
 
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return usuarioRepository.existsByEmail(email);
     }
 
     @Override
@@ -85,10 +90,10 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuarioDTO.setEmail(usuario.getEmail());
         usuarioDTO.setTelefono(usuario.getTelefono());
 
-        List<UsuarioAlergenoDTO> alergias = (usuario.getAlergenos() == null) ?
-                List.of() : usuario.getAlergenos().stream().map(this::toDTOUsuarioAlergeno).toList();
+        List<UsuarioAlergenoDTO> alergias = (usuario.getAlergias() == null) ?
+                List.of() : usuario.getAlergias().stream().map(this::toDTOUsuarioAlergeno).toList();
 
-        usuarioDTO.setAlergenos(new ArrayList<>(alergias));
+        usuarioDTO.setAlergias(new ArrayList<>(alergias));
 
         return usuarioDTO;
     }
@@ -106,22 +111,22 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setEmail(dto.getEmail());
         usuario.setTelefono(dto.getTelefono());
 
-        if (dto.getAlergenos() != null) {
+        if (dto.getAlergias() != null) {
 
             List<UsuarioAlergeno> usuarioAlergenos = new ArrayList<>();
 
-            for (UsuarioAlergenoDTO aux : dto.getAlergenos()){
+            for (UsuarioAlergenoDTO aux : dto.getAlergias()){
 
                 UsuarioAlergeno usuarioAlergeno = new UsuarioAlergeno();
 
                 usuarioAlergeno.setId(aux.getId());
                 usuarioAlergeno.setNombre(aux.getNombre());
-                usuarioAlergeno.setId_alergeno(aux.getId_alergeno());
+                usuarioAlergeno.setIdAlergeno(aux.getId_alergeno());
 
                 usuarioAlergenos.add(usuarioAlergeno);
             }
 
-            usuario.setAlergenos(usuarioAlergenos);
+            usuario.setAlergias(usuarioAlergenos);
 
         }
 
@@ -133,7 +138,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         UsuarioAlergenoDTO dto = new UsuarioAlergenoDTO();
 
         dto.setId(usuarioAlergeno.getId());
-        dto.setId_alergeno(usuarioAlergeno.getId_alergeno());
+        dto.setId_alergeno(usuarioAlergeno.getIdAlergeno());
         dto.setNombre(usuarioAlergeno.getNombre());
 
         return dto;
@@ -142,7 +147,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     private UsuarioAlergeno toEntityUsuarioAlergeno (UsuarioAlergenoDTO dto){
         UsuarioAlergeno e = new UsuarioAlergeno();
         e.setId(dto.getId());
-        e.setId_alergeno(dto.getId_alergeno());
+        e.setIdAlergeno(dto.getId_alergeno());
         e.setNombre(dto.getNombre());
         return e;
     }

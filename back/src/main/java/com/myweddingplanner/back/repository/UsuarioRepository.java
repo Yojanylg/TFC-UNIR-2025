@@ -8,9 +8,11 @@ import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-// TODO findByEmail
+    @EntityGraph(attributePaths = "rol")
     Optional<Usuario> findByEmail(String email);
+
     boolean existsByEmail(String email);
-    @EntityGraph(attributePaths = "rol") // fuerza carga EAGER del rol
+
+    @EntityGraph(attributePaths = "rol")
     Optional<Usuario> findWithRolByEmail(String email);
 }

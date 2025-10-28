@@ -17,6 +17,7 @@ public class Itinerario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+
     private String descripcion;
 
     // RELACION CON BODA

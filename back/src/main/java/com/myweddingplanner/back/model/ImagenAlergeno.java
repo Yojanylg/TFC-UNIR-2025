@@ -17,10 +17,11 @@ public class ImagenAlergeno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+
     private String enlace;
+
     private String tipo;
 
-    //bidireccional
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_alergeno", nullable = false)
     private Alergeno alergeno;

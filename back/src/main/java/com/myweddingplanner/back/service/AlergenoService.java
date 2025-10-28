@@ -1,6 +1,7 @@
 package com.myweddingplanner.back.service;
 
 import com.myweddingplanner.back.dto.AlergenoDTO;
+import com.myweddingplanner.back.dto.ImagenAlergenoDTO;
 import com.myweddingplanner.back.model.Alergeno;
 
 import java.util.List;
@@ -16,8 +17,6 @@ public interface AlergenoService {
 
     void deleteById(Long id);
 
-    AlergenoDTO toDTO(Alergeno a);
-
-    Alergeno toEntity(AlergenoDTO dto);
+    AlergenoDTO toDTO(Alergeno alergeno);
 
 }

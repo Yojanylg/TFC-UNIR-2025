@@ -20,5 +20,4 @@ public interface ProductoService {
 
     ProductoDTO toDTO(Producto producto);
 
-    Producto toEntity(ProductoDTO dto);
 }

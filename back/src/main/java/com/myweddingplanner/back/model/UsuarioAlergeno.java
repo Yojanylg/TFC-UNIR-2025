@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "usuarios_alergenos")
+@Table(name = "alergias")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,26 +18,13 @@ public class UsuarioAlergeno {
     @EqualsAndHashCode.Include
     private Long id;
 
-    private Long id_alergeno;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+    @Column(name = "id_alergeno")
+    private Long idAlergeno;
 
     private String nombre;
 
-
-    /*
-
-    // RELACIONES MODELO 1
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_alergeno")
-    private Alergeno alergeno;
-
-    */
 }

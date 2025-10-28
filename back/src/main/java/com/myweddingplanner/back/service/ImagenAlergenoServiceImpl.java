@@ -1,5 +1,6 @@
 package com.myweddingplanner.back.service;
 
+import com.myweddingplanner.back.dto.ImagenAlergenoDTO;
 import com.myweddingplanner.back.model.ImagenAlergeno;
 import com.myweddingplanner.back.repository.ImagenAlergenoRepository;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,14 @@ public class ImagenAlergenoServiceImpl implements ImagenAlergenoService{
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public ImagenAlergenoDTO toDTO(ImagenAlergeno imagenAlergeno) {
+        ImagenAlergenoDTO dto = new ImagenAlergenoDTO();
+        dto.setId(imagenAlergeno.getId());
+        dto.setEnlace(imagenAlergeno.getEnlace());
+        dto.setTipo(imagenAlergeno.getTipo());
+        return dto;
     }
 }

@@ -26,5 +26,6 @@ public class UsuarioDTO {
 
     private String telefono;
 
-    private List<UsuarioAlergenoDTO> alergenos = new ArrayList<>();
+    private List<UsuarioAlergenoDTO> alergias = new ArrayList<>();
+
 }

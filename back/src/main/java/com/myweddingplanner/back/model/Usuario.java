@@ -35,14 +35,11 @@ public class Usuario {
 
     private String password;
 
-
-    // RELACIONES
-
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UsuarioAlergeno> alergenos = new ArrayList<>();
+    private List<UsuarioAlergeno> alergias = new ArrayList<>();
 
-    public void setAlergenos (List<UsuarioAlergeno> nuevas){
-        this.alergenos.clear();
+    public void setAlergias(List<UsuarioAlergeno> nuevas){
+        this.alergias.clear();
         if (nuevas != null){
             nuevas.forEach(this::addAlergeno);
         }
@@ -50,32 +47,16 @@ public class Usuario {
 
     public void addAlergeno(UsuarioAlergeno alergia){
         alergia.setUsuario(this);
-        this.alergenos.add(alergia);
+        this.alergias.add(alergia);
     }
 
     public void removeAlergeno(UsuarioAlergeno alergia){
-        this.alergenos.remove(alergia);
+        this.alergias.remove(alergia);
         alergia.setUsuario(null);
     }
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_rol")
     private Rol rol;
-
-    // RELACION CON BODA POR MEDIO DE BODA-USUARIO
-    // Relacion modelo 1
-    //@OneToMany(mappedBy = "usuario")
-    //private List<BodaUsuario> bodas;
-
-
-    // RELACION CON BODA POR MEDIO DE INVITACION-USUARIO
-    // Relacion modelo 1
-    //@OneToMany(mappedBy = "usuario")
-    //private List<InvitacionUsuario> invitaciones;
-
-
-
-
 
 }

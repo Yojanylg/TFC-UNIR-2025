@@ -1,18 +1,13 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.dto.AlergenoDTO;
-import com.myweddingplanner.back.dto.ImagenAlergenoDTO;
 import com.myweddingplanner.back.dto.ImagenProductoDTO;
 import com.myweddingplanner.back.dto.ProductoDTO;
-import com.myweddingplanner.back.model.Alergeno;
-import com.myweddingplanner.back.model.ImagenAlergeno;
 import com.myweddingplanner.back.model.ImagenProducto;
 import com.myweddingplanner.back.model.Producto;
 import com.myweddingplanner.back.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,17 +16,19 @@ import java.util.Optional;
 public class ProductoServiceImpl implements ProductoService{
 
 
-    private final ProductoRepository repository;
+    private final ProductoRepository productoRepository;
+    private final ImagenProductoService imagenProductoService;
 
-    public ProductoServiceImpl(ProductoRepository repository) {
-        this.repository = repository;
+    public ProductoServiceImpl(ProductoRepository repository, ImagenProductoService imagenProductoService) {
+        this.productoRepository = repository;
+        this.imagenProductoService = imagenProductoService;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<ProductoDTO> findById(Long id) {
 
-        Optional<Producto> opt = repository.findById(id);
+        Optional<Producto> opt = productoRepository.findById(id);
 
         return (opt.isEmpty()) ? Optional.empty() : Optional.of(toDTO(opt.get()));
     }
@@ -42,7 +39,7 @@ public class ProductoServiceImpl implements ProductoService{
 
         List<ProductoDTO> list = new ArrayList<>();
 
-        for (Producto a: repository.findAll()){
+        for (Producto a: productoRepository.findAll()){
             list.add(toDTO(a));
         }
         return list;
@@ -51,7 +48,7 @@ public class ProductoServiceImpl implements ProductoService{
     @Override
     public ProductoDTO save(ProductoDTO dto) {
         Producto entity = (dto.getId() != null)
-                ? repository.findById(dto.getId()).orElseGet(Producto::new)
+                ? productoRepository.findById(dto.getId()).orElseGet(Producto::new)
                 : new Producto();
 
         entity.setNombre(dto.getNombre());
@@ -59,23 +56,25 @@ public class ProductoServiceImpl implements ProductoService{
         entity.setEnlaceCompra(dto.getEnlaceCompra());
         entity.setValor(dto.getValor());
 
-        List<ImagenProducto> imgs = (dto.getImagenes() == null) ? List.of()
-                : dto.getImagenes().stream().map(this::toEntityImagen).toList();
+        sincronizarImagenes(entity, dto.getImagenes());
 
-        entity.setImagenes(imgs);
-        Producto saved = repository.save(entity);
+        Producto saved = productoRepository.save(entity);
+
         return toDTO(saved);
     }
+
+
 
     @Override
     public void deleteById(Long id) {
 
-        repository.deleteById(id);
+        productoRepository.deleteById(id);
 
     }
 
     @Override
     public ProductoDTO toDTO(Producto producto) {
+
         ProductoDTO dto = new ProductoDTO();
 
         dto.setId(producto.getId());
@@ -85,54 +84,113 @@ public class ProductoServiceImpl implements ProductoService{
         dto.setValor(producto.getValor());
 
         List<ImagenProductoDTO> imagenes = (producto.getImagenes() == null) ?
-                List.of() : producto.getImagenes().stream().map(this::toDTOImagen).toList();
+                List.of() : producto.getImagenes().stream().map(imagenProductoService::toDTO).toList();
         dto.setImagenes(new ArrayList<>(imagenes));
 
         return dto;
     }
 
-    @Override
-    public Producto toEntity(ProductoDTO dto) {
+    private void sincronizarImagenes(Producto entity, List<ImagenProductoDTO> imagenesDTO) {
+          /*
+        Tengo que comparar dos listas de imagenes, la que viene en el DTO y la que vienen en la entidad
+         */
 
-        Producto p = new Producto();
 
-        if (dto.getId() != null) p.setId(dto.getId());
+        // Si la entidad no tiene imagenes inicializamos el array vacío,
+        // esto es que no tenemos imagenes en la bbdd
 
-        p.setNombre(dto.getNombre());
-        p.setDescripcion(dto.getDescripcion());
-        p.setEnlaceCompra(dto.getEnlaceCompra());
-        p.setValor(dto.getValor());
-
-        if (dto.getImagenes() != null) {
-            List<ImagenProducto> imagenes = new ArrayList<>();
-
-            for (ImagenProductoDTO imgDto : dto.getImagenes()){
-                ImagenProducto img = new ImagenProducto();
-                img.setId(imgDto.getId());
-                img.setEnlace(imgDto.getEnlace());
-                img.setTipo(imgDto.getTipo());
-                img.setProducto(p);
-                imagenes.add(img);
-            }
-            p.setImagenes(imagenes);
+        if (entity.getImagenes() == null){
+            entity.setImagenes(new ArrayList<>());
         }
-        return p;
-    }
 
-    private ImagenProductoDTO toDTOImagen(ImagenProducto img) {
-        ImagenProductoDTO dto = new ImagenProductoDTO();
-        dto.setId(img.getId());
-        dto.setEnlace(img.getEnlace());
-        dto.setTipo(img.getTipo());
-        return dto;
-    }
+        // en esta variable guardamos el list vacío o no que tenga la entidad
+        List<ImagenProducto> imagenesEntidad = entity.getImagenes();
 
-    private ImagenProducto toEntityImagen(ImagenProductoDTO dto) {
-        ImagenProducto e = new ImagenProducto();
-        e.setId(dto.getId());
-        e.setEnlace(dto.getEnlace());
-        e.setTipo(dto.getTipo());
-        return e;
+        // en esta variable guardamos las imagenes que estando en la entidad no esten en dto
+        List<ImagenProducto> aEliminar = new ArrayList<>();
+
+        // para cada imagen de alergeno guardada en la BBDD
+        // la comparamos con el list de imagenes que vienen en el dto
+        // si encontramos dos id iguales es que ya está en bbdd
+        // entonces actualizamos la info de la bbdd con lo que venga en dto
+        // si no encontramos en el dto la imagen que tenemos en bbdd la agregamos a la lista para eliminar
+        for (ImagenProducto img : imagenesEntidad){
+
+            boolean encontradoEnDTO = false;
+
+            /*
+                    una imagen del list de imagenes de la entidad
+
+                    existe en dto?
+
+                        SI -> seteamos los miembros por si cambian y mantenemos el id
+
+                        NO -> la agregamos al list aEliminar
+
+             */
+
+            if (imagenesDTO != null){
+
+                // comparamos con la imagen actual todas las del list del dto
+
+                for (ImagenProductoDTO imagenEnDTO : imagenesDTO){
+
+                    // si ambas tiene id asignado y el id coincide, es que son la misma instancia
+
+                    if (imagenEnDTO.getId() != null
+                            && img.getId() != null
+                            && imagenEnDTO.getId().equals(img.getId())){
+
+                        // seteo la info por si ha variado y mantengo el id intacto
+                        img.setEnlace(imagenEnDTO.getEnlace());
+                        img.setTipo(imagenEnDTO.getTipo());
+
+                        // salgo del bucle porque ya encontré una coincidencia
+                        encontradoEnDTO = true;
+
+                        break;
+                    }
+                }
+            }
+
+            if (!encontradoEnDTO){
+                aEliminar.add(img);
+            }
+
+        }
+
+        // eliminamos de la lista de imagenes de la entidad en memoria
+        // las imagenes que no encontramos en el dto
+        for (ImagenProducto imagen : aEliminar){
+            imagenesEntidad.remove(imagen);
+        }
+
+        // ya modificamos las que estaban en dto y en entidad
+        // eliminamos de la entidad las que ya no estaban en dto
+        // tenemos que agregar a la entidad las que estan en dto pero no en la entidad
+
+        if (imagenesDTO != null){
+            for (ImagenProductoDTO imagenDTO : imagenesDTO){
+                boolean yaExiste = false;
+
+                if (imagenDTO.getId() != null){
+                    for (ImagenProducto existente : imagenesEntidad){
+                        if (existente.getId() != null && existente.getId().equals(imagenDTO.getId())){
+                            yaExiste = true;
+                            break;
+                        }
+                    }
+                }
+
+                if(!yaExiste){
+                    ImagenProducto nueva = new ImagenProducto();
+                    nueva.setEnlace(imagenDTO.getEnlace());
+                    nueva.setTipo(imagenDTO.getTipo());
+                    nueva.setProducto(entity);
+                    imagenesEntidad.add(nueva);
+                }
+            }
+        }
     }
 
 }

@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface UsuarioService {
 
+    //CRUD BASICO
+
     Optional<UsuarioDTO> findById(Long id);
 
     List<UsuarioDTO> findAll();
@@ -15,6 +17,13 @@ public interface UsuarioService {
     UsuarioDTO save(UsuarioDTO dto);
 
     void deleteById (Long id);
+
+    // CRUD ++
+
+
+    // UTILIDADES
+
+    boolean existsByEmail(String email);
 
     UsuarioDTO toDTO(Usuario a);
 

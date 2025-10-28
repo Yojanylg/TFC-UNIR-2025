@@ -24,7 +24,7 @@ public class Regalo {
     private String descripcion;
 
     @Column(name = "enlace_compra")
-    private String enlace;
+    private String enlaceCompra;
 
     @Column(name = "comprador")
     private Long idUsuario;
@@ -36,14 +36,5 @@ public class Regalo {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_boda")
     private Boda boda;
-
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "id_producto")
-    //private Producto producto;
-
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "id_usuario")
-    //private Usuario usuario;
-
 
 }

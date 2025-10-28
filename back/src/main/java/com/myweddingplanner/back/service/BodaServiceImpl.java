@@ -198,7 +198,7 @@ public class BodaServiceImpl implements BodaService{
                 regalo.setId(regaloDTO.getId());
                 regalo.setIdProducto(regaloDTO.getIdProducto());
                 regalo.setDescripcion(regaloDTO.getDescripcion());
-                regalo.setEnlace(regaloDTO.getEnlace());
+                regalo.setEnlaceCompra(regaloDTO.getEnlace());
                 regalo.setIdUsuario(regaloDTO.getIdUsuario());
                 regalo.setValor(regaloDTO.getValor());
                 regalo.setConfirmado(regaloDTO.isConfirmado());
@@ -227,7 +227,6 @@ public class BodaServiceImpl implements BodaService{
         return itinerario;
     }
 
-
     private NovioDTO toDTONovio(Novio novio) {
 
         NovioDTO dto = new NovioDTO();
@@ -240,6 +239,7 @@ public class BodaServiceImpl implements BodaService{
 
         return dto;
     }
+
     private Novio toEntityNovio(NovioDTO dto){
         Novio novio = new Novio();
 
@@ -252,7 +252,6 @@ public class BodaServiceImpl implements BodaService{
 
         return novio;
     }
-
 
     private InvitadoDTO toDTOInvitado(Invitado invitado) {
 
@@ -270,6 +269,7 @@ public class BodaServiceImpl implements BodaService{
 
         return dto;
     }
+
     private Invitado toEntityInvitado(InvitadoDTO dto){
         Invitado invitado = new Invitado();
 
@@ -296,13 +296,14 @@ public class BodaServiceImpl implements BodaService{
         dto.setId(regalo.getId());
         dto.setIdProducto(regalo.getIdProducto());
         dto.setDescripcion(regalo.getDescripcion());
-        dto.setEnlace(regalo.getEnlace());
+        dto.setEnlace(regalo.getEnlaceCompra());
         dto.setIdUsuario(regalo.getIdUsuario());
         dto.setValor(regalo.getValor());
         dto.setConfirmado(regalo.isConfirmado());
 
         return dto;
     }
+
     private Regalo toEntityRegalo(RegaloDTO dto){
 
         Regalo regalo = new Regalo();
@@ -310,7 +311,7 @@ public class BodaServiceImpl implements BodaService{
         regalo.setId(dto.getId());
         regalo.setIdProducto(dto.getIdProducto());
         regalo.setDescripcion(dto.getDescripcion());
-        regalo.setEnlace(dto.getEnlace());
+        regalo.setEnlaceCompra(dto.getEnlace());
         regalo.setIdUsuario(dto.getIdUsuario());
         regalo.setValor(dto.getValor());
         regalo.setConfirmado(dto.isConfirmado());

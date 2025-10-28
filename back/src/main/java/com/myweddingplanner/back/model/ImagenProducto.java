@@ -17,7 +17,9 @@ public class ImagenProducto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+
     private String enlace;
+
     private String tipo;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -37,6 +37,8 @@ public class BodaController {
     }
 
     // READ ALL
+    // ADMIN
+
     @GetMapping
     public ResponseEntity<List<BodaDTO>> getall(){
         return ResponseEntity.ok(bodaService.findAll());

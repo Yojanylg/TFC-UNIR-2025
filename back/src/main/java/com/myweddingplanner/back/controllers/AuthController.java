@@ -8,6 +8,7 @@ import com.myweddingplanner.back.model.Usuario;
 import com.myweddingplanner.back.repository.RolRepository;
 import com.myweddingplanner.back.repository.UsuarioRepository;
 import com.myweddingplanner.back.security.JwtService;
+import com.myweddingplanner.back.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,20 +29,23 @@ public class AuthController {
     private final UsuarioRepository usuarioRepo;
     private final RolRepository rolRepo;
     private final PasswordEncoder encoder;
+    private final UsuarioService usuarioService;
 
     public AuthController(AuthenticationManager authManager, JwtService jwtService,
                           UsuarioRepository usuarioRepo, RolRepository rolRepo,
-                          PasswordEncoder encoder) {
+                          PasswordEncoder encoder, UsuarioService usuarioService) {
         this.authManager = authManager;
         this.jwtService = jwtService;
         this.usuarioRepo = usuarioRepo;
         this.rolRepo = rolRepo;
         this.encoder = encoder;
+        this.usuarioService = usuarioService;
     }
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest req) {
-        if (usuarioRepo.existsByEmail(req.getEmail())) {
+
+        if (usuarioService.existsByEmail(req.getEmail())) {
             // evita user enumeration: puedes usar un 409 y mensaje genérico si prefieres
             return ResponseEntity.status(409).build();
         }

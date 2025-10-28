@@ -46,7 +46,4 @@ public class Invitado {
     @JoinColumn(name = "id_boda")
     private Boda boda;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "id_usuario")
-    //private Usuario usuario;
 }

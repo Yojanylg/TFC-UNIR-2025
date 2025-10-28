@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/auth/usuarios")
+@RequestMapping("/api/usuarios")
 @Tag(name = "API usuarios",
         description = "CRUD usuarios de la App")
 public class UsuarioController {
@@ -23,7 +23,7 @@ public class UsuarioController {
     }
 
 
-    @GetMapping("error")
+    @GetMapping("/error")
     public String getError(){
         return "Error en la api";
     }

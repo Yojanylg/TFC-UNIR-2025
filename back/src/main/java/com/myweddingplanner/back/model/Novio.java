@@ -18,6 +18,9 @@ public class Novio {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @Column(name = "id_usuario")
+    private Long idUsuario;
+
     private String nombre;
 
     @Column(name = "apellido_1")
@@ -34,8 +37,4 @@ public class Novio {
     @JoinColumn(name = "id_boda")
     private Boda boda;
 
-    // Relacion con Usuario
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "id_usuario")
-    //private Usuario usuario;
 }

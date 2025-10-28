@@ -18,4 +18,6 @@ public class RegisterRequest {
     private String email;
     @NotBlank
     private String password;
+
+    // TODO agregar campos de registro
 }

@@ -19,5 +19,9 @@ public class RegisterRequest {
     @NotBlank
     private String password;
 
+    private boolean esNovio;
+
+    private String emailNovio;
+
     // TODO agregar campos de registro
 }

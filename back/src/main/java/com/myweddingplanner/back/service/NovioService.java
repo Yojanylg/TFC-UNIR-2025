@@ -14,4 +14,8 @@ public interface NovioService {
     Novio save(Novio novio);
 
     void deleteById (Long id);
+
+    Optional<Novio> findByEmail(String email);
+
+    boolean existsByEmail(String email);
 }

@@ -17,10 +17,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     private final UsuarioRepository usuarioRepository;
 
-
-    public UsuarioServiceImpl(UsuarioRepository repository) {
-        this.usuarioRepository = repository;
-
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
     }
 
     @Override
@@ -74,6 +72,12 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
+    public Optional<UsuarioDTO> findByEmail(String email) {
+        Optional<Usuario> opt = usuarioRepository.findByEmail(email);
+        return (opt.isEmpty()) ? Optional.empty() : Optional.of(toDTO(opt.get()));
+    }
+
+    @Override
     public boolean existsByEmail(String email) {
         return usuarioRepository.existsByEmail(email);
     }
@@ -96,41 +100,6 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuarioDTO.setAlergias(new ArrayList<>(alergias));
 
         return usuarioDTO;
-    }
-
-    @Override
-    public Usuario toEntity(UsuarioDTO dto) {
-
-        Usuario usuario = new Usuario();
-
-        if (dto.getId() != null) usuario.setId(dto.getId());
-
-        usuario.setNombre(dto.getNombre());
-        usuario.setApellido1(dto.getApellido1());
-        usuario.setApellido2(dto.getApellido2());
-        usuario.setEmail(dto.getEmail());
-        usuario.setTelefono(dto.getTelefono());
-
-        if (dto.getAlergias() != null) {
-
-            List<UsuarioAlergeno> usuarioAlergenos = new ArrayList<>();
-
-            for (UsuarioAlergenoDTO aux : dto.getAlergias()){
-
-                UsuarioAlergeno usuarioAlergeno = new UsuarioAlergeno();
-
-                usuarioAlergeno.setId(aux.getId());
-                usuarioAlergeno.setNombre(aux.getNombre());
-                usuarioAlergeno.setIdAlergeno(aux.getId_alergeno());
-
-                usuarioAlergenos.add(usuarioAlergeno);
-            }
-
-            usuario.setAlergias(usuarioAlergenos);
-
-        }
-
-        return usuario;
     }
 
     private UsuarioAlergenoDTO toDTOUsuarioAlergeno(UsuarioAlergeno usuarioAlergeno){

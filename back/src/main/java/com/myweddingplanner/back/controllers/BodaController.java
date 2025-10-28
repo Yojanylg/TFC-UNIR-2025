@@ -36,8 +36,14 @@ public class BodaController {
         return ResponseEntity.ok(bodaService.findById(id).get());
     }
 
-    // READ ALL
-    // ADMIN
+
+    // READ ONE POR ID NOVIO
+    @GetMapping
+    public ResponseEntity<List<BodaDTO>> getPorNovio(@RequestParam Long idNovio){
+
+        return null;
+    }
+
 
     @GetMapping
     public ResponseEntity<List<BodaDTO>> getall(){

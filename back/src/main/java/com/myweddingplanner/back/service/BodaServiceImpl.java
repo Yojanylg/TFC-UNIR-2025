@@ -14,19 +14,20 @@ import java.util.Optional;
 @Service
 public class BodaServiceImpl implements BodaService{
 
-    private final BodaRepository repository;
+    private final BodaRepository bodaRepository;
     private final ItinerarioRepository itinerarioRepository;
 
-    public BodaServiceImpl(BodaRepository repository, ItinerarioRepository itinerarioRepository) {
-        this.repository = repository;
+    public BodaServiceImpl(BodaRepository bodaRepository, ItinerarioRepository itinerarioRepository) {
+        this.bodaRepository = bodaRepository;
         this.itinerarioRepository = itinerarioRepository;
     }
+
 
     @Override
     @Transactional(readOnly = true)
     public Optional<BodaDTO> findById(Long id) {
 
-        Optional<Boda> opt = repository.findById(id);
+        Optional<Boda> opt = bodaRepository.findById(id);
 
         return (opt.isEmpty()) ? Optional.empty() : Optional.of(toDTO(opt.get()));
     }
@@ -37,7 +38,7 @@ public class BodaServiceImpl implements BodaService{
 
         List<BodaDTO> list = new ArrayList<>();
 
-        for (Boda a: repository.findAll()){
+        for (Boda a: bodaRepository.findAll()){
             list.add(toDTO(a));
         }
         return list;
@@ -47,7 +48,7 @@ public class BodaServiceImpl implements BodaService{
     public BodaDTO save(BodaDTO dto) {
 
         Boda entity = (dto.getId() != null)
-                ? repository.findById(dto.getId()).orElseGet(Boda::new)
+                ? bodaRepository.findById(dto.getId()).orElseGet(Boda::new)
                 : new Boda();
 
 
@@ -86,7 +87,7 @@ public class BodaServiceImpl implements BodaService{
         entity.setRegalos(reg);
 
 
-        Boda saved = repository.save(entity);
+        Boda saved = bodaRepository.save(entity);
         return toDTO(saved);
     }
 
@@ -94,10 +95,11 @@ public class BodaServiceImpl implements BodaService{
     @Override
     @Transactional
     public void deleteById(Long id) {
-        repository.deleteById(id);
+        bodaRepository.deleteById(id);
 
     }
 
+    @Override
     public BodaDTO toDTO(Boda boda){
 
         BodaDTO dto = new BodaDTO();
@@ -114,6 +116,7 @@ public class BodaServiceImpl implements BodaService{
         //SETEANDO NOVIOS
         List<NovioDTO> novios = (boda.getNovios() == null) ?
                 List.of() : boda.getNovios().stream().map(this::toDTONovio).toList();
+
         dto.setNovios(new ArrayList<>(novios));
 
         //SETEANDO INVITADOS
@@ -231,6 +234,7 @@ public class BodaServiceImpl implements BodaService{
 
         NovioDTO dto = new NovioDTO();
         dto.setId(novio.getId());
+        dto.setIdUsuario(novio.getIdUsuario());
         dto.setNombre(novio.getNombre());
         dto.setApellido1(novio.getApellido1());
         dto.setApellido2(novio.getApellido2());
@@ -244,6 +248,7 @@ public class BodaServiceImpl implements BodaService{
         Novio novio = new Novio();
 
         novio.setId(dto.getId());
+        novio.setIdUsuario(dto.getIdUsuario());
         novio.setNombre(dto.getNombre());
         novio.setApellido1(dto.getApellido1());
         novio.setApellido2(dto.getApellido2());

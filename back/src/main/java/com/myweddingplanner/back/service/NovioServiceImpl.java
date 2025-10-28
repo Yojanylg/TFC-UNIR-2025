@@ -23,6 +23,16 @@ public class NovioServiceImpl implements NovioService{
     }
 
     @Override
+    public Optional<Novio> findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return repository.existsByEmail(email);
+    }
+
+    @Override
     public List<Novio> findAll() {
         return repository.findAll();
     }
@@ -36,4 +46,6 @@ public class NovioServiceImpl implements NovioService{
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
+
 }

@@ -1,7 +1,6 @@
 package com.myweddingplanner.back.service;
 
 import com.myweddingplanner.back.dto.AlergenoDTO;
-import com.myweddingplanner.back.dto.ImagenAlergenoDTO;
 import com.myweddingplanner.back.model.Alergeno;
 
 import java.util.List;

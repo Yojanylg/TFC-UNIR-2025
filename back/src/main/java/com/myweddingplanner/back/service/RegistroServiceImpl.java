@@ -76,7 +76,7 @@ public class RegistroServiceImpl implements RegistroService{
             // Actualizamos el novio si coincide por email
             for (Novio n : boda.getNovios()){
                 if (usuarioCreado.getEmail().equals(n.getEmail())){
-                    n.setIdUsuario(usuarioCreado.getId());
+                    n.setUsuario(usuarioCreado.getId());
                     n.setNombre(usuarioCreado.getNombre());
                     n.setApellido1(usuarioCreado.getApellido1());
                     n.setApellido2(usuarioCreado.getApellido2());
@@ -100,7 +100,7 @@ public class RegistroServiceImpl implements RegistroService{
 
         NovioDTO novio1 = new NovioDTO();
 
-        novio1.setIdUsuario(usuarioCreado.getId());
+        novio1.setUsuario(usuarioCreado.getId());
         novio1.setNombre(usuarioCreado.getNombre());
         novio1.setApellido1(usuarioCreado.getApellido1());
         novio1.setApellido2(usuarioCreado.getApellido2());
@@ -118,7 +118,7 @@ public class RegistroServiceImpl implements RegistroService{
                 // novio2 ya es usuario del sistema, completamos datos
                 UsuarioDTO u2 = usuarioService.findByEmail(req.getEmailNovio())
                         .orElseThrow(() -> new IllegalStateException("Inconsistencia usuario novio2 no encontrado"));
-                novio2.setIdUsuario(u2.getId());
+                novio2.setUsuario(u2.getId());
                 novio2.setNombre(u2.getNombre());
                 novio2.setApellido1(u2.getApellido1());
                 novio2.setApellido2(u2.getApellido2());

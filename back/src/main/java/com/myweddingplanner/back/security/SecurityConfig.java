@@ -41,14 +41,20 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(restAuthEntryPoint))
                 .authorizeHttpRequests(reg -> reg
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/usuarios/**").authenticated()
-                        .anyRequest().authenticated()
-                )
+                        // jwt apagado temporal comentar para encender
+                        .anyRequest().permitAll()
+                );
+                        // jwt apagado temporal descomentar para arrancar
+                        //.requestMatchers("/api/auth/**").permitAll()
+                        //.requestMatchers("/api/usuarios/**").authenticated()
+                        //.anyRequest().authenticated()
 
-                .authenticationProvider(daoAuthenticationProvider());
+                // jwt apagado temporal descomentar para arrancar
+                //)
+                //.authenticationProvider(daoAuthenticationProvider());
 
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        // jwt apagado temporal
+        //http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

@@ -2,6 +2,7 @@ package com.myweddingplanner.back.controllers;
 
 import com.myweddingplanner.back.dto.BodaDTO;
 import com.myweddingplanner.back.service.BodaService;
+import com.myweddingplanner.back.service.NovioService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,17 +10,20 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/auth/bodas")
+@RequestMapping("/api/bodas")
 @Tag(name = "API bodas",
         description = "CRUD bodas de la App")
 public class BodaController {
 
     private final BodaService bodaService;
+    private final NovioService novioService;
 
-    public BodaController(BodaService bodaService) {
+    public BodaController(BodaService bodaService, NovioService novioService) {
         this.bodaService = bodaService;
+        this.novioService = novioService;
     }
 
     @GetMapping("error")
@@ -36,15 +40,19 @@ public class BodaController {
         return ResponseEntity.ok(bodaService.findById(id).get());
     }
 
+    // READ ONE por idUsuario
+    @GetMapping(params = "idUsuario")
+    public ResponseEntity<BodaDTO> buscarBodaActualPorUsuario(@RequestParam Long idUsuario){
 
-    // READ ONE POR ID NOVIO
-    @GetMapping
-    public ResponseEntity<List<BodaDTO>> getPorNovio(@RequestParam Long idNovio){
+        Optional<BodaDTO> boda = bodaService.buscarBodaActualPorUsuario(idUsuario);
 
-        return null;
+        return bodaService.buscarBodaActualPorUsuario(idUsuario)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+
     }
 
-
+    // READ ALL
     @GetMapping
     public ResponseEntity<List<BodaDTO>> getall(){
         return ResponseEntity.ok(bodaService.findAll());

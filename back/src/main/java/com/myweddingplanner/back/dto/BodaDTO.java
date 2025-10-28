@@ -20,6 +20,8 @@ public class BodaDTO {
 
     private String fecha;
 
+    private String estado;
+
     private ItinerarioDTO itinerario;
 
     private List<NovioDTO> novios = new ArrayList<>();

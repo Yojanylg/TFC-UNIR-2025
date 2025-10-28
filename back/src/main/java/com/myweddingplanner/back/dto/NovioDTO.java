@@ -1,7 +1,6 @@
 package com.myweddingplanner.back.dto;
 
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,7 @@ public class NovioDTO{
 
 private Long id;
 
-private Long IdUsuario;
+private Long usuario;
 
 private String nombre;
 

@@ -9,12 +9,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MisBodasDTO {
+public class MisBodaDTO {
 
     private Long id;
 
     private String lugar;
 
     private String fecha;
+
+    private String estado;
 
 }

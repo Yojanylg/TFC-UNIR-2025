@@ -2,8 +2,10 @@ package com.myweddingplanner.back.service;
 
 import com.myweddingplanner.back.dto.*;
 import com.myweddingplanner.back.model.*;
+import com.myweddingplanner.back.model.enums.EstadoBoda;
 import com.myweddingplanner.back.repository.BodaRepository;
 import com.myweddingplanner.back.repository.ItinerarioRepository;
+import com.myweddingplanner.back.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +18,12 @@ public class BodaServiceImpl implements BodaService{
 
     private final BodaRepository bodaRepository;
     private final ItinerarioRepository itinerarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    public BodaServiceImpl(BodaRepository bodaRepository, ItinerarioRepository itinerarioRepository) {
+    public BodaServiceImpl(BodaRepository bodaRepository, ItinerarioRepository itinerarioRepository, UsuarioRepository usuarioRepository) {
         this.bodaRepository = bodaRepository;
         this.itinerarioRepository = itinerarioRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
 
@@ -100,6 +104,38 @@ public class BodaServiceImpl implements BodaService{
     }
 
     @Override
+    public List<BodaDTO> buscarBodasPorUsuario(Long usuario) {
+
+        String emailUsuario = usuarioRepository.findById(usuario).get().getEmail();
+
+        List<Boda> bodasUsuario = bodaRepository.findByNoviosEmail(emailUsuario);
+
+        List<BodaDTO> bodasDtoUsuario = new ArrayList<>();
+
+        for (Boda boda : bodasUsuario){
+            bodasDtoUsuario.add(toDTO(boda));
+        }
+
+        return bodasDtoUsuario;
+    }
+
+    @Override
+    public Optional<BodaDTO> buscarBodaActualPorUsuario(Long usuario) {
+
+        String emailUsuario = usuarioRepository.findById(usuario).get().getEmail();
+
+        List<Boda> bodasUsuario = bodaRepository.findByNoviosEmail(emailUsuario);
+
+        for (Boda boda : bodasUsuario){
+            if (boda.getEstado().name().equals("PREPARANDO")){
+                return Optional.of(toDTO(boda));
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
     public BodaDTO toDTO(Boda boda){
 
         BodaDTO dto = new BodaDTO();
@@ -107,6 +143,7 @@ public class BodaServiceImpl implements BodaService{
         dto.setId(boda.getId());
         dto.setFecha(boda.getFecha());
         dto.setLugar(boda.getLugar());
+        dto.setEstado(boda.getEstado().name());
 
         // SETEANDO ITINERARIO
         Itinerario itinerario = boda.getItinerario();
@@ -129,6 +166,18 @@ public class BodaServiceImpl implements BodaService{
                 List.of() : boda.getRegalos().stream().map(this::toDTORegalo).toList();
         dto.setRegalos(new ArrayList<>(regalosDTO));
 
+        return dto;
+    }
+
+    @Override
+    public MisBodaDTO toMisBodaDTO(Boda boda) {
+
+        MisBodaDTO dto = new MisBodaDTO();
+
+        dto.setId(boda.getId());
+        dto.setLugar(boda.getLugar());
+        dto.setFecha(boda.getFecha());
+        dto.setEstado(boda.getEstado().name());
 
         return dto;
     }
@@ -140,6 +189,9 @@ public class BodaServiceImpl implements BodaService{
 
         boda.setLugar(dto.getLugar());
         boda.setFecha(dto.getFecha());
+
+        // tratamiento de un string a enum
+        boda.setEstado(EstadoBoda.valueOf(dto.getEstado()));
 
         // SETEANDO ITINERARIO
         if (dto.getItinerario() != null) {
@@ -234,7 +286,7 @@ public class BodaServiceImpl implements BodaService{
 
         NovioDTO dto = new NovioDTO();
         dto.setId(novio.getId());
-        dto.setIdUsuario(novio.getIdUsuario());
+        dto.setUsuario(novio.getUsuario());
         dto.setNombre(novio.getNombre());
         dto.setApellido1(novio.getApellido1());
         dto.setApellido2(novio.getApellido2());
@@ -248,7 +300,7 @@ public class BodaServiceImpl implements BodaService{
         Novio novio = new Novio();
 
         novio.setId(dto.getId());
-        novio.setIdUsuario(dto.getIdUsuario());
+        novio.setUsuario(dto.getUsuario());
         novio.setNombre(dto.getNombre());
         novio.setApellido1(dto.getApellido1());
         novio.setApellido2(dto.getApellido2());

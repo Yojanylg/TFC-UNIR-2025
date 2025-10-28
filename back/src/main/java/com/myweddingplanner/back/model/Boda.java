@@ -1,5 +1,6 @@
 package com.myweddingplanner.back.model;
 
+import com.myweddingplanner.back.model.enums.EstadoBoda;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,10 @@ public class Boda {
     private String fecha;
 
     private String lugar;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EstadoBoda estado;
 
     // RELACION CON ITINERARIO
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)

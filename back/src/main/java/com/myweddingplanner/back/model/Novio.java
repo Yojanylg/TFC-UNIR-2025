@@ -18,8 +18,8 @@ public class Novio {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(name = "id_usuario")
-    private Long idUsuario;
+    @Column(name = "usuario")
+    private Long usuario;
 
     private String nombre;
 

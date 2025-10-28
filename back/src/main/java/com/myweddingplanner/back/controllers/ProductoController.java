@@ -1,6 +1,5 @@
 package com.myweddingplanner.back.controllers;
 
-import com.myweddingplanner.back.dto.AlergenoDTO;
 import com.myweddingplanner.back.dto.ProductoDTO;
 import com.myweddingplanner.back.service.ProductoService;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,6 +1,7 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.model.Invitado;
+import com.myweddingplanner.back.dto.InvitadoDTO;
+import com.myweddingplanner.back.model.Invitacion;
 
 
 import java.util.List;
@@ -8,11 +9,15 @@ import java.util.Optional;
 
 public interface InvitadoService {
 
-    Optional<Invitado> findById(Long id);
+    Optional<Invitacion> findById(Long id);
 
-    List<Invitado> findAll();
+    List<Invitacion> findByUsuario(Long usuario);
 
-    Invitado save(Invitado invitado);
+    List<Invitacion> findAll();
+
+    Invitacion save(Invitacion invitacion);
 
     void deleteById (Long id);
+
+    InvitadoDTO toDTO (Invitacion invitacion);
 }

@@ -1,5 +1,6 @@
 package com.myweddingplanner.back.dto;
 
+import com.myweddingplanner.back.model.enums.EstadoBoda;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ public class BodaDTO {
 
     private String fecha;
 
-    private String estado;
+    private EstadoBoda estado;
 
     private ItinerarioDTO itinerario;
 

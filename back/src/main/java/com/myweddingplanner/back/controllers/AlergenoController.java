@@ -12,21 +12,15 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/auth/alergenos")
+@RequestMapping("/api/alergenos")
 @Tag(name = "API Alergenos",
         description = "CRUD alergenos de la App")
 public class AlergenoController {
 
     private final AlergenoService alergenoService;
 
-
     public AlergenoController(AlergenoService alergenoService) {
         this.alergenoService = alergenoService;
-    }
-
-    @GetMapping("error")
-    public String getError(){
-        return "Error en la api";
     }
 
     // READ ALL
@@ -35,7 +29,8 @@ public class AlergenoController {
         return ResponseEntity.ok(alergenoService.findAll());
     }
 
-    // READ ONE
+    /* END POINT PARA ADMIN
+    // READ ONE - ADMIN
     @GetMapping("/{id}")
     public ResponseEntity<AlergenoDTO> getById(@PathVariable Long id){
         if (alergenoService.findById(id).isEmpty()){
@@ -44,7 +39,7 @@ public class AlergenoController {
         return ResponseEntity.ok(alergenoService.findById(id).get());
     }
 
-    // UPDATE
+    // UPDATE - ADMIN
     @PutMapping("/{id}")
     public ResponseEntity<AlergenoDTO> update(@PathVariable Long id, @RequestBody AlergenoDTO dto){
 
@@ -56,7 +51,7 @@ public class AlergenoController {
                 }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // CREATE
+    // CREATE - ADMIN
     @PostMapping
     public ResponseEntity<AlergenoDTO> create(@RequestBody AlergenoDTO dto){
 
@@ -72,7 +67,7 @@ public class AlergenoController {
         return ResponseEntity.created(location).body(nuevo);
     }
 
-    // DELETE
+    // DELETE - ADMIN
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         if (alergenoService.findById(id).isEmpty()){
@@ -81,5 +76,5 @@ public class AlergenoController {
         alergenoService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
+     */
 }

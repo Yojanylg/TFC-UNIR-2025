@@ -1,7 +1,7 @@
 package com.myweddingplanner.back.service;
 
 import com.myweddingplanner.back.dto.BodaDTO;
-import com.myweddingplanner.back.dto.MisBodaDTO;
+import com.myweddingplanner.back.dto.MiBodaDTO;
 import com.myweddingplanner.back.model.Boda;
 
 import java.util.List;
@@ -23,6 +23,6 @@ public interface BodaService {
 
     BodaDTO toDTO(Boda boda);
 
-    MisBodaDTO toMisBodaDTO(Boda boda);
+    MiBodaDTO toMisBodaDTO(Boda boda);
 
 }

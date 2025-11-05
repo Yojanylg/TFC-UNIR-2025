@@ -36,21 +36,21 @@ public class Usuario {
     private String password;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UsuarioAlergeno> alergias = new ArrayList<>();
+    private List<Alergia> alergias = new ArrayList<>();
 
-    public void setAlergias(List<UsuarioAlergeno> nuevas){
+    public void setAlergias(List<Alergia> nuevas){
         this.alergias.clear();
         if (nuevas != null){
             nuevas.forEach(this::addAlergeno);
         }
     }
 
-    public void addAlergeno(UsuarioAlergeno alergia){
+    public void addAlergeno(Alergia alergia){
         alergia.setUsuario(this);
         this.alergias.add(alergia);
     }
 
-    public void removeAlergeno(UsuarioAlergeno alergia){
+    public void removeAlergeno(Alergia alergia){
         this.alergias.remove(alergia);
         alergia.setUsuario(null);
     }

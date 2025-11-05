@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = {"boda"})
-public class Invitado {
+public class Invitacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Invitado {
 
     // No hay relacion con la tabla porque un invitado puede o no estar registrado
     @Column(name = "id_usuario")
-    private Long idUsuario;
+    private Long usuario;
 
     private String nombre;
 

@@ -1,17 +1,17 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.model.UsuarioAlergeno;
+import com.myweddingplanner.back.model.Alergia;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface AlergiaService {
 
-    Optional<UsuarioAlergeno> findById(Long id);
+    Optional<Alergia> findById(Long id);
 
-    List<UsuarioAlergeno> findAll();
+    List<Alergia> findAll();
 
-    UsuarioAlergeno save(UsuarioAlergeno usuarioAlergeno);
+    Alergia save(Alergia alergia);
 
     void deleteById (Long id);
 

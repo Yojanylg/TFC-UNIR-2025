@@ -169,7 +169,6 @@ CREATE TABLE usuarios (
     email VARCHAR(255),
     telefono VARCHAR(255),
     password VARCHAR(255),
-    estado VARCHAR(255) DEFAULT "PREPARANDO",
     id_rol BIGINT DEFAULT 1,
     FOREIGN KEY (id_rol) REFERENCES roles(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -247,6 +246,7 @@ CREATE TABLE bodas (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     lugar VARCHAR(255),
     fecha VARCHAR(255),
+    estado VARCHAR(255) DEFAULT "PREPARANDO",
     id_itinerario BIGINT,
     CONSTRAINT fk_bodas_itinerario 
         FOREIGN KEY (id_itinerario) REFERENCES itinerarios(id) 
@@ -301,7 +301,7 @@ CREATE TABLE regalos (
     id_producto BIGINT,
     descripcion VARCHAR(255),
     enlace_compra VARCHAR(255),
-    id_usuario BIGINT,
+    comprador BIGINT,
     valor NUMERIC(10,2),
     confirmado BOOLEAN DEFAULT false,
     CONSTRAINT fk_reg_boda
@@ -321,7 +321,7 @@ Relaciones:
 
 CREATE TABLE novios (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    id_usuario BIGINT,
+    usuario BIGINT,
     id_boda BIGINT,
     nombre VARCHAR(255),
     apellido_1 VARCHAR(255),

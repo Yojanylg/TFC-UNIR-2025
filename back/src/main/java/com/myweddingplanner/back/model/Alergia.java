@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = {"usuario"})
-public class UsuarioAlergeno {
+public class Alergia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

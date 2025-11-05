@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/auth/productos")
+@RequestMapping("/api/productos")
 @Tag(name = "API Productos",
         description = "CRUD productos de la App")
 public class ProductoController {

@@ -27,6 +27,11 @@ public class NovioServiceImpl implements NovioService{
         return repository.findByEmail(email);
     }
 
+    @Override
+    public List<Novio> findByUsuario(Long usuario){
+        return repository.findByUsuario(usuario);
+    }
+
 
     @Override
     public boolean existsByEmail(String email) {

@@ -9,6 +9,8 @@ public interface NovioService {
 
     Optional<Novio> findById(Long id);
 
+    List<Novio> findByUsuario(Long usuario);
+
     List<Novio> findAll();
 
     Novio save(Novio novio);

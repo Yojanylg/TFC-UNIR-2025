@@ -27,7 +27,6 @@ public class Boda {
     private String lugar;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private EstadoBoda estado;
 
     // RELACION CON ITINERARIO
@@ -58,23 +57,23 @@ public class Boda {
 
     // RELACION CON INVITADOS
     @OneToMany(mappedBy = "boda", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Invitado> invitados = new ArrayList<>();
+    private List<Invitacion> invitados = new ArrayList<>();
 
-    public void setInvitados(List<Invitado> nuevos){
+    public void setInvitados(List<Invitacion> nuevos){
         this.invitados.clear();
         if (nuevos != null){
             nuevos.forEach(this::addInvitado);
         }
     }
 
-    public void addInvitado(Invitado invitado){
-        invitado.setBoda(this);
-        this.invitados.add(invitado);
+    public void addInvitado(Invitacion invitacion){
+        invitacion.setBoda(this);
+        this.invitados.add(invitacion);
     }
 
-    public void removeInvitao(Invitado invitado){
-        this.invitados.remove(invitado);
-        invitado.setBoda(null);
+    public void removeInvitao(Invitacion invitacion){
+        this.invitados.remove(invitacion);
+        invitacion.setBoda(null);
     }
 
     // RELACION CON NOVIOS

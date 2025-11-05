@@ -13,15 +13,34 @@ import lombok.Setter;
 @Setter
 public class RegisterRequest {
 
+    // Datos comunes a registro Novios e Invitados
+
+    private String nombre;
+
+    private String primerApellido;
+
+    private String segundoApellido;
+
     @Email
     @NotBlank
     private String email;
+
     @NotBlank
     private String password;
 
+
+    // Datos de registro novio
+
     private boolean esNovio;
+
+    private String nombreNovio;
+
+    private String primerApellidoNovio;
+
+    private String segundoApellidoNovio;
 
     private String emailNovio;
 
-    // TODO agregar campos de registro
+    private String fechaBoda;
+
 }

@@ -12,8 +12,7 @@ public interface NovioRepository extends JpaRepository<Novio, Long> {
 
     Optional<Novio> findByEmail(String email);
 
-    @Query("SELECT DISTINCT n.boda.id FROM Novio n WHERE n.email = :email AND n.boda IS NOT NULL")
-    List<Long> buscarIdBodasPorEmail(@Param("email") String email);
+    List<Novio> findByUsuario (Long usuario);
 
     boolean existsByEmail(String email);
 

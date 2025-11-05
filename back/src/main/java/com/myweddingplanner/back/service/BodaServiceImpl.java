@@ -2,7 +2,6 @@ package com.myweddingplanner.back.service;
 
 import com.myweddingplanner.back.dto.*;
 import com.myweddingplanner.back.model.*;
-import com.myweddingplanner.back.model.enums.EstadoBoda;
 import com.myweddingplanner.back.repository.BodaRepository;
 import com.myweddingplanner.back.repository.ItinerarioRepository;
 import com.myweddingplanner.back.repository.UsuarioRepository;
@@ -58,6 +57,7 @@ public class BodaServiceImpl implements BodaService{
 
         entity.setFecha(dto.getFecha());
         entity.setLugar(dto.getLugar());
+        entity.setEstado(dto.getEstado());
 
         // AGREGANDO ITINERARIO
         Itinerario itinerario;
@@ -81,7 +81,7 @@ public class BodaServiceImpl implements BodaService{
         entity.setNovios(nv);
 
         // AGREGANDO INVITADOS
-        List<Invitado> inv = (dto.getInvitados() == null) ? List.of()
+        List<Invitacion> inv = (dto.getInvitados() == null) ? List.of()
                 : dto.getInvitados().stream().map(this::toEntityInvitado).toList();
         entity.setInvitados(inv);
 
@@ -143,7 +143,7 @@ public class BodaServiceImpl implements BodaService{
         dto.setId(boda.getId());
         dto.setFecha(boda.getFecha());
         dto.setLugar(boda.getLugar());
-        dto.setEstado(boda.getEstado().name());
+        dto.setEstado(boda.getEstado());
 
         // SETEANDO ITINERARIO
         Itinerario itinerario = boda.getItinerario();
@@ -170,11 +170,11 @@ public class BodaServiceImpl implements BodaService{
     }
 
     @Override
-    public MisBodaDTO toMisBodaDTO(Boda boda) {
+    public MiBodaDTO toMisBodaDTO(Boda boda) {
 
-        MisBodaDTO dto = new MisBodaDTO();
+        MiBodaDTO dto = new MiBodaDTO();
 
-        dto.setId(boda.getId());
+        dto.setIdBoda(boda.getId());
         dto.setLugar(boda.getLugar());
         dto.setFecha(boda.getFecha());
         dto.setEstado(boda.getEstado().name());
@@ -191,7 +191,9 @@ public class BodaServiceImpl implements BodaService{
         boda.setFecha(dto.getFecha());
 
         // tratamiento de un string a enum
-        boda.setEstado(EstadoBoda.valueOf(dto.getEstado()));
+        // boda.setEstado(EstadoBoda.valueOf(dto.getEstado()));
+        boda.setEstado(dto.getEstado());
+
 
         // SETEANDO ITINERARIO
         if (dto.getItinerario() != null) {
@@ -221,23 +223,23 @@ public class BodaServiceImpl implements BodaService{
         //SETEANDO INVITADOS
         if (dto.getInvitados() != null) {
 
-            List<Invitado> invitados = new ArrayList<>();
+            List<Invitacion> invitacions = new ArrayList<>();
 
             for (InvitadoDTO invitadoDTO : dto.getInvitados()){
-                Invitado invitado = new Invitado();
-                invitado.setId(invitadoDTO.getId());
-                invitado.setNombre(invitadoDTO.getNombre());
-                invitado.setApellido1(invitadoDTO.getApellido1());
-                invitado.setApellido2(invitadoDTO.getApellido2());
-                invitado.setEmail(invitadoDTO.getEmail());
-                invitado.setTelefono(invitadoDTO.getTelefono());
-                invitado.setConfirmado(invitadoDTO.isConfirmado());
-                invitado.setAcomptesMayores(invitadoDTO.getAcomptesMayores());
-                invitado.setAcomptesMenores(invitadoDTO.getAcomptesMenores());
+                Invitacion invitacion = new Invitacion();
+                invitacion.setId(invitadoDTO.getId());
+                invitacion.setNombre(invitadoDTO.getNombre());
+                invitacion.setApellido1(invitadoDTO.getApellido1());
+                invitacion.setApellido2(invitadoDTO.getApellido2());
+                invitacion.setEmail(invitadoDTO.getEmail());
+                invitacion.setTelefono(invitadoDTO.getTelefono());
+                invitacion.setConfirmado(invitadoDTO.isConfirmado());
+                invitacion.setAcomptesMayores(invitadoDTO.getAcomptesMayores());
+                invitacion.setAcomptesMenores(invitadoDTO.getAcomptesMenores());
 
-                invitados.add(invitado);
+                invitacions.add(invitacion);
             }
-            boda.setInvitados(invitados);
+            boda.setInvitados(invitacions);
         }
 
         //SETEANDO REGALOS
@@ -310,38 +312,38 @@ public class BodaServiceImpl implements BodaService{
         return novio;
     }
 
-    private InvitadoDTO toDTOInvitado(Invitado invitado) {
+    private InvitadoDTO toDTOInvitado(Invitacion invitacion) {
 
         InvitadoDTO dto = new InvitadoDTO();
-        dto.setId(invitado.getId());
-        dto.setIdUsuario(invitado.getIdUsuario());
-        dto.setNombre(invitado.getNombre());
-        dto.setApellido1(invitado.getApellido1());
-        dto.setApellido2(invitado.getApellido2());
-        dto.setEmail(invitado.getEmail());
-        dto.setTelefono(invitado.getTelefono());
-        dto.setConfirmado(invitado.isConfirmado());
-        dto.setAcomptesMayores(invitado.getAcomptesMayores());
-        dto.setAcomptesMenores(invitado.getAcomptesMenores());
+        dto.setId(invitacion.getId());
+        dto.setIdUsuario(invitacion.getUsuario());
+        dto.setNombre(invitacion.getNombre());
+        dto.setApellido1(invitacion.getApellido1());
+        dto.setApellido2(invitacion.getApellido2());
+        dto.setEmail(invitacion.getEmail());
+        dto.setTelefono(invitacion.getTelefono());
+        dto.setConfirmado(invitacion.isConfirmado());
+        dto.setAcomptesMayores(invitacion.getAcomptesMayores());
+        dto.setAcomptesMenores(invitacion.getAcomptesMenores());
 
         return dto;
     }
 
-    private Invitado toEntityInvitado(InvitadoDTO dto){
-        Invitado invitado = new Invitado();
+    private Invitacion toEntityInvitado(InvitadoDTO dto){
+        Invitacion invitacion = new Invitacion();
 
-        invitado.setId(dto.getId());
-        invitado.setIdUsuario(dto.getIdUsuario());
-        invitado.setNombre(dto.getNombre());
-        invitado.setApellido1(dto.getApellido1());
-        invitado.setApellido2(dto.getApellido2());
-        invitado.setEmail(dto.getEmail());
-        invitado.setTelefono(dto.getTelefono());
-        invitado.setConfirmado(dto.isConfirmado());
-        invitado.setAcomptesMayores(dto.getAcomptesMayores());
-        invitado.setAcomptesMenores(dto.getAcomptesMenores());
+        invitacion.setId(dto.getId());
+        invitacion.setUsuario(dto.getIdUsuario());
+        invitacion.setNombre(dto.getNombre());
+        invitacion.setApellido1(dto.getApellido1());
+        invitacion.setApellido2(dto.getApellido2());
+        invitacion.setEmail(dto.getEmail());
+        invitacion.setTelefono(dto.getTelefono());
+        invitacion.setConfirmado(dto.isConfirmado());
+        invitacion.setAcomptesMayores(dto.getAcomptesMayores());
+        invitacion.setAcomptesMenores(dto.getAcomptesMenores());
 
-        return invitado;
+        return invitacion;
     }
 
     // Mapeado Regalo <-> RegaloDTO

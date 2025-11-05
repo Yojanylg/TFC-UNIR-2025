@@ -3,7 +3,7 @@ package com.myweddingplanner.back.service;
 import com.myweddingplanner.back.dto.UsuarioAlergenoDTO;
 import com.myweddingplanner.back.dto.UsuarioDTO;
 import com.myweddingplanner.back.model.Usuario;
-import com.myweddingplanner.back.model.UsuarioAlergeno;
+import com.myweddingplanner.back.model.Alergia;
 import com.myweddingplanner.back.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,10 +54,10 @@ public class UsuarioServiceImpl implements UsuarioService{
         entity.setEmail(dto.getEmail());
         entity.setTelefono(dto.getTelefono());
 
-        List<UsuarioAlergeno> alergenos = (dto.getAlergias() == null) ? List.of()
+        List<Alergia> alergias = (dto.getAlergias() == null) ? List.of()
                 : dto.getAlergias().stream().map(this::toEntityUsuarioAlergeno).toList();
 
-        entity.setAlergias(alergenos);
+        entity.setAlergias(alergias);
 
 
         Usuario saved = usuarioRepository.save(entity);
@@ -102,19 +102,19 @@ public class UsuarioServiceImpl implements UsuarioService{
         return usuarioDTO;
     }
 
-    private UsuarioAlergenoDTO toDTOUsuarioAlergeno(UsuarioAlergeno usuarioAlergeno){
+    private UsuarioAlergenoDTO toDTOUsuarioAlergeno(Alergia alergia){
 
         UsuarioAlergenoDTO dto = new UsuarioAlergenoDTO();
 
-        dto.setId(usuarioAlergeno.getId());
-        dto.setId_alergeno(usuarioAlergeno.getIdAlergeno());
-        dto.setNombre(usuarioAlergeno.getNombre());
+        dto.setId(alergia.getId());
+        dto.setId_alergeno(alergia.getIdAlergeno());
+        dto.setNombre(alergia.getNombre());
 
         return dto;
     }
 
-    private UsuarioAlergeno toEntityUsuarioAlergeno (UsuarioAlergenoDTO dto){
-        UsuarioAlergeno e = new UsuarioAlergeno();
+    private Alergia toEntityUsuarioAlergeno (UsuarioAlergenoDTO dto){
+        Alergia e = new Alergia();
         e.setId(dto.getId());
         e.setIdAlergeno(dto.getId_alergeno());
         e.setNombre(dto.getNombre());

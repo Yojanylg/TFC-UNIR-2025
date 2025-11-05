@@ -1,7 +1,11 @@
 package com.myweddingplanner.back.repository;
 
-import com.myweddingplanner.back.model.Invitado;
+import com.myweddingplanner.back.model.Invitacion;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface InvitadoRepository extends JpaRepository<Invitado, Long> {
+import java.util.List;
+
+public interface InvitadoRepository extends JpaRepository<Invitacion, Long> {
+
+    List<Invitacion> findByUsuario(Long usuario);
 }

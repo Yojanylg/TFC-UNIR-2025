@@ -4,8 +4,6 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
@@ -61,6 +59,15 @@ public class JwtService {
 
     public String extractUsername(String token){
         return parseAllClaims(token).getBody().getSubject();
+    }
+
+    public Long extractUserId(String token){
+        Claims claims = parseAllClaims(token).getBody();
+        Object raw = claims.get("uid");
+
+        if (raw instanceof Number n) return n.longValue();
+        if (raw instanceof String s) return Long.parseLong(s);
+        throw new IllegalArgumentException("el token no contiene uid");
     }
 
     public boolean isTokenValid(String token, String username){

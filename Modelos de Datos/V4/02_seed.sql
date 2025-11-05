@@ -1,3 +1,5 @@
+-- los usuarios estan mal
+
 -- 14 alergenos de obligada declaración
 
 INSERT INTO alergenos (nombre) VALUES
@@ -16,6 +18,9 @@ INSERT INTO alergenos (nombre) VALUES
 ('Altramuces'),
 ('Moluscos');
 
+INSERT INTO roles (nombre) VALUES 
+('ROLE_ADMIN'),
+('ROLE_USER');
 
 INSERT INTO productos (nombre, enlace_compra, descripcion, valor) VALUES
 ('Vajilla elegante','https://shop.example.com/vajilla','Set de 24 piezas de porcelana blanca',120.50),

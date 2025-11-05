@@ -6,6 +6,7 @@ import com.myweddingplanner.back.model.Boda;
 import com.myweddingplanner.back.model.Novio;
 import com.myweddingplanner.back.model.Rol;
 import com.myweddingplanner.back.model.Usuario;
+import com.myweddingplanner.back.model.enums.EstadoBoda;
 import com.myweddingplanner.back.repository.RolRepository;
 import com.myweddingplanner.back.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,9 @@ public class RegistroServiceImpl implements RegistroService{
 
         // Crear Usuario base
         Usuario nuevo = new Usuario();
+        nuevo.setNombre(req.getNombre());
+        nuevo.setApellido1(req.getPrimerApellido());
+        nuevo.setApellido2(req.getSegundoApellido());
         nuevo.setEmail(req.getEmail());
         nuevo.setPassword(encoder.encode(req.getPassword()));
         nuevo.setRol(rolUsuario);
@@ -96,7 +100,8 @@ public class RegistroServiceImpl implements RegistroService{
         BodaDTO nuevaBoda = new BodaDTO();
 
         nuevaBoda.setLugar("pendiente"); // TODO definir si viene desde UI
-        nuevaBoda.setFecha("pendiente"); // TODO definir si viene desde UI
+        nuevaBoda.setFecha(req.getFechaBoda());
+        nuevaBoda.setEstado(EstadoBoda.PREPARANDO);
 
         NovioDTO novio1 = new NovioDTO();
 
@@ -127,11 +132,15 @@ public class RegistroServiceImpl implements RegistroService{
             } else {
                 // Novio2 no registrado
                 novio2.setEmail(req.getEmailNovio());
+                novio2.setNombre(req.getNombreNovio());
+                novio2.setApellido1(req.getPrimerApellidoNovio());
+                novio2.setApellido2(req.getSegundoApellidoNovio());
             }
 
             nuevaBoda.getNovios().add(novio2);
         }
 
+        System.out.println("creando boda");
         bodaService.save(nuevaBoda);
 
     }

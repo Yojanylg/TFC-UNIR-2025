@@ -1,6 +1,5 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.model.Novio;
 import com.myweddingplanner.back.model.Regalo;
 
 import java.util.List;

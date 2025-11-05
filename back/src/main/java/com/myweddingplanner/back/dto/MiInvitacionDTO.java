@@ -9,14 +9,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MisBodaDTO {
+public class MiInvitacionDTO {
 
-    private Long id;
+    private Long idBoda;
 
-    private String lugar;
+    private Long idInvitacion;
 
-    private String fecha;
+    private String nombreNovios;
 
-    private String estado;
+    private String lugarBoda;
 
+    private String fechaBoda;
+
+    private boolean confirmado;
 }

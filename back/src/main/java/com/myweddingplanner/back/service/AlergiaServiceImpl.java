@@ -1,6 +1,6 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.model.UsuarioAlergeno;
+import com.myweddingplanner.back.model.Alergia;
 import com.myweddingplanner.back.repository.UsuarioAlergenoRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +17,18 @@ public class AlergiaServiceImpl implements AlergiaService {
     }
 
     @Override
-    public Optional<UsuarioAlergeno> findById(Long id) {
+    public Optional<Alergia> findById(Long id) {
         return usuarioAlergenoRepository.findById(id);
     }
 
     @Override
-    public List<UsuarioAlergeno> findAll() {
+    public List<Alergia> findAll() {
         return usuarioAlergenoRepository.findAll();
     }
 
     @Override
-    public UsuarioAlergeno save(UsuarioAlergeno usuarioAlergeno) {
-        return usuarioAlergenoRepository.save(usuarioAlergeno);
+    public Alergia save(Alergia alergia) {
+        return usuarioAlergenoRepository.save(alergia);
     }
 
     @Override

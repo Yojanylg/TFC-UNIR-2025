@@ -4,26 +4,31 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "imagen_productos")
+@Table(name = "user_wedding")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"producto"})
-public class ImagenProducto {
+@ToString(exclude = {"wedding", "userApp"})
+public class UserWedding {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Long id;
 
-    private String enlace;
-
-    private String tipo;
+    @Column(name = "email_groom")
+    private String emailGroom;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto")
-    private Producto producto;
+    @JoinColumn(name = "wedding_id")
+    private Wedding wedding;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserApp userApp;
+
 
 }

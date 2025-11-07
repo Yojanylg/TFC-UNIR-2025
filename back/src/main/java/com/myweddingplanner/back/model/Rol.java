@@ -15,6 +15,8 @@ import java.util.List;
 @ToString(exclude = {"usuarios"})
 public class Rol {
 
+    // no tocar hasta fin refactor
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include

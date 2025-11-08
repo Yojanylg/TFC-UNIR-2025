@@ -1,9 +1,9 @@
 package com.myweddingplanner.back.controllers;
 
 import com.myweddingplanner.back.dto.*;
-import com.myweddingplanner.back.repository.UsuarioRepository;
+import com.myweddingplanner.back.repository.UserAppRepository;
 import com.myweddingplanner.back.security.JwtService;
-import com.myweddingplanner.back.service.RegistroService;
+import com.myweddingplanner.back.service.RegisterService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,21 +20,21 @@ public class AuthController {
 
     private final AuthenticationManager authManager;
     private final JwtService jwtService;
-    private final UsuarioRepository usuarioRepo;
-    private final RegistroService registroService;
+    private final RegisterService registerService;
+    private final UserAppRepository userAppRepository;
 
-    public AuthController(AuthenticationManager authManager, JwtService jwtService, UsuarioRepository usuarioRepo, RegistroService registroService) {
+    public AuthController(AuthenticationManager authManager, JwtService jwtService, UserAppRepository userAppRepository, RegisterService registerService) {
         this.authManager = authManager;
         this.jwtService = jwtService;
-        this.usuarioRepo = usuarioRepo;
-        this.registroService = registroService;
+        this.userAppRepository = userAppRepository;
+        this.registerService = registerService;
     }
 
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest req) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest req) {
 
-        RegistroResult result = registroService.registrarUsuario(req);
+        RegistroResult result = registerService.registerUserApp(req);
 
         String access = jwtService.generateToken(
                 result.usuarioEmail(), Map.of("role", result.rolNombre(), "uid", result.usuarioId()));
@@ -42,7 +42,7 @@ public class AuthController {
 
         // 201 Created + Location (opcional)
         return ResponseEntity
-                .created(URI.create("/api/usuarios/" + result.usuarioId()))
+                .created(URI.create("/api/users/" + result.usuarioId()))
                 .body(new AuthResponse(access, refresh));
 
     }
@@ -59,7 +59,7 @@ public class AuthController {
             return ResponseEntity.status(401).build();
         }
 
-        var u = usuarioRepo.findWithRolByEmail(req.getEmail()) //
+        var u = userAppRepository.findWithRolByEmail(req.getEmail()) //
                 .orElseThrow();
 
         String access = jwtService.generateToken(

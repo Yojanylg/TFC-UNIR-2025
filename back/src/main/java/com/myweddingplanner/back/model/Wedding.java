@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"events", "presents","guests","couple"})
+@ToString(exclude = {"events", "presents","invitations","grooms"})
 public class Wedding {
 
     @Id
@@ -27,6 +27,7 @@ public class Wedding {
     private String place;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "state_wedding")
     private StateWedding stateWedding;
 
     // RELACION CON ITINERARIO
@@ -39,11 +40,11 @@ public class Wedding {
 
     // RELACION CON INVITADOS
     @OneToMany(mappedBy = "wedding", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserInvitationWedding> guests = new ArrayList<>();
+    private List<UserInvitationWedding> invitations = new ArrayList<>();
 
     // RELACION CON NOVIOS
     @OneToMany(mappedBy = "wedding", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserWedding> couple = new ArrayList<>();
+    private List<UserWedding> grooms = new ArrayList<>();
 
 
 
@@ -65,8 +66,8 @@ public class Wedding {
     }
 
 
-    public void setGuests(List<UserInvitationWedding> nuevos){
-        this.guests.clear();
+    public void setInvitations(List<UserInvitationWedding> nuevos){
+        this.invitations.clear();
         if (nuevos != null){
             nuevos.forEach(this::addGests);
         }
@@ -74,18 +75,18 @@ public class Wedding {
 
     public void addGests(UserInvitationWedding invitacion){
         invitacion.setWedding(this);
-        this.guests.add(invitacion);
+        this.invitations.add(invitacion);
     }
 
 
     public void removGuests(UserInvitationWedding invitacion){
-        this.guests.remove(invitacion);
+        this.invitations.remove(invitacion);
         invitacion.setWedding(null);
     }
 
 
-    public void setCouple(List<UserWedding> nuevos){
-        this.couple.clear();
+    public void setGrooms(List<UserWedding> nuevos){
+        this.grooms.clear();
         if (nuevos != null){
             nuevos.forEach(this::addNovio);
         }
@@ -93,11 +94,11 @@ public class Wedding {
 
     public void addNovio(UserWedding weddingGroom){
         weddingGroom.setWedding(this);
-        this.couple.add(weddingGroom);
+        this.grooms.add(weddingGroom);
     }
 
     public void removeNovio(UserWedding weddingGroom){
-        this.couple.remove(weddingGroom);
+        this.grooms.remove(weddingGroom);
         weddingGroom.setWedding(null);
     }
 

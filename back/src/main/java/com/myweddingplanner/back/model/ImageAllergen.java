@@ -3,28 +3,28 @@ package com.myweddingplanner.back.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Entity
-@Table(name = "roles")
+@Table(name = "allergens_images")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"usuarios"})
-public class Rol {
-
-    // no tocar hasta fin refactor
+@ToString(exclude = {"allergen"})
+public class ImageAllergen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
 
-    private String nombre;
+    private String link;
 
-    @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserApp> usuarios;
+    @Column(name = "image_type")
+    private String imageType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_allergen", nullable = false)
+    private Allergen allergen;
 
 }

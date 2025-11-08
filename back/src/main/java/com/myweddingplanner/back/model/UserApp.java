@@ -40,16 +40,16 @@ public class UserApp {
     private Rol rol;
 
     @OneToMany(mappedBy = "userApp", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserWedding> myWeddings;
+    private List<UserWedding> myWeddings = new ArrayList<>();
 
     @OneToMany(mappedBy = "userApp", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserInvitationWedding> guests;
+    private List<UserInvitationWedding> invitations =new ArrayList<>();
 
     @OneToMany(mappedBy = "userApp", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AllergiesUser> allergies = new ArrayList<>();
 
     @OneToMany(mappedBy = "userApp", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Present> presents;
+    private List<Present> presents = new ArrayList<>();
 
     public void setAlergias(List<AllergiesUser> nuevas){
         this.allergies.clear();

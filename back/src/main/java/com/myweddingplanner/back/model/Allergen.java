@@ -23,22 +23,22 @@ public class Allergen {
     private String name;
 
     @OneToMany(mappedBy = "allergen", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AllergenImage> images = new ArrayList<>();
+    private List<ImageAllergen> images = new ArrayList<>();
 
 
-    public void setImages (List<AllergenImage> nuevas){
+    public void setImages (List<ImageAllergen> nuevas){
         this.images.clear();
         if (nuevas != null){
             nuevas.forEach(this::addImage);
         }
     }
 
-    public void addImage(AllergenImage img){
+    public void addImage(ImageAllergen img){
         img.setAllergen(this);
         this.images.add(img);
     }
 
-    public void removeImage(AllergenImage img){
+    public void removeImage(ImageAllergen img){
         this.images.remove(img);
         img.setAllergen(null);
     }

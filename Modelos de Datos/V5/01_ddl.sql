@@ -5,7 +5,7 @@ Archivo:    01_ddl.sql
 Autor:      Yojany Lobo Gil, 
             Paloma de los Milagros, 
             Bryan Ludena
-Fecha:      2025-10-23
+Fecha:      2025-11-19
 Version:    5.0
 Descripción: Script DDL para crear el esquema de la aplicación My Wedding (tablas, 
             relaciones y constraints) en MySQL. Este proyecto corresponte al proyecto
@@ -22,13 +22,11 @@ usuarios nueva col estado
 Agregamos tabla ROLES y relación: 1 roles * usuarios
 
 TODO 
-    alergenos.nombre UNIQUE
-    usuarios -> agregar password
+   
     imagen_(producto || alergeno) -> cuando definamos los tipos de imagenes, se pueden
                                     unificar en una tabla y agregar restricción check
     usuarios.email -> UNIQUE
-    itinerarios -> UPGRADE esta tabla debe evolucionar y convertirce en la instanciación
-                    de los distintos eventos dentro de una boda: banquete, ceremonia, etc. 
+ 
 
 
 ------------------------------------------------------------------------------------
@@ -45,14 +43,16 @@ CREATE DATABASE IF NOT EXISTS mywedding;
 USE mywedding;
 
 /* ------------------------------------------------------------------------------------
-1. CREACIÓN DE TABLAS
+1. CREACION DE TABLAS
 ------------------------------------------------------------------------------------ */
 
 /* -------------------------------------------------------------
-Tabla: alergenos
+Tabla: allergens
+
 Descripción: 
             Contiene los distintos alergenos que pueden estar
-            presentes en los alimentos ofrecidos en la boda
+            presentes en los alimentos ofrecidos en la boda. La ley marca
+            catorce alérgenos de declaración obligatoria.
 Relaciones: 
             - Puede tener multiples imágenes
             - Se relaciona con imagenes_alergenos mediante FK
@@ -60,13 +60,14 @@ Notas:
             - Cada registro representa un único tipo de alérgeno
             - Campo "nombre" debe ser único para evitar duplicados
 ---------------------------------------------------------------- */
+
 CREATE TABLE allergens (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255)
 );
 
 /* -------------------------------------------------------------
-Tabla: imagen_alergenos
+Tabla: allergens_images
 Descripción:
             Contiene los enlaces a las imágenes que ilustran alérgenos
             que pueden ser utilizadas en la IU.
@@ -82,14 +83,14 @@ CREATE TABLE allergens_images (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     link VARCHAR(255),
     image_type VARCHAR(255),
-    id_allergen BIGINT,
+    allergen_id BIGINT,
     CONSTRAINT fk_allergens_images_allergens 
-        FOREIGN KEY (id_allergen) REFERENCES allergens(id) 
+        FOREIGN KEY (allergen_id) REFERENCES allergens(id) 
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 /* -------------------------------------------------------------
-Tabla: productos
+Tabla: products
 Descripción:
             - Contiene los productos que a modo de ideas de regalo 
             ofrece la APP a los Novios para que puedan agregar 
@@ -102,17 +103,17 @@ Relaciones:
 CREATE TABLE products (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
-    link VARCHAR(255) ,
     description VARCHAR(255),
+    link VARCHAR(255) ,
+    price NUMERIC(10,2),
     product_type VARCHAR(255),
     start_date DATETIME,
-    update_date DATETIME,
-    price NUMERIC(10,2)
+    update_date DATETIME    
 );
 
 
 /* -------------------------------------------------------------
-Tabla: imagen_producto
+Tabla: images_products
 Descripción:
             Contiene los enlaces a las imágenes que ilustran productos
             que pueden ser utilizadas en la IU.
@@ -145,13 +146,13 @@ Relaciones:
 Notas:
 ---------------------------------------------------------------- */
 
---CREATE TABLE roles (
-  --  id BIGINT not null auto_increment PRIMARY KEY,
-  --  nombre VARCHAR(255) NOT NULL
---);
+CREATE TABLE roles (
+  id BIGINT not null AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(255) NOT NULL
+);
 
 /* -------------------------------------------------------------
-Tabla: usuarios
+Tabla: users_app
 Descripción: 
             Contiene la información referente a los usuarios registrados
             en la app
@@ -177,7 +178,7 @@ CREATE TABLE users_app (
 );
 
 /* -------------------------------------------------------------
-Tabla: alergias
+Tabla: allergies
 Descripción:
             - Contiene el conjunto de las alergias de los usuarios de la APP
             - Esta tabla debiera estar securizada y protegida dado que es información
@@ -218,14 +219,15 @@ RELACIONES ENTRE TABLAS
 
 
 /* -------------------------------------------------------------
-Tabla: bodas
+Tabla: weddings
 Descripción:
             - contiene la información básica de una boda
 Relaciones:
-            - se relaciona 1:N con invitados FK (invitados.id_boda)
-            - se relaciona 1:N con novios FK (novios.id_boda)
-            - se relaciona 1:N con inviregalos FK (regalos.id_boda)
-            - se relaciona 1:1 con itinerarios FK (boda.id_itinerario)
+            - se relaciona 1:N con users_invitations FK (users_invitations.wedding_id)
+            - se relaciona 1:N con user_weddings FK (user_weddings.wedding_id)
+            - se relaciona 1:N con presents FK (presents.wedding_id)
+            - se relaciona 1:N con events FK (events.wedding_id)
+
 Notas:
         - esta tabla ha de sufrir UPGRADE para establecer todas las relaciones
         que tiene con otras tablas y que de momento se dejan pendientes
@@ -234,13 +236,13 @@ Notas:
 
 CREATE TABLE weddings (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    dateWedding DATETIME,
+    date_wedding DATETIME,
     place VARCHAR(255),
     state_wedding VARCHAR(255)  DEFAULT "PREPARING"
 );
 
 /* -------------------------------------------------------------
-Tabla: itinerarios
+Tabla: events
 Descripción:
             - de comento no es más que un conjunto de oraciones con los distintos 
             itinerarios de cada boda.
@@ -263,7 +265,7 @@ CREATE TABLE events (
 
 
 /* -------------------------------------------------------------
-Tabla: invitados
+Tabla: users_invitations
 Descripción:
             - contiene los datos de lo invitados de cada boda
             - esta tabla permite realizar invitaciones a usuarios no regisrados
@@ -281,9 +283,8 @@ CREATE TABLE users_invitations (
     user_id BIGINT,
     wedding_id BIGINT,
     confirm BOOLEAN DEFAULT false,  
+    notifies BOOLEAN DEFAULT false,
     email_invitation VARCHAR(255),
-    child_acompanion INT,
-    adult_acompanion INT,
     CONSTRAINT fk_users_invitations_weddings
         FOREIGN KEY (wedding_id) REFERENCES weddings(id) 
         ON DELETE CASCADE ON UPDATE CASCADE,
@@ -293,7 +294,7 @@ CREATE TABLE users_invitations (
 );
 
 /* -------------------------------------------------------------
-Tabla: regalos
+Tabla: presents
 Descripción:
             - contiene los datos de los regalos de cada boda
             - esta tabla permite a los novios agregar regalos a su
@@ -324,7 +325,7 @@ CREATE TABLE presents (
 
 
 /* -------------------------------------------------------------
-Tabla: novios
+Tabla: user_weddings
 Descripción:
             - contiene los datos de los novios de la boda, permitiendo
             que solo un novio esté registrado o lo hagan los dos
@@ -344,6 +345,32 @@ CREATE TABLE user_weddings (
         FOREIGN KEY (user_id) REFERENCES users_app(id) 
         ON DELETE CASCADE ON UPDATE CASCADE    
 );
+
+
+/* -------------------------------------------------------------
+Tabla: companions
+Descripción:
+            - contiene los datos de los novios de la boda, permitiendo
+            que solo un novio esté registrado o lo hagan los dos
+Relaciones:
+            - se relacina con boda.id mediante FK (novios.id_boda)
+---------------------------------------------------------------- */
+
+CREATE TABLE companions (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_invitation_id BIGINT,
+    name VARCHAR(255),
+    first_surname VARCHAR(255),
+    second_surname VARCHAR(255),
+    email VARCHAR(255),
+    adult BOOLEAN(255),
+    allergies VARCHAR(255),
+    CONSTRAINT fk_users_invitations_companion
+        FOREIGN KEY (user_invitation_id) REFERENCES users_invitations(id) 
+        ON DELETE CASCADE ON UPDATE CASCADE  
+);
+
+
 
 /* ==============================================================
 RELACIONES ENTRE TABLAS

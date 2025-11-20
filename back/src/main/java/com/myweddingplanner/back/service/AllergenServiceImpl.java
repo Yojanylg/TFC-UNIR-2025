@@ -1,6 +1,6 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.dto.AllergenDTO;
+import com.myweddingplanner.back.dto.allergens.AllergenDTO;
 import com.myweddingplanner.back.mapper.AllergenMapper;
 import com.myweddingplanner.back.model.Allergen;
 import com.myweddingplanner.back.repository.AllergenRepository;

@@ -5,24 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyUserDTO {
+public class MyCompanion {
 
-    private Long idUser;
+    private Long idCompanion;
     private String name;
     private String firstSurname;
     private String secondSurname;
     private String email;
-
-    private List<MyWedding> myWeddings = new ArrayList<>();
-    private List<MyInvitation> myInvitations = new ArrayList<>();
-
-
-
+    private boolean isAdult;
+    private String allergies;
 }

@@ -51,7 +51,7 @@ public class UserApp {
     @OneToMany(mappedBy = "userApp", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Present> presents = new ArrayList<>();
 
-    public void setAlergias(List<AllergiesUser> nuevas){
+    public void setAllergies(List<AllergiesUser> nuevas){
         this.allergies.clear();
         if (nuevas != null){
             nuevas.forEach(this::addAlergeno);

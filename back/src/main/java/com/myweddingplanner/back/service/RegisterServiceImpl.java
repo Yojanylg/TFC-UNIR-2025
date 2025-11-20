@@ -5,7 +5,6 @@ import com.myweddingplanner.back.exception.EmailYaRegistradoException;
 import com.myweddingplanner.back.model.*;
 import com.myweddingplanner.back.model.enums.StateWedding;
 import com.myweddingplanner.back.repository.RolRepository;
-import com.myweddingplanner.back.repository.UserAppRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +27,7 @@ public class RegisterServiceImpl implements RegisterService {
 
 
     @Override
-    public RegistroResult registerUserApp(RegisterRequest req) {
+    public RegisterResult registerUserApp(RegisterRequest req) {
 
         System.out.println("Comprobando si está registrado");
         if (userAppService.existsByEmail(req.getEmail())){
@@ -41,14 +40,14 @@ public class RegisterServiceImpl implements RegisterService {
         Rol rolUsuario = rolRepository.findByNombre("ROLE_USER")
                 .orElseThrow(() -> new IllegalStateException("Rol no creado en BBDD"));
 
-        System.out.println("Creando rol " + rolUsuario.getNombre());
+        System.out.println("Creando rol " + rolUsuario.getName());
 
 
 
         UserApp newUser = new UserApp();
         newUser.setName(req.getNombre());
-        newUser.setFirstSurname(req.getPrimerApellido());
-        newUser.setSecondSurname(req.getSegundoApellido());
+        newUser.setFirstSurname(req.getFirstSurname());
+        newUser.setSecondSurname(req.getSecondSurname());
         newUser.setEmail(req.getEmail());
         newUser.setPassword(encoder.encode(req.getPassword()));
         newUser.setRol(rolUsuario);
@@ -68,7 +67,7 @@ public class RegisterServiceImpl implements RegisterService {
 
          */
 
-        return new RegistroResult(userAppCreated.getId(), userAppCreated.getEmail(), userAppCreated.getName());
+        return new RegisterResult(userAppCreated.getId(), userAppCreated.getEmail(), userAppCreated.getName());
     }
 
     private void processGroomRegistration(RegisterRequest req, UserApp userAppCreated) {
@@ -121,15 +120,15 @@ public class RegisterServiceImpl implements RegisterService {
 
         // setter uwSecond
 
-        if (req.getEmailNovio() != null && !req.getEmailNovio().isBlank()){
+        if (req.getEmailGroom() != null && !req.getEmailGroom().isBlank()){
 
             UserWedding uwSecond = new UserWedding();
 
 
-            if (userAppService.existsByEmail(req.getEmailNovio())) {
+            if (userAppService.existsByEmail(req.getEmailGroom())) {
 
                 // novio2 ya es usuario del sistema, completamos datos
-                UserApp u2 = userAppService.findByEmail(req.getEmailNovio())
+                UserApp u2 = userAppService.findByEmail(req.getEmailGroom())
                         .orElseThrow(() -> new IllegalStateException("Inconsistencia usuario novio2 no encontrado"));
 
                 uwSecond.setUserApp(u2);
@@ -138,7 +137,7 @@ public class RegisterServiceImpl implements RegisterService {
             } else {
 
                 // Novio2 no registrado
-                uwSecond.setEmailGroom(req.getEmailNovio());
+                uwSecond.setEmailGroom(req.getEmailGroom());
             }
 
             weddingCreated.getGrooms().add(uwSecond);

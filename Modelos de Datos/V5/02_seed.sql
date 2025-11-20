@@ -48,6 +48,7 @@ INSERT INTO images_products (id, link, image_type, product_id) VALUES
   (2205, 'https://cdn.example.com/prod/toallas.jpg',      'main', 2105);
 
 INSERT INTO users_app (id, name, first_surname, second_surname, email, phone, password, rol_id) VALUES
+
   -- Novios boda #3001
   (3101, 'Laura',   'García',   'Santos', 'laura.gs@example.com',   '+34 600000001', '{bcrypt}$2a$10$seed1', 1),
   (3102, 'Diego',   'Pérez',    'López',  'diego.pl@example.com',   '+34 600000002', '{bcrypt}$2a$10$seed2', 1),
@@ -66,7 +67,7 @@ INSERT INTO users_app (id, name, first_surname, second_surname, email, phone, pa
   (3112, 'Irene',   'Hidalgo',  'Solís',  'irene.hs@example.com',   '+34 600000012', '{bcrypt}$2a$10$seed9', 1),
   (3113, 'Tomás',   'Vidal',    'Barra',  'tomas.vb@example.com',   '+34 600000013', '{bcrypt}$2a$10$seedA', 1),
 
-  -- USUARIOS SIN BODA Y NO INVITADOS (requisito)
+  -- USUARIOS SIN BODA Y NO INVITADOS
   (3114, 'Sofía',   'Rey',      'Marín',  'sofia.rm@example.com',   '+34 600000014', '{bcrypt}$2a$10$seedB', 1),
   (3115, 'Hugo',    'Cano',     'Arce',   'hugo.ca@example.com',    '+34 600000015', '{bcrypt}$2a$10$seedC', 1),
   (3116, 'Celia',   'Luna',     'Prat',   'celia.lp@example.com',   '+34 600000016', '{bcrypt}$2a$10$seedD', 1),
@@ -95,9 +96,9 @@ INSERT INTO events (id, event_type, description, time, wedding_id) VALUES
   (4122, 'Baile',     'DJ set',                        '2027-06-20 21:00:00', 3003);
 
 INSERT INTO allergies (allergen_id, user_id) VALUES
-  (1, 3110), -- Nuria: Lactosa
-  (2, 3112), -- Irene: Frutos secos
-  (3, 3102); -- Diego (novio): Gluten
+  (1, 3110),
+  (2, 3112),
+  (3, 3102);
 
 
 INSERT INTO user_weddings (id, email_groom, wedding_id, user_id) VALUES

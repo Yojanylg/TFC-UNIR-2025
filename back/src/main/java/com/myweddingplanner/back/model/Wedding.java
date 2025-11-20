@@ -22,6 +22,7 @@ public class Wedding {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @Column(name = "date_wedding")
     private LocalDateTime dateWedding;
 
     private String place;

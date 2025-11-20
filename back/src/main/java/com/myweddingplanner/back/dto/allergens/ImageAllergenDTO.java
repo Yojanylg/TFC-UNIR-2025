@@ -1,4 +1,4 @@
-package com.myweddingplanner.back.dto;
+package com.myweddingplanner.back.dto.allergens;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,9 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImageAllergenDTO {
-
-    private Long id;
+    private Long idImage;
     private String link;
     private String imageType;
-    private Long allergenId;
 }

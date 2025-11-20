@@ -17,9 +17,9 @@ public class RegisterRequest {
 
     private String nombre;
 
-    private String primerApellido;
+    private String firstSurname;
 
-    private String segundoApellido;
+    private String secondSurname;
 
     @Email
     @NotBlank
@@ -31,16 +31,16 @@ public class RegisterRequest {
 
     // Datos de registro novio
 
-    private boolean esNovio;
+    private boolean isGroom;
 
-    private String nombreNovio;
+    private String nameGroom;
 
-    private String primerApellidoNovio;
+    private String firstSurnameGroom;
 
-    private String segundoApellidoNovio;
+    private String secondSurnameGroom;
 
-    private String emailNovio;
+    private String emailGroom;
 
-    private String fechaBoda;
+    private String weddingDate;
 
 }

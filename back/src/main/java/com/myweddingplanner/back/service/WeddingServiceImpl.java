@@ -1,6 +1,6 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.dto.WeddingDTO;
+import com.myweddingplanner.back.dto.wedding.WeddingDTO;
 import com.myweddingplanner.back.mapper.WeddingMapper;
 import com.myweddingplanner.back.model.Wedding;
 import com.myweddingplanner.back.repository.WeddingRepository;

@@ -20,11 +20,11 @@ public class ImageAllergen {
 
     private String link;
 
-    @Column(name = "image_type")
+    @Column(name = "type")
     private String imageType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_allergen", nullable = false)
+    @JoinColumn(name = "allergen_id")
     private Allergen allergen;
 
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyUserAllergenDTO {
+public class MyUserAllergiesDTO {
 
     private Long userId;
     private List<MyAllergy> myAllergies;

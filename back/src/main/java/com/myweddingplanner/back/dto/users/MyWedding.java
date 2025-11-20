@@ -13,9 +13,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MyWedding {
 
-    private Long idGroom;
     private Long idWedding;
     private String stateWedding;
     private LocalDateTime date;
+    private String place;
+
 
 }

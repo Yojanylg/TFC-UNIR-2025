@@ -34,7 +34,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest req) {
 
-        RegistroResult result = registerService.registerUserApp(req);
+        RegisterResult result = registerService.registerUserApp(req);
 
         String access = jwtService.generateToken(
                 result.usuarioEmail(), Map.of("role", result.rolNombre(), "uid", result.usuarioId()));
@@ -63,7 +63,7 @@ public class AuthController {
                 .orElseThrow();
 
         String access = jwtService.generateToken(
-                u.getEmail(), Map.of("role", u.getRol().getNombre(), "uid", u.getId()));
+                u.getEmail(), Map.of("role", u.getRol().getName(), "uid", u.getId()));
 
         String refresh = jwtService.generateRefreshToken(u.getEmail());
         return ResponseEntity.ok(new AuthResponse(access, refresh));

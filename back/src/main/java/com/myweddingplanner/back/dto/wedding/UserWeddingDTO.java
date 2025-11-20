@@ -1,4 +1,4 @@
-package com.myweddingplanner.back.dto;
+package com.myweddingplanner.back.dto.wedding;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +11,9 @@ import lombok.Setter;
 @Setter
 public class UserWeddingDTO {
 
+    private Long idUserWedding;
     private Long idUser;
-    private Long idWedding;
-    private String userName;
+    private String name;
     private String firstSurname;
     private String secondSurname;
 

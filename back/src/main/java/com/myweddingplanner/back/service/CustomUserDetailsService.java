@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserApp u = repository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + email));
 
-        var authorities = List.of(new SimpleGrantedAuthority(u.getRol().getNombre()));
+        var authorities = List.of(new SimpleGrantedAuthority(u.getRol().getName()));
         return new User(u.getEmail(), u.getPassword(), authorities);
     }
 }

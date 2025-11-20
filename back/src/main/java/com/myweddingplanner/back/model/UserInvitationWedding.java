@@ -3,6 +3,8 @@ package com.myweddingplanner.back.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users_invitations")
 @Getter
@@ -26,16 +28,19 @@ public class UserInvitationWedding {
     @JoinColumn(name = "wedding_id")
     private Wedding wedding;
 
-    private boolean confirm;
+    @Column(name = "confirm")
+    private boolean isConfirm;
+
+    @Column(name = "notified")
+    private boolean isNotified;
+
 
     @Column(name = "email_invitation")
     private String emailInvitation;
 
-    @Column(name = "child_acompanion")
-    private int childAcompanion;
 
-    @Column(name = "adult_acompanion")
-    private int adultAcompanion;
+    @OneToMany(mappedBy = "userInvitationWedding")
+    private List<Companion> companions;
 
 
 }

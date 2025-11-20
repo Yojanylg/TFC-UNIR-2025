@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,11 +16,13 @@ import java.time.LocalDateTime;
 public class MyInvitation {
 
     private Long idInvitation;
-    private LocalDateTime date;
+    private LocalDateTime weddingDate;
     private String place;
     private String couple;
     private boolean isConfirm;
+    private boolean isNotified;
     private int childCompanion;
     private int adultCompanion;
+    private List<MyCompanion> companions = new ArrayList<>();
 
 }

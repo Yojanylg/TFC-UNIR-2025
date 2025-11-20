@@ -3,8 +3,6 @@ package com.myweddingplanner.back.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "roles")
 @Getter
@@ -12,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"usuarios"})
+@ToString(exclude = {})
 public class Rol {
 
     // no tocar hasta fin refactor
@@ -22,9 +20,6 @@ public class Rol {
     @EqualsAndHashCode.Include
     private Long id;
 
-    private String nombre;
-
-    @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserApp> usuarios;
+    private String name;
 
 }

@@ -1,5 +1,8 @@
 package com.myweddingplanner.back.service;
 
+import com.myweddingplanner.back.dto.users.MyUserAllergiesDTO;
+import com.myweddingplanner.back.dto.users.MyUserDTO;
+import com.myweddingplanner.back.dto.users.MyUserPresentDTO;
 import com.myweddingplanner.back.model.UserApp;
 
 import java.util.List;
@@ -7,7 +10,13 @@ import java.util.Optional;
 
 public interface UserAppService {
 
-    Optional<UserApp> findById(Long id);
+    MyUserDTO findMyUserDTOById (Long id);
+
+    MyUserAllergiesDTO findMyUserAllergiesDTOById (Long id);
+
+    MyUserPresentDTO finMyUserPresentDTOById (Long id);
+
+    MyUserDTO update (MyUserDTO dto);
 
     List<UserApp> findAll();
 
@@ -15,7 +24,7 @@ public interface UserAppService {
 
     void deleteById (Long id);
 
-    Optional<UserApp> findByEmail(String email);
+    Optional<UserApp> findByEmail (String email);
 
-    boolean existsByEmail(String email);
+    boolean existsByEmail (String email);
 }

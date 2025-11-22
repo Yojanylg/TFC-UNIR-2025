@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface WeddingRepository extends JpaRepository<Wedding, Long> {
 
     Optional<Wedding> findById(Long id);
+    Optional<List<Wedding>> findByGroomsUserAppId(Long id);
     Optional<Wedding> findByGroomsUserEmail(String email);
     Optional<Wedding> findByInvitationsUserEmail(String email);
 

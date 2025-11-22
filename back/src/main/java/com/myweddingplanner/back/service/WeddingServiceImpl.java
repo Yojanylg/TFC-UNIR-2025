@@ -3,6 +3,7 @@ package com.myweddingplanner.back.service;
 import com.myweddingplanner.back.dto.wedding.WeddingDTO;
 import com.myweddingplanner.back.mapper.WeddingMapper;
 import com.myweddingplanner.back.model.Wedding;
+import com.myweddingplanner.back.model.enums.StateWedding;
 import com.myweddingplanner.back.repository.WeddingRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,20 @@ public class WeddingServiceImpl implements WeddingService{
         WeddingDTO dto = weddingMapper.toWeddingDTO(wedding);
 
         return Optional.of(dto);
+    }
+
+    @Override
+    public Optional<WeddingDTO> findWeddingPreparingByUserId(Long userId) {
+
+        List<Wedding> weddings = weddingRepository.findByGroomsUserAppId(userId).orElseThrow();
+
+        for (Wedding w : weddings){
+            if (w.getStateWedding().toString().equals(StateWedding.PREPARING.toString())){
+                return Optional.of(weddingMapper.toWeddingDTO(w));
+            }
+        }
+
+        return Optional.empty();
     }
 
     @Override

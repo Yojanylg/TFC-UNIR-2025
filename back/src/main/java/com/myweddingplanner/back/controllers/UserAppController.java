@@ -5,13 +5,12 @@ import com.myweddingplanner.back.dto.users.MyUserDTO;
 import com.myweddingplanner.back.dto.users.MyUserPresentDTO;
 import com.myweddingplanner.back.security.JwtService;
 import com.myweddingplanner.back.service.UserAppService;
+import com.myweddingplanner.back.service.UserInvitationWeddingService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
 
 @RestController
@@ -21,10 +20,12 @@ import java.util.Map;
 public class UserAppController {
 
     private final UserAppService userAppService;
+    private final UserInvitationWeddingService userInvitationWeddingService;
     private final JwtService jwtService;
 
-    public UserAppController(UserAppService userAppService, JwtService jwtService) {
+    public UserAppController(UserAppService userAppService, UserInvitationWeddingService userInvitationWeddingService, JwtService jwtService) {
         this.userAppService = userAppService;
+        this.userInvitationWeddingService = userInvitationWeddingService;
         this.jwtService = jwtService;
     }
 
@@ -61,7 +62,6 @@ public class UserAppController {
         // Obtener Token
         String token = authorizationHeader.substring(7);
 
-        // TODO
         MyUserAllergiesDTO dto = userAppService.findMyUserAllergiesDTOById(jwtService.extractUserId(token));
 
         return ResponseEntity.ok(dto);
@@ -80,11 +80,74 @@ public class UserAppController {
         // Obtener Token
         String token = authorizationHeader.substring(7);
 
-        // TODO
         MyUserPresentDTO dto = userAppService.finMyUserPresentDTOById(jwtService.extractUserId(token));
 
         return ResponseEntity.ok(dto);
 
     }
+
+    @GetMapping("/myInvitations")
+    public ResponseEntity<?> getMyInvitations (@RequestHeader (name = "Authorization", required = true) String authorizationHeader){
+
+        // Tratamiento del Header sin Token
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Falta token Bearer en Authorization"));
+        }
+
+        // Obtener Token
+        String token = authorizationHeader.substring(7);
+
+        return ResponseEntity.ok(userInvitationWeddingService.getMyListInvitations(jwtService.extractUserId(token)));
+
+    }
+
+
+
+    /* ----------------- UPDATE DE USERS ----------------- */
+
+    @PutMapping("/myAllergies")
+    public ResponseEntity<?> updateMyAllergies (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
+                                                @RequestBody MyUserAllergiesDTO dto){
+
+        // Tratamiento del Header sin Token
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Falta token Bearer en Authorization"));
+        }
+
+        // Obtener Token
+        String token = authorizationHeader.substring(7);
+        // Obtener User
+        Long userId = jwtService.extractUserId(token);
+
+        userAppService.updateUserAllergies(userId, dto);
+
+        return ResponseEntity.ok(userAppService.findMyUserAllergiesDTOById(jwtService.extractUserId(token)));
+
+    }
+
+    @PutMapping("/myPresents")
+    public ResponseEntity<?> updatePresents (@RequestHeader (name = "Authorization", required = true) String authorizationHeader,
+                                             @RequestBody MyUserPresentDTO dto){
+
+        // Tratamiento del Header sin Token
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Falta token Bearer en Authorization"));
+        }
+        // Obtener Token
+        String token = authorizationHeader.substring(7);
+        // Obtener User
+        Long userId = jwtService.extractUserId(token);
+
+        userAppService.updateMyUserPresents(userId, dto);
+
+        return ResponseEntity.ok(userAppService.finMyUserPresentDTOById(userId));
+
+    }
+
+
+
 
 }

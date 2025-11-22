@@ -18,5 +18,7 @@ public interface WeddingMapper {
 
     MyWeddingInvitationDTO toMyWeddingInvitationDTO(UserInvitationWedding entity);
 
+    ListWeddingInvitationDTO toListWeddingInvitationDTO (Wedding entity);
+
 
 }

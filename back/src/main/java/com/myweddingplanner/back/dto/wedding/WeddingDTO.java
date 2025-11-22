@@ -30,7 +30,5 @@ public class WeddingDTO {
 
     private List<MyWeddingPresentDTO> presents = new ArrayList<>();
 
-    private List<MyWeddingInvitationDTO> invitations = new ArrayList<>();
-
 
 }

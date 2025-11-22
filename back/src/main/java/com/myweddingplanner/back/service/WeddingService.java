@@ -10,6 +10,8 @@ public interface WeddingService {
 
     Optional<WeddingDTO> findById(Long id);
 
+    Optional<WeddingDTO> findWeddingPreparingByUserId(Long userId);
+
     List<WeddingDTO> findAll();
 
     Wedding save(Wedding wedding);

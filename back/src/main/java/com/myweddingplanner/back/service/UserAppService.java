@@ -12,6 +12,8 @@ public interface UserAppService {
 
     MyUserDTO findMyUserDTOById (Long id);
 
+    public boolean updateMyUserPresents(Long userID, MyUserPresentDTO dto);
+
     MyUserAllergiesDTO findMyUserAllergiesDTOById (Long id);
 
     MyUserPresentDTO finMyUserPresentDTOById (Long id);
@@ -27,4 +29,6 @@ public interface UserAppService {
     Optional<UserApp> findByEmail (String email);
 
     boolean existsByEmail (String email);
+
+    boolean updateUserAllergies(Long userId, MyUserAllergiesDTO dto);
 }

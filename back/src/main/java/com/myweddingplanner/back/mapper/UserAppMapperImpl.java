@@ -95,7 +95,8 @@ public class UserAppMapperImpl implements UserAppMapper{
         return dto;
     }
 
-    private MyInvitation toMyInvitation(UserInvitationWedding ui){
+    @Override
+    public MyInvitation toMyInvitation(UserInvitationWedding ui){
 
         MyInvitation invitation = new MyInvitation();
 

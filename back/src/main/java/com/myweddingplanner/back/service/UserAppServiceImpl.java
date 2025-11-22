@@ -3,11 +3,12 @@ package com.myweddingplanner.back.service;
 import com.myweddingplanner.back.dto.users.*;
 import com.myweddingplanner.back.exception.UserNotFoundException;
 import com.myweddingplanner.back.mapper.UserAppMapper;
-import com.myweddingplanner.back.model.Companion;
-import com.myweddingplanner.back.model.UserApp;
-import com.myweddingplanner.back.model.UserInvitationWedding;
+import com.myweddingplanner.back.model.*;
+import com.myweddingplanner.back.repository.AllergenRepository;
+import com.myweddingplanner.back.repository.PresentRepository;
 import com.myweddingplanner.back.repository.UserAppRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,10 +19,14 @@ import java.util.Optional;
 public class UserAppServiceImpl implements UserAppService{
 
     private final UserAppRepository userRepository;
+    private final PresentRepository presentRepository;
+    private final AllergenRepository allergenRepository;
     private final UserAppMapper userAppMapper;
 
-    public UserAppServiceImpl(UserAppRepository userRepository, UserAppMapper userAppMapper) {
+    public UserAppServiceImpl(UserAppRepository userRepository, PresentRepository presentRepository, AllergenRepository allergenRepository, UserAppMapper userAppMapper) {
         this.userRepository = userRepository;
+        this.presentRepository = presentRepository;
+        this.allergenRepository = allergenRepository;
         this.userAppMapper = userAppMapper;
     }
 
@@ -175,7 +180,79 @@ public class UserAppServiceImpl implements UserAppService{
 
     }
 
+    @Override
+    public boolean updateUserAllergies(Long userId, MyUserAllergiesDTO dto) {
 
+        UserApp user = userRepository.findById(userId).get();
+
+        List<AllergiesUser> toRemove = new ArrayList<>();
+
+        // para cada alergia que hay en la lista de alergias del usuario en la bb
+        // lo comparo con cada una de las alergias que hay en el dto
+        // si coincide con alguna es que sigue estando
+        // si no coincide con ninguna la añado a la lista de eliminar
+        // porque está en la bbdd pero no en el dto
+        for (AllergiesUser allergie : user.getAllergies()){
+
+            boolean found = false;
+
+            for (MyAllergy myAllergy : dto.getMyAllergies()){
+
+                if (allergie.getId().equals(myAllergy.getIdAllergy())){
+                    found = true;
+                    break;
+                }
+            }
+
+            if(!found){
+
+                toRemove.add(allergie);
+            }
+        }
+
+        user.getAllergies().removeAll(toRemove);
+
+        // Agrego lo nuevo en el dto a la bbdd
+        // si el id es null es que es nuevo
+        for (MyAllergy myAllergy : dto.getMyAllergies()){
+            if (myAllergy.getIdAllergy() == null){
+
+                AllergiesUser allergie = new AllergiesUser();
+
+                allergie.setUserApp(user);
+                allergie.setAllergen(allergenRepository.findById(myAllergy.getIdAllergen()).get());
+
+                user.getAllergies().add(allergie);
+            }
+        }
+
+        userRepository.save(user);
+
+        return true;
+    }
+
+    @Override
+    public boolean updateMyUserPresents(Long userId, MyUserPresentDTO dto){
+
+        UserApp user = userRepository.findById(userId).orElseThrow();
+        List<Present> actual = user.getPresents();
+        List<MyPresent> enDTO = dto.getMyPresents();
+
+        // eliminar los que han pasado a no confirmados
+        for (MyPresent mp : enDTO){
+            if (!mp.isConfirm()){
+                for (Present present : user.getPresents()){
+                    if (present.getId().equals(mp.getIdPresent())){
+                        present.setUserApp(null);
+                        present.setConfirm(false);
+                        presentRepository.save(present);
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
 
 
 
@@ -204,4 +281,6 @@ public class UserAppServiceImpl implements UserAppService{
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
+
+
 }

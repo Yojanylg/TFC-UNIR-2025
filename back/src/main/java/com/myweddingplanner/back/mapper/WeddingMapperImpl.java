@@ -3,10 +3,7 @@ package com.myweddingplanner.back.mapper;
 import com.myweddingplanner.back.dto.users.MyCompanion;
 import com.myweddingplanner.back.dto.wedding.*;
 import com.myweddingplanner.back.model.*;
-import org.hibernate.dialect.MySQLServerConfiguration;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class WeddingMapperImpl implements WeddingMapper{
@@ -26,8 +23,6 @@ public class WeddingMapperImpl implements WeddingMapper{
         listEvent(wedding, dto);
 
         listPresent(wedding, dto);
-
-        listWeddingInvitation(wedding, dto);
 
         return dto;
     }
@@ -54,13 +49,6 @@ public class WeddingMapperImpl implements WeddingMapper{
         }
     }
 
-    private void listWeddingInvitation(Wedding w, WeddingDTO dto){
-
-        for (UserInvitationWedding u : w.getInvitations()){
-            dto.getInvitations().add(toMyWeddingInvitationDTO(u));
-        }
-    }
-
     @Override
     public ListWeddingPresentDTO toListWeddingPresentDTO(Wedding entity) {
 
@@ -77,6 +65,21 @@ public class WeddingMapperImpl implements WeddingMapper{
         }
 
         return dto;
+    }
+
+    public ListWeddingInvitationDTO toListWeddingInvitationDTO (Wedding entity){
+
+        ListWeddingInvitationDTO dto = new ListWeddingInvitationDTO();
+
+        for (UserWedding u : entity.getGrooms()){
+            dto.getGrooms().add(toUserWeddingDTO(u));
+        }
+
+        for (UserInvitationWedding invitation : entity.getInvitations()){
+            dto.getListWeddingInvitation().add(toMyWeddingInvitationDTO(invitation));
+        }
+
+        return null;
     }
 
     @Override

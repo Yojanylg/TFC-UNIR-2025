@@ -8,7 +8,7 @@ public interface UserAppMapper {
 
     MyUserAllergiesDTO toMyUserAllergiesDTO (UserApp u);
 
-    MyUserPresentDTO toMyUserPresentDTO (UserApp u);
+    ListUserPresentDTO toMyUserPresentDTO (UserApp u);
 
     MyUserDTO toMyUserDTO(UserApp u);
 

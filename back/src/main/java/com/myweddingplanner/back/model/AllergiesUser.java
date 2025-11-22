@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"userApp", "allergen"})
+@ToString(exclude = {"userApp"})
 public class AllergiesUser {
 
     @Id
@@ -19,10 +19,33 @@ public class AllergiesUser {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "allergen_id")
-    private Allergen allergen;
-    
+    private boolean gluten;
+
+    private boolean crustaceos;
+
+    private boolean huevos;
+
+    private boolean pescado;
+
+    private boolean cacahuete;
+
+    private boolean soja;
+
+    private boolean leche;
+
+    private boolean frutosCascara;
+
+    private boolean apio;
+
+    private boolean mostaza;
+
+    private boolean sesamo;
+
+    private boolean sulfitos;
+
+    private boolean altramuces;
+
+    private boolean moluscos;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

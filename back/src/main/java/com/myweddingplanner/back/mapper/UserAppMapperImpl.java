@@ -55,9 +55,9 @@ public class UserAppMapperImpl implements UserAppMapper{
     }
 
     @Override
-    public MyUserPresentDTO toMyUserPresentDTO(UserApp u) {
+    public ListUserPresentDTO toMyUserPresentDTO(UserApp u) {
 
-        MyUserPresentDTO dto = new MyUserPresentDTO();
+        ListUserPresentDTO dto = new ListUserPresentDTO();
 
         dto.setUserId(u.getId());
 

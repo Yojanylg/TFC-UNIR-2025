@@ -2,7 +2,7 @@ package com.myweddingplanner.back.controllers;
 
 import com.myweddingplanner.back.dto.users.MyUserAllergiesDTO;
 import com.myweddingplanner.back.dto.users.MyUserDTO;
-import com.myweddingplanner.back.dto.users.MyUserPresentDTO;
+import com.myweddingplanner.back.dto.users.ListUserPresentDTO;
 import com.myweddingplanner.back.security.JwtService;
 import com.myweddingplanner.back.service.UserAppService;
 import com.myweddingplanner.back.service.UserInvitationWeddingService;
@@ -80,7 +80,7 @@ public class UserAppController {
         // Obtener Token
         String token = authorizationHeader.substring(7);
 
-        MyUserPresentDTO dto = userAppService.finMyUserPresentDTOById(jwtService.extractUserId(token));
+        ListUserPresentDTO dto = userAppService.finMyUserPresentDTOById(jwtService.extractUserId(token));
 
         return ResponseEntity.ok(dto);
 
@@ -129,7 +129,7 @@ public class UserAppController {
 
     @PutMapping("/myPresents")
     public ResponseEntity<?> updatePresents (@RequestHeader (name = "Authorization", required = true) String authorizationHeader,
-                                             @RequestBody MyUserPresentDTO dto){
+                                             @RequestBody ListUserPresentDTO dto){
 
         // Tratamiento del Header sin Token
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){

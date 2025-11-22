@@ -7,8 +7,6 @@ import com.myweddingplanner.back.model.*;
 import com.myweddingplanner.back.repository.AllergenRepository;
 import com.myweddingplanner.back.repository.PresentRepository;
 import com.myweddingplanner.back.repository.UserAppRepository;
-import jakarta.persistence.EntityNotFoundException;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -47,7 +45,7 @@ public class UserAppServiceImpl implements UserAppService{
     }
 
     @Override
-    public MyUserPresentDTO finMyUserPresentDTOById(Long id) {
+    public ListUserPresentDTO finMyUserPresentDTOById(Long id) {
         return userRepository.findById(id)
                 .map(userAppMapper::toMyUserPresentDTO)
                 .orElseThrow(() -> new UserNotFoundException(id));
@@ -232,7 +230,7 @@ public class UserAppServiceImpl implements UserAppService{
     }
 
     @Override
-    public boolean updateMyUserPresents(Long userId, MyUserPresentDTO dto){
+    public boolean updateMyUserPresents(Long userId, ListUserPresentDTO dto){
 
         UserApp user = userRepository.findById(userId).orElseThrow();
         List<Present> actual = user.getPresents();

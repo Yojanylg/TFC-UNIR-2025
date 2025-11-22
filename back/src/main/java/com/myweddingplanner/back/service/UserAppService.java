@@ -2,7 +2,7 @@ package com.myweddingplanner.back.service;
 
 import com.myweddingplanner.back.dto.users.MyUserAllergiesDTO;
 import com.myweddingplanner.back.dto.users.MyUserDTO;
-import com.myweddingplanner.back.dto.users.MyUserPresentDTO;
+import com.myweddingplanner.back.dto.users.ListUserPresentDTO;
 import com.myweddingplanner.back.model.UserApp;
 
 import java.util.List;
@@ -12,11 +12,11 @@ public interface UserAppService {
 
     MyUserDTO findMyUserDTOById (Long id);
 
-    public boolean updateMyUserPresents(Long userID, MyUserPresentDTO dto);
+    public boolean updateMyUserPresents(Long userID, ListUserPresentDTO dto);
 
     MyUserAllergiesDTO findMyUserAllergiesDTOById (Long id);
 
-    MyUserPresentDTO finMyUserPresentDTOById (Long id);
+    ListUserPresentDTO finMyUserPresentDTOById (Long id);
 
     MyUserDTO update (MyUserDTO dto);
 

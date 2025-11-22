@@ -11,8 +11,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyUserPresentDTO {
+public class ListUserInvitationDTO {
 
     private Long userId;
-    private List<MyPresent> myPresents;
+    private List<MyInvitation> invitationList;
+
 }

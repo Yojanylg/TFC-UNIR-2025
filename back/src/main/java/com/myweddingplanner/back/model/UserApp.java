@@ -45,27 +45,9 @@ public class UserApp {
     @OneToMany(mappedBy = "userApp", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserInvitationWedding> invitations =new ArrayList<>();
 
-    @OneToMany(mappedBy = "userApp", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AllergiesUser> allergies = new ArrayList<>();
+    private AllergiesUser allergies;
 
     @OneToMany(mappedBy = "userApp", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Present> presents = new ArrayList<>();
-
-    public void setAllergies(List<AllergiesUser> nuevas){
-        this.allergies.clear();
-        if (nuevas != null){
-            nuevas.forEach(this::addAlergeno);
-        }
-    }
-
-    public void addAlergeno(AllergiesUser alergia){
-        alergia.setUserApp(this);
-        this.allergies.add(alergia);
-    }
-
-    public void removeAlergeno(AllergiesUser alergia){
-        this.allergies.remove(alergia);
-        alergia.setUserApp(null);
-    }
 
 }

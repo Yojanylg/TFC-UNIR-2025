@@ -1,34 +1,34 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.dto.users.MyUserAllergiesDTO;
+import com.myweddingplanner.back.dto.users.ListUserInvitationDTO;
 import com.myweddingplanner.back.dto.users.MyUserDTO;
 import com.myweddingplanner.back.dto.users.ListUserPresentDTO;
 import com.myweddingplanner.back.model.UserApp;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface UserAppService {
 
-    MyUserDTO findMyUserDTOById (Long id);
+    // Metodos para GET en UserAppCongtroller
 
-    public boolean updateMyUserPresents(Long userID, ListUserPresentDTO dto);
+    MyUserDTO getMyUser(Long userId);
+    ListUserInvitationDTO getListUserInvitation(Long userId);
+    ListUserPresentDTO getListUserPresent(Long userId);
 
-    MyUserAllergiesDTO findMyUserAllergiesDTOById (Long id);
+    // Metodos para UPDATE en UserAppController
 
-    ListUserPresentDTO finMyUserPresentDTOById (Long id);
+    MyUserDTO updateMyUser(MyUserDTO dto);
+    ListUserInvitationDTO updateListUserInvitation(ListUserInvitationDTO dto);
+    ListUserPresentDTO updateListUserPresent(ListUserPresentDTO dto);
 
-    MyUserDTO update (MyUserDTO dto);
 
-    List<UserApp> findAll();
 
     UserApp save(UserApp entity);
 
-    void deleteById (Long id);
+
 
     Optional<UserApp> findByEmail (String email);
 
     boolean existsByEmail (String email);
 
-    boolean updateUserAllergies(Long userId, MyUserAllergiesDTO dto);
 }

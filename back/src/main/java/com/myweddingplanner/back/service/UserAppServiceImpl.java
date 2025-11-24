@@ -4,9 +4,9 @@ import com.myweddingplanner.back.dto.users.*;
 import com.myweddingplanner.back.exception.UserNotFoundException;
 import com.myweddingplanner.back.mapper.UserAppMapper;
 import com.myweddingplanner.back.model.*;
-import com.myweddingplanner.back.repository.AllergenRepository;
 import com.myweddingplanner.back.repository.PresentRepository;
 import com.myweddingplanner.back.repository.UserAppRepository;
+import com.myweddingplanner.back.repository.UserInvitationWeddingRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,156 +18,153 @@ public class UserAppServiceImpl implements UserAppService{
 
     private final UserAppRepository userRepository;
     private final PresentRepository presentRepository;
-    private final AllergenRepository allergenRepository;
+    private final UserInvitationWeddingRepository userInvitationWeddingRepository;
     private final UserAppMapper userAppMapper;
 
-    public UserAppServiceImpl(UserAppRepository userRepository, PresentRepository presentRepository, AllergenRepository allergenRepository, UserAppMapper userAppMapper) {
+    public UserAppServiceImpl(UserAppRepository userRepository, PresentRepository presentRepository, UserInvitationWeddingRepository userInvitationWeddingRepository, UserAppMapper userAppMapper) {
         this.userRepository = userRepository;
         this.presentRepository = presentRepository;
-        this.allergenRepository = allergenRepository;
+        this.userInvitationWeddingRepository = userInvitationWeddingRepository;
         this.userAppMapper = userAppMapper;
     }
 
     @Override
-    public MyUserDTO findMyUserDTOById(Long id) {
+    public MyUserDTO getMyUser(Long userId) {
 
-        return userRepository.findById(id)
+        return userRepository.findById(userId)
                 .map(userAppMapper::toMyUserDTO)
-                .orElseThrow(() -> new UserNotFoundException(id));
+                .orElseThrow(() -> new UserNotFoundException(userId));
     }
 
     @Override
-    public MyUserAllergiesDTO findMyUserAllergiesDTOById(Long id) {
+    public ListUserInvitationDTO getListUserInvitation(Long userId) {
 
-        return userRepository.findById(id)
-                .map(userAppMapper::toMyUserAllergiesDTO)
-                .orElseThrow(() -> new UserNotFoundException(id));
+        ListUserInvitationDTO dto = new ListUserInvitationDTO();
+
+        dto.setUserId(userId);
+
+        List<UserInvitationWedding> invitations = userInvitationWeddingRepository.findByUserAppId(userId);
+
+        for (UserInvitationWedding invitation : invitations){
+            dto.getInvitationList().add(userAppMapper.toMyInvitation(invitation));
+        }
+
+        return dto;
     }
 
     @Override
-    public ListUserPresentDTO finMyUserPresentDTOById(Long id) {
-        return userRepository.findById(id)
-                .map(userAppMapper::toMyUserPresentDTO)
-                .orElseThrow(() -> new UserNotFoundException(id));
+    public ListUserPresentDTO getListUserPresent(Long userId) {
+        return userRepository.findById(userId)
+                .map(userAppMapper::toListUserPresent)
+                .orElseThrow(() -> new UserNotFoundException(userId));
     }
 
+
     @Override
-    public MyUserDTO update(MyUserDTO dto) {
+    public MyUserDTO updateMyUser(MyUserDTO dto) {
 
         UserApp user = userRepository.findById(dto.getIdUser())
                 .orElseThrow(() -> new UserNotFoundException(dto.getIdUser()));
 
         // todo comprobar si hay cambios y actualizar
 
-        updateInvitations(user, dto);
+        user.setName(dto.getName());
+        user.setFirstSurname(dto.getFirstSurname());
+        user.setSecondSurname(dto.getSecondSurname());
+        user.setAllergies(dto.getUserAllergies());
 
-        return userAppMapper.toMyUserDTO( userRepository.save(user));
+        return userAppMapper.toMyUserDTO(userRepository.save(user));
     }
 
-    private void updateInvitations(UserApp user, MyUserDTO dto){
+    @Override
+    public ListUserInvitationDTO updateListUserInvitation(ListUserInvitationDTO dto) {
 
-        // lo que hay en bbdd
-        List<UserInvitationWedding> invitations = user.getInvitations();
-        // lo que no hay en dto
-        List<UserInvitationWedding> toRemove = new ArrayList<>();
+        Long userId = dto.getUserId();
 
-        for (UserInvitationWedding invitationWedding : invitations){
+        UserApp user = userRepository.findById(userId).orElseThrow();
 
-            MyInvitation myInvitation = findMyInvitation(dto, invitationWedding.getId());
+        // el usuario solo puede cambiar el estado de sus invitaciones
+        // no puede add ni delete
 
-            if (myInvitation == null){
-                toRemove.add(invitationWedding);
-            } else {
-                updateInvitation(invitationWedding, myInvitation);
+        // invitaciones en bbdd
+        List<UserInvitationWedding> invitations = userInvitationWeddingRepository.findByUserAppId(dto.getUserId());
+
+        for(UserInvitationWedding userInvitationWedding : invitations){
+
+            for (MyInvitation myInvitation : dto.getInvitationList()){
+
+                if (userInvitationWedding.getId().equals(myInvitation.getIdInvitation())){
+
+                    userInvitationWedding.setConfirm(myInvitation.isConfirm());
+                    userInvitationWedding.setNotified(myInvitation.isNotified());
+
+                    updateListCompanion(userInvitationWedding, myInvitation);
+
+                    userInvitationWeddingRepository.save(userInvitationWedding);
+
+                    break;
+                }
             }
-
         }
 
-        invitations.removeAll(toRemove);
-    }
-
-    private MyInvitation findMyInvitation(MyUserDTO dto, Long invitationId){
-
-        if (dto.getMyInvitations() == null){
-
-            return null;
-
-        }
-
-        for (MyInvitation myInvitation : dto.getMyInvitations()){
-
-            if (invitationId.equals(myInvitation.getIdInvitation())){
-
-                return myInvitation;
-
-            }
-
-        }
-
-        return null;
+        return userAppMapper.toListUserInvitation(userRepository.findById(dto.getUserId()).orElseThrow());
 
     }
 
-    private void updateInvitation(UserInvitationWedding invitationWedding, MyInvitation myInvitation){
-
-        invitationWedding.setConfirm(myInvitation.isConfirm());
-        invitationWedding.setNotified(myInvitation.isNotified());
-
-        updateCompanions(invitationWedding, myInvitation);
-
-    }
-
-    private void updateCompanions(UserInvitationWedding invitationWedding, MyInvitation myInvitation){
+    private void updateListCompanion(UserInvitationWedding invitationWedding, MyInvitation myInvitation){
 
         // bbdd
         List<Companion> companions = invitationWedding.getCompanions();
         // no en dto
         List<Companion> toRemove = new ArrayList<>();
 
-        if (companions == null){
-
-            return;
-
-        }
 
         for (Companion companion : companions){
 
-            MyCompanion myCompanion = findMyCompanion(myInvitation, companion.getId());
+            boolean found = false;
 
+            for (MyCompanion myCompanion : myInvitation.getCompanions()){
 
-            if (myCompanion == null){
+                // si esta en ambas listas -> update
+                if (companion.getId().equals(myCompanion.getIdCompanion())){
 
-                toRemove.add(companion);
+                    companion.setName(myCompanion.getName());
+                    companion.setFirstSurname(myCompanion.getFirstSurname());
+                    companion.setSecondSurname(myCompanion.getSecondSurname());
+                    companion.setEmail(myCompanion.getEmail());
+                    companion.setAdult(myCompanion.isAdult());
+                    companion.setAllergies(myCompanion.getAllergies());
 
-            } else {
+                    found = true;
+                    break;
+                }
 
-                updateCompanion(companion, myCompanion);
             }
 
+            if(!found) {
+                toRemove.add(companion);
+            }
+
+        }
+
+        for (MyCompanion myCompanion : myInvitation.getCompanions()){
+
+            if (myCompanion.getIdCompanion()==null){
+
+                Companion companion = updateCompanion(invitationWedding, myCompanion);
+
+                companions.add(companion);
+
+            }
         }
 
         companions.removeAll(toRemove);
 
     }
 
-    private MyCompanion findMyCompanion(MyInvitation myInvitation, Long companionId){
+    private Companion updateCompanion(UserInvitationWedding invitationWedding, MyCompanion myCompanion) {
 
-        if (myInvitation.getCompanions() == null){
-            return null;
-        }
-
-        for (MyCompanion myCompanion : myInvitation.getCompanions()){
-
-            if (companionId.equals(myCompanion.getIdCompanion())){
-
-                return myCompanion;
-            }
-        }
-
-        return null;
-    }
-
-    private void updateCompanion(Companion companion, MyCompanion myCompanion){
+        Companion companion = new Companion();
 
         companion.setName(myCompanion.getName());
         companion.setFirstSurname(myCompanion.getFirstSurname());
@@ -176,61 +173,32 @@ public class UserAppServiceImpl implements UserAppService{
         companion.setAdult(myCompanion.isAdult());
         companion.setAllergies(myCompanion.getAllergies());
 
+        companion.setUserInvitationWedding(invitationWedding);
+
+        return companion;
     }
 
+
     @Override
-    public boolean updateUserAllergies(Long userId, MyUserAllergiesDTO dto) {
+    public ListUserPresentDTO updateListUserPresent(ListUserPresentDTO dto) {
 
-        UserApp user = userRepository.findById(userId).get();
+        List<Present> presentsBD = presentRepository.findByUserAppId(dto.getUserId());
 
-        List<AllergiesUser> toRemove = new ArrayList<>();
-
-        // para cada alergia que hay en la lista de alergias del usuario en la bb
-        // lo comparo con cada una de las alergias que hay en el dto
-        // si coincide con alguna es que sigue estando
-        // si no coincide con ninguna la añado a la lista de eliminar
-        // porque está en la bbdd pero no en el dto
-        for (AllergiesUser allergie : user.getAllergies()){
-
-            boolean found = false;
-
-            for (MyAllergy myAllergy : dto.getMyAllergies()){
-
-                if (allergie.getId().equals(myAllergy.getIdAllergy())){
-                    found = true;
+        for (Present present : presentsBD){
+            for (MyPresent myPresent : dto.getMyPresents()){
+                if(present.getId().equals(myPresent.getIdPresent())){
+                    present.setConfirm(myPresent.isConfirm());
                     break;
                 }
             }
-
-            if(!found){
-
-                toRemove.add(allergie);
-            }
         }
 
-        user.getAllergies().removeAll(toRemove);
+        List<Present> update = presentRepository.saveAll(presentsBD);
 
-        // Agrego lo nuevo en el dto a la bbdd
-        // si el id es null es que es nuevo
-        for (MyAllergy myAllergy : dto.getMyAllergies()){
-            if (myAllergy.getIdAllergy() == null){
-
-                AllergiesUser allergie = new AllergiesUser();
-
-                allergie.setUserApp(user);
-                allergie.setAllergen(allergenRepository.findById(myAllergy.getIdAllergen()).get());
-
-                user.getAllergies().add(allergie);
-            }
-        }
-
-        userRepository.save(user);
-
-        return true;
+        return userAppMapper.toListUserPresent(userRepository.findById(dto.getUserId()).orElseThrow());
     }
 
-    @Override
-    public boolean updateMyUserPresents(Long userId, ListUserPresentDTO dto){
+    public boolean updateListUserPresents(Long userId, ListUserPresentDTO dto){
 
         UserApp user = userRepository.findById(userId).orElseThrow();
         List<Present> actual = user.getPresents();
@@ -254,20 +222,10 @@ public class UserAppServiceImpl implements UserAppService{
 
 
 
-    // TODO
-
-    @Override
-    public List<UserApp> findAll() {
-        return userRepository.findAll();
-    }
 
     @Override
     public UserApp save(UserApp entity) {
         return userRepository.save(entity);
-    }
-
-    @Override
-    public void deleteById(Long id) {
     }
 
     @Override

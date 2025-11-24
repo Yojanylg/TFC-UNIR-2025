@@ -8,54 +8,42 @@ import org.springframework.stereotype.Component;
 public class UserAppMapperImpl implements UserAppMapper{
 
     @Override
-    public MyUserDTO toMyUserDTO(UserApp u) {
+    public MyUserDTO toMyUserDTO(UserApp user) {
 
         MyUserDTO dto = new MyUserDTO();
 
-        dto.setIdUser(u.getId() != null ? u.getId() : null);
-        dto.setName(u.getName() != null ? u.getName() : null);
-        dto.setFirstSurname(u.getFirstSurname() != null ? u.getFirstSurname() : null);
-        dto.setSecondSurname(u.getSecondSurname() != null ? u.getSecondSurname() : null);
-        dto.setEmail(u.getEmail() != null ? u.getEmail() : null);
+        dto.setIdUser(user.getId() != null ? user.getId() : null);
+        dto.setName(user.getName() != null ? user.getName() : null);
+        dto.setFirstSurname(user.getFirstSurname() != null ? user.getFirstSurname() : null);
+        dto.setSecondSurname(user.getSecondSurname() != null ? user.getSecondSurname() : null);
+        dto.setEmail(user.getEmail() != null ? user.getEmail() : null);
 
         // MY WEDDING
-        for (UserWedding uw : u.getMyWeddings()){
-
-            MyWedding myWedding = new MyWedding();
-
-            myWedding.setIdWedding(uw.getWedding().getId());
-            myWedding.setStateWedding(uw.getWedding().getStateWedding().toString());
-            myWedding.setDate(uw.getWedding().getDateWedding());
-            myWedding.setPlace(uw.getWedding().getPlace());
-
-            dto.getMyWeddings().add(myWedding);
+        for (UserWedding uw : user.getMyWeddings()){
+            dto.getMyWeddings().add(toMyWedding(uw.getWedding()));
         }
 
-        // MY INVITATION
-        for (UserInvitationWedding ui : u.getInvitations()){
-
-            dto.getMyInvitations().add(toMyInvitation(ui));
-
-        }
+        dto.setUserAllergies(user.getAllergies());
 
         return dto;
     }
 
     @Override
-    public MyUserAllergiesDTO toMyUserAllergiesDTO(UserApp u) {
+    public MyWedding toMyWedding(Wedding wedding) {
 
-        MyUserAllergiesDTO dto = new MyUserAllergiesDTO();
+        MyWedding myWedding = new MyWedding();
 
-        dto.setUserId(u.getId());
+        myWedding.setIdWedding(wedding.getId());
+        myWedding.setStateWedding(wedding.getStateWedding().toString());
+        myWedding.setDate(wedding.getDateWedding());
+        myWedding.setPlace(wedding.getPlace());
 
-        for (AllergiesUser a : u.getAllergies()){
-            dto.getMyAllergies().add(toMyAllergy(a));
-        }
-        return dto;
+        return myWedding;
     }
 
+
     @Override
-    public ListUserPresentDTO toMyUserPresentDTO(UserApp u) {
+    public ListUserPresentDTO toListUserPresent(UserApp u) {
 
         ListUserPresentDTO dto = new ListUserPresentDTO();
 
@@ -68,20 +56,8 @@ public class UserAppMapperImpl implements UserAppMapper{
         return dto;
     }
 
-    private MyAllergy toMyAllergy(AllergiesUser a){
-
-        MyAllergy dto = new MyAllergy();
-
-        dto.setIdAllergy(a.getId() != null ? a.getId() : null);
-        dto.setIdAllergen(a.getAllergen().getId() != null ? a.getAllergen().getId() : null);
-        dto.setName(a.getAllergen().getName() != null ? a.getAllergen().getName() : null);
-        dto.setImage("pendiente de mapper");
-
-        return dto;
-
-    }
-
-    private MyPresent toMyPresent(Present p){
+    @Override
+    public MyPresent toMyPresent(Present p){
 
         MyPresent dto = new MyPresent();
 
@@ -95,18 +71,32 @@ public class UserAppMapperImpl implements UserAppMapper{
         return dto;
     }
 
+
     @Override
-    public MyInvitation toMyInvitation(UserInvitationWedding ui){
+    public ListUserInvitationDTO toListUserInvitation(UserApp user) {
+
+        ListUserInvitationDTO dto = new ListUserInvitationDTO();
+
+        dto.setUserId(user.getId());
+
+        for(UserInvitationWedding invitation : user.getInvitations()){
+            dto.getInvitationList().add(toMyInvitation(invitation));
+        }
+        return dto;
+    }
+
+    @Override
+    public MyInvitation toMyInvitation(UserInvitationWedding userInvitationWedding){
 
         MyInvitation invitation = new MyInvitation();
 
-        invitation.setIdInvitation(ui.getId());
-        invitation.setWeddingDate(ui.getWedding().getDateWedding());
-        invitation.setPlace(ui.getWedding().getPlace());
+        invitation.setIdInvitation(userInvitationWedding.getId());
+        invitation.setWeddingDate(userInvitationWedding.getWedding().getDateWedding());
+        invitation.setPlace(userInvitationWedding.getWedding().getPlace());
 
         // COUPLE
         boolean first = true;
-        for (UserWedding groom : ui.getWedding().getGrooms()){
+        for (UserWedding groom : userInvitationWedding.getWedding().getGrooms()){
 
             String name = "";
 
@@ -118,18 +108,19 @@ public class UserAppMapperImpl implements UserAppMapper{
             }
         }
 
-        invitation.setConfirm(ui.isConfirm());
+        invitation.setConfirm(userInvitationWedding.isConfirm());
 
-        invitation.setNotified(ui.isNotified());
+        invitation.setNotified(userInvitationWedding.isNotified());
 
-        for (Companion companion : ui.getCompanions()){
+        for (Companion companion : userInvitationWedding.getCompanions()){
             invitation.getCompanions().add(toMyCompanion(companion));
         }
 
         return invitation;
     }
 
-    private MyCompanion toMyCompanion (Companion companion){
+    @Override
+    public MyCompanion toMyCompanion (Companion companion){
 
         MyCompanion myCompanion = new MyCompanion();
 

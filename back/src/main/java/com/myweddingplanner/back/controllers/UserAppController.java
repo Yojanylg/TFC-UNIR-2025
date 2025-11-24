@@ -1,6 +1,5 @@
 package com.myweddingplanner.back.controllers;
 
-import com.myweddingplanner.back.dto.users.MyUserAllergiesDTO;
 import com.myweddingplanner.back.dto.users.MyUserDTO;
 import com.myweddingplanner.back.dto.users.ListUserPresentDTO;
 import com.myweddingplanner.back.security.JwtService;
@@ -33,7 +32,7 @@ public class UserAppController {
     /* ----------------- GET DE USERS ----------------- */
 
     @GetMapping("/me")
-    public ResponseEntity<?> getMyUserDTO (@RequestHeader (name = "Authorization", required = true) String authorizationHeader){
+    public ResponseEntity<?> getUser (@RequestHeader (name = "Authorization", required = true) String authorizationHeader){
 
         // Tratamiento del Header sin Token
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
@@ -44,32 +43,14 @@ public class UserAppController {
         // Obtener Token
         String token = authorizationHeader.substring(7);
 
-        MyUserDTO dto = userAppService.findMyUserDTOById(jwtService.extractUserId(token));
-
-        return ResponseEntity.ok(dto);
-
-    }
-
-    @GetMapping("/myAllergies")
-    public ResponseEntity<?> getMyAllergies (@RequestHeader (name = "Authorization", required = true) String authorizationHeader){
-
-        // Tratamiento del Header sin Token
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Falta token Bearer en Authorization"));
-        }
-
-        // Obtener Token
-        String token = authorizationHeader.substring(7);
-
-        MyUserAllergiesDTO dto = userAppService.findMyUserAllergiesDTOById(jwtService.extractUserId(token));
+        MyUserDTO dto = userAppService.getMyUser(jwtService.extractUserId(token));
 
         return ResponseEntity.ok(dto);
 
     }
 
     @GetMapping("/myPresents")
-    public ResponseEntity<?> getMyPresents (@RequestHeader (name = "Authorization", required = true) String authorizationHeader){
+    public ResponseEntity<?> getUserPresents (@RequestHeader (name = "Authorization", required = true) String authorizationHeader){
 
         // Tratamiento del Header sin Token
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
@@ -80,14 +61,14 @@ public class UserAppController {
         // Obtener Token
         String token = authorizationHeader.substring(7);
 
-        ListUserPresentDTO dto = userAppService.finMyUserPresentDTOById(jwtService.extractUserId(token));
+        ListUserPresentDTO dto = userAppService.getListUserPresent(jwtService.extractUserId(token));
 
         return ResponseEntity.ok(dto);
 
     }
 
     @GetMapping("/myInvitations")
-    public ResponseEntity<?> getMyInvitations (@RequestHeader (name = "Authorization", required = true) String authorizationHeader){
+    public ResponseEntity<?> getUserInvitations (@RequestHeader (name = "Authorization", required = true) String authorizationHeader){
 
         // Tratamiento del Header sin Token
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
@@ -106,9 +87,9 @@ public class UserAppController {
 
     /* ----------------- UPDATE DE USERS ----------------- */
 
-    @PutMapping("/myAllergies")
-    public ResponseEntity<?> updateMyAllergies (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
-                                                @RequestBody MyUserAllergiesDTO dto){
+    @PutMapping("/me")
+    public ResponseEntity<?> updateUser (@RequestHeader (name = "Authorization", required = true) String authorizationHeader,
+                                         @RequestBody MyUserDTO dto){
 
         // Tratamiento del Header sin Token
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
@@ -118,12 +99,11 @@ public class UserAppController {
 
         // Obtener Token
         String token = authorizationHeader.substring(7);
-        // Obtener User
         Long userId = jwtService.extractUserId(token);
 
-        userAppService.updateUserAllergies(userId, dto);
 
-        return ResponseEntity.ok(userAppService.findMyUserAllergiesDTOById(jwtService.extractUserId(token)));
+
+        return ResponseEntity.ok(dto);
 
     }
 
@@ -141,13 +121,27 @@ public class UserAppController {
         // Obtener User
         Long userId = jwtService.extractUserId(token);
 
-        userAppService.updateMyUserPresents(userId, dto);
 
-        return ResponseEntity.ok(userAppService.finMyUserPresentDTOById(userId));
+
+        return ResponseEntity.ok(userAppService.getListUserPresent(userId));
 
     }
 
+    @PutMapping("/myInvitations")
+    public ResponseEntity<?> updateUserInvitations (@RequestHeader (name = "Authorization", required = true) String authorizationHeader){
 
+        // Tratamiento del Header sin Token
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Falta token Bearer en Authorization"));
+        }
+
+        // Obtener Token
+        String token = authorizationHeader.substring(7);
+
+        return ResponseEntity.ok(userInvitationWeddingService.getMyListInvitations(jwtService.extractUserId(token)));
+
+    }
 
 
 }

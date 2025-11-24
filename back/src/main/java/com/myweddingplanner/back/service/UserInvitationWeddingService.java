@@ -6,7 +6,10 @@ import java.util.List;
 
 public interface UserInvitationWeddingService {
 
+
     List<MyInvitation> getMyListInvitations(Long userId);
+
+
 
     boolean notified(Long id);
 

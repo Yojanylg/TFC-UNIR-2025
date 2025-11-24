@@ -1,18 +1,20 @@
 package com.myweddingplanner.back.mapper;
 
 import com.myweddingplanner.back.dto.users.*;
-import com.myweddingplanner.back.model.UserApp;
-import com.myweddingplanner.back.model.UserInvitationWedding;
+import com.myweddingplanner.back.model.*;
 
 public interface UserAppMapper {
 
-    MyUserAllergiesDTO toMyUserAllergiesDTO (UserApp u);
+    MyUserDTO toMyUserDTO(UserApp user);
+    MyWedding toMyWedding(Wedding wedding);
 
-    ListUserPresentDTO toMyUserPresentDTO (UserApp u);
 
-    MyUserDTO toMyUserDTO(UserApp u);
+    ListUserPresentDTO toListUserPresent(UserApp user);
+    MyPresent toMyPresent(Present present);
 
-    MyInvitation toMyInvitation(UserInvitationWedding ui);
 
+    ListUserInvitationDTO toListUserInvitation(UserApp user);
+    MyInvitation toMyInvitation(UserInvitationWedding userInvitationWedding);
+    MyCompanion toMyCompanion(Companion companion);
 
 }

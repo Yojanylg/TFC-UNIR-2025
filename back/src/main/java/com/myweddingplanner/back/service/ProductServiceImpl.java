@@ -1,24 +1,22 @@
 package com.myweddingplanner.back.service;
 
+import com.myweddingplanner.back.dto.products.ListProductDTO;
 import com.myweddingplanner.back.dto.products.ProductDTO;
 import com.myweddingplanner.back.mapper.ProductMapper;
 import com.myweddingplanner.back.model.Product;
 import com.myweddingplanner.back.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService{
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
-
-    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper) {
-        this.productRepository = productRepository;
-        this.productMapper = productMapper;
-    }
 
     @Override
     public List<ProductDTO> getAll() {
@@ -30,5 +28,10 @@ public class ProductServiceImpl implements ProductService{
         }
 
         return list;
+    }
+
+    @Override
+    public ListProductDTO getList() {
+        return productMapper.toListProductDTO(productRepository.findAll());
     }
 }

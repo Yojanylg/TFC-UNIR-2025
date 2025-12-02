@@ -1,5 +1,8 @@
 package com.myweddingplanner.back.controllers;
 
+import com.myweddingplanner.back.dto.wedding.ListEmailInvitation;
+import com.myweddingplanner.back.dto.wedding.ListWeddingInvitationDTO;
+import com.myweddingplanner.back.dto.wedding.ListWeddingPresentDTO;
 import com.myweddingplanner.back.dto.wedding.WeddingDTO;
 import com.myweddingplanner.back.security.JwtService;
 import com.myweddingplanner.back.service.WeddingService;
@@ -32,18 +35,12 @@ public class WeddingController {
     @GetMapping("/preparing")
     public ResponseEntity<?> getWeddingPreparing (@RequestHeader(name = "Authorization", required = true) String authorizationHeader){
 
-        // Tratamiento del Header sin Token
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Falta token Bearer en Authorization"));
-        }
-
         // Obtener Token
         String token = authorizationHeader.substring(7);
         // Obtener UserApp ID
         Long id = jwtService.extractUserId(token);
 
-       Optional<WeddingDTO> optWedding = weddingService.findWeddingPreparingByUserId(id);
+       Optional<WeddingDTO> optWedding = weddingService.getWeddingPreparingByUserId(id);
 
 
        if (optWedding.isEmpty()){
@@ -56,25 +53,62 @@ public class WeddingController {
     }
 
     // Get One
-    @GetMapping("/{id}")
+    @GetMapping("/{idWedding}")
     public ResponseEntity<?> getWedding (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
-                                         @PathVariable Long id){
+                                         @PathVariable Long idWedding){
 
-        // Tratamiento del Header sin Token
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Falta token Bearer en Authorization"));
-        }
+        return ResponseEntity.ok(weddingService.getById(idWedding));
 
-        return ResponseEntity.ok(weddingService.findById(id));
+    }
+    // Get presents by id wedding
+    @GetMapping("/presents/{idWedding}")
+    public ResponseEntity<?> getWeddingPresents (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
+                                         @PathVariable Long idWedding){
+
+        // aqui podemos limitar el acceso a una boda si el usuario es novio
+
+        return ResponseEntity.ok(weddingService.getListWeddingPresent(idWedding));
+
+    }
+    // Get invitations by id wedding
+    @GetMapping("/invitations/{idWedding}")
+    public ResponseEntity<?> getWeddingInvitations (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
+                                                 @PathVariable Long idWedding){
+
+        return ResponseEntity.ok(weddingService.getListWeddingInvitation(idWedding));
 
     }
 
-    // Create
+    /* ----------------- CREATE DE USERS ----------------- */
+
+    @PostMapping("/invitations/{idWedding}")
+    public ResponseEntity<?> addInvitations (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
+                                             @PathVariable Long idWedding,
+                                             @RequestBody ListEmailInvitation listEmailInvitation){
+
+        listEmailInvitation.setIdWedding(idWedding);
+
+        return ResponseEntity.ok(weddingService.addInvitation(listEmailInvitation));
+    }
 
 
-    // Update
+    /* ----------------- UPDATE DE USERS ----------------- */
 
+    @PutMapping("/{idWedding}")
+    public ResponseEntity<?> updateWedding(@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
+                                    @RequestBody WeddingDTO dto){
+        return ResponseEntity.ok(weddingService.updateWeddingDTO(dto));
+    }
+
+    @PutMapping("/presents/{idWedding}")
+    public ResponseEntity<?> updateWeddingPresents(@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
+                                           @PathVariable Long idWedding,
+                                           @RequestBody ListWeddingPresentDTO dto){
+
+        dto.setIdWedding(idWedding);
+
+        return ResponseEntity.ok(weddingService.updateListWeddingPresent(dto));
+    }
 
 
 }

@@ -41,7 +41,7 @@ public class Wedding {
 
     // RELACION CON INVITADOS
     @OneToMany(mappedBy = "wedding", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserInvitationWedding> invitations = new ArrayList<>();
+    private List<UserInvitation> invitations = new ArrayList<>();
 
     // RELACION CON NOVIOS
     @OneToMany(mappedBy = "wedding", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -67,20 +67,20 @@ public class Wedding {
     }
 
 
-    public void setInvitations(List<UserInvitationWedding> nuevos){
+    public void setInvitations(List<UserInvitation> nuevos){
         this.invitations.clear();
         if (nuevos != null){
             nuevos.forEach(this::addGests);
         }
     }
 
-    public void addGests(UserInvitationWedding invitacion){
+    public void addGests(UserInvitation invitacion){
         invitacion.setWedding(this);
         this.invitations.add(invitacion);
     }
 
 
-    public void removGuests(UserInvitationWedding invitacion){
+    public void removGuests(UserInvitation invitacion){
         this.invitations.remove(invitacion);
         invitacion.setWedding(null);
     }

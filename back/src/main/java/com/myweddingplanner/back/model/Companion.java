@@ -36,5 +36,5 @@ public class Companion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_invitation_id")
-    private UserInvitationWedding userInvitationWedding;
+    private UserInvitation userInvitationWedding;
 }

@@ -1,10 +1,13 @@
 package com.myweddingplanner.back.mapper;
 
 import com.myweddingplanner.back.dto.products.ImageProductDTO;
+import com.myweddingplanner.back.dto.products.ListProductDTO;
 import com.myweddingplanner.back.dto.products.ProductDTO;
 import com.myweddingplanner.back.model.ImageProduct;
 import com.myweddingplanner.back.model.Product;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ProductMapperImpl implements ProductMapper{
@@ -19,7 +22,7 @@ public class ProductMapperImpl implements ProductMapper{
         dto.setDescription(entity.getDescription());
         dto.setLink(entity.getLink());
         dto.setPrice(entity.getPrice());
-        dto.setType(entity.getProductType());
+        dto.setType(entity.getProductType().toString());
         dto.setStartDate(entity.getStartDate());
         dto.setUpdateDate(entity.getUpdateDate());
 
@@ -40,6 +43,17 @@ public class ProductMapperImpl implements ProductMapper{
         dto.setLink(entity.getLink());
         dto.setImageType(entity.getImageType());
 
+        return dto;
+    }
+
+    @Override
+    public ListProductDTO toListProductDTO(List<Product> productList) {
+
+        ListProductDTO dto = new ListProductDTO();
+
+        for (Product p : productList){
+            dto.getProducts().add(toProductDTO(p));
+        }
         return dto;
     }
 }

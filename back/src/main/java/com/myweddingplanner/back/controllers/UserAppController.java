@@ -42,7 +42,6 @@ public class UserAppController {
 
         // Obtener Token
         String token = authorizationHeader.substring(7);
-
         MyUserDTO dto = userAppService.getMyUser(jwtService.extractUserId(token));
 
         return ResponseEntity.ok(dto);
@@ -61,9 +60,7 @@ public class UserAppController {
         // Obtener Token
         String token = authorizationHeader.substring(7);
 
-        ListUserPresentDTO dto = userAppService.getListUserPresent(jwtService.extractUserId(token));
-
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(userAppService.getListUserPresent(jwtService.extractUserId(token)));
 
     }
 
@@ -106,7 +103,6 @@ public class UserAppController {
         return ResponseEntity.ok(dto);
 
     }
-
     @PutMapping("/myPresents")
     public ResponseEntity<?> updatePresents (@RequestHeader (name = "Authorization", required = true) String authorizationHeader,
                                              @RequestBody ListUserPresentDTO dto){
@@ -126,7 +122,6 @@ public class UserAppController {
         return ResponseEntity.ok(userAppService.getListUserPresent(userId));
 
     }
-
     @PutMapping("/myInvitations")
     public ResponseEntity<?> updateUserInvitations (@RequestHeader (name = "Authorization", required = true) String authorizationHeader){
 

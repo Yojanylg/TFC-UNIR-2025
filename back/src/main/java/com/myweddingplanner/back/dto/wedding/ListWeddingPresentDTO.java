@@ -15,7 +15,7 @@ import java.util.List;
 public class ListWeddingPresentDTO {
 
     private Long idWedding;
-    private List<MyWeddingPresentDTO> myWeddingPresent = new ArrayList<>();
-    private List<UserWeddingDTO> grooms = new ArrayList<>();
+    private List<WeddingPresentDTO> myWeddingPresent = new ArrayList<>();
+    private List<WeddingUserDTO> grooms = new ArrayList<>();
 
 }

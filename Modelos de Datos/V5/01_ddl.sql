@@ -47,49 +47,6 @@ USE mywedding;
 ------------------------------------------------------------------------------------ */
 
 /* -------------------------------------------------------------
-Tabla: allergens
-
-Descripción: 
-            Contiene los distintos alergenos que pueden estar
-            presentes en los alimentos ofrecidos en la boda. La ley marca
-            catorce alérgenos de declaración obligatoria.
-Relaciones: 
-            - Puede tener multiples imágenes
-            - Se relaciona con imagenes_alergenos mediante FK
-Notas:
-            - Cada registro representa un único tipo de alérgeno
-            - Campo "nombre" debe ser único para evitar duplicados
----------------------------------------------------------------- */
-
-CREATE TABLE allergens (
-    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255)
-);
-
-/* -------------------------------------------------------------
-Tabla: allergens_images
-Descripción:
-            Contiene los enlaces a las imágenes que ilustran alérgenos
-            que pueden ser utilizadas en la IU.
-Relaciones:
-            - Cada imagen pertenece a un único alérgeno
-            - Se relaciona FK id_alergeno con alergenos.id
-Notas:      
-            - el campo tipo se refiere a una de las distintas posiciones
-            que una imágen puede tomar dentro de la IU
----------------------------------------------------------------- */
-
-CREATE TABLE allergens_images (
-    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    link VARCHAR(255),
-    image_type VARCHAR(255),
-    allergen_id BIGINT,
-    CONSTRAINT fk_allergens_images_allergens 
-        FOREIGN KEY (allergen_id) REFERENCES allergens(id) 
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-/* -------------------------------------------------------------
 Tabla: products
 Descripción:
             - Contiene los productos que a modo de ideas de regalo 
@@ -148,7 +105,7 @@ Notas:
 
 CREATE TABLE roles (
   id BIGINT not null AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(255) NOT NULL
+  name VARCHAR(255) NOT NULL
 );
 
 /* -------------------------------------------------------------
@@ -191,27 +148,27 @@ Relaciones:
 
 CREATE TABLE allergies (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	allergen_id BIGINT NULL,
     user_id BIGINT(255),
+    gluten BOOLEAN DEFAULT false,
+    crustaceos BOOLEAN DEFAULT false,
+    huevos BOOLEAN DEFAULT false,
+    pescado BOOLEAN DEFAULT false,
+    cacahuete BOOLEAN DEFAULT false,
+    soja BOOLEAN DEFAULT false,
+    leche BOOLEAN DEFAULT false,
+    frutos_cascara BOOLEAN DEFAULT false,
+    apio BOOLEAN DEFAULT false,
+    mostaza BOOLEAN DEFAULT false,
+    sesamo BOOLEAN DEFAULT false,
+    sulfitos BOOLEAN DEFAULT false,
+    altramuces BOOLEAN DEFAULT false,
+    moluscos BOOLEAN DEFAULT false,
 	CONSTRAINT fk_allergies_users_app
         FOREIGN KEY (user_id) REFERENCES users_app(id) 
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_allergies_allergens
-        FOREIGN KEY (allergen_id) REFERENCES allergens(id) 
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
-/* ==============================================================
-RELACIONES ENTRE TABLAS
-=================================================================
-
-- imagen_alergenos.id_alergeno -> alergeno.id   (N:1)
-- imagen_productos.id_productoo -> producto.id  (N:1)
-- alergias.id_usuario -> usuarios.id            (N:1)
-- ususarios.id_roles -> roles.id                (N:1)
-
-============================================================== */
 
 
 
@@ -283,7 +240,7 @@ CREATE TABLE users_invitations (
     user_id BIGINT,
     wedding_id BIGINT,
     confirm BOOLEAN DEFAULT false,  
-    notifies BOOLEAN DEFAULT false,
+    notified BOOLEAN DEFAULT false,
     email_invitation VARCHAR(255),
     CONSTRAINT fk_users_invitations_weddings
         FOREIGN KEY (wedding_id) REFERENCES weddings(id) 
@@ -333,7 +290,7 @@ Relaciones:
             - se relacina con boda.id mediante FK (novios.id_boda)
 ---------------------------------------------------------------- */
 
-CREATE TABLE user_weddings (
+CREATE TABLE users_weddings (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     email_groom VARCHAR(255),
     wedding_id BIGINT,
@@ -363,7 +320,7 @@ CREATE TABLE companions (
     first_surname VARCHAR(255),
     second_surname VARCHAR(255),
     email VARCHAR(255),
-    adult BOOLEAN(255),
+    adult BOOLEAN DEFAULT false,
     allergies VARCHAR(255),
     CONSTRAINT fk_users_invitations_companion
         FOREIGN KEY (user_invitation_id) REFERENCES users_invitations(id) 
@@ -376,8 +333,11 @@ CREATE TABLE companions (
 RELACIONES ENTRE TABLAS
 =================================================================
 
-- boda.id_itinerario -> itinerario.id   (1:1)
-- invitados.id_boda -> boda.id          (N:1)
-- regalos.id_boda -> boda.id            (N:1)
-- novios.id_boda -> boda.id             (N:1)
+- imagen_productos.id_productoo -> producto.id  (N:1)
+- alergias.id_usuario -> usuarios.id            (N:1)
+- ususarios.id_roles -> roles.id                (N:1)
+- boda.id_itinerario -> itinerario.id           (1:1)
+- invitados.id_boda -> boda.id                  (N:1)
+- regalos.id_boda -> boda.id                    (N:1)
+- novios.id_boda -> boda.id                     (N:1)
 ============================================================== */

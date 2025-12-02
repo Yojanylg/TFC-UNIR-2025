@@ -20,25 +20,46 @@ public class UserAppMapperImpl implements UserAppMapper{
 
         // MY WEDDING
         for (UserWedding uw : user.getMyWeddings()){
-            dto.getMyWeddings().add(toMyWedding(uw.getWedding()));
+            dto.getUserWeddings().add(toMyWedding(uw.getWedding()));
         }
 
-        dto.setUserAllergies(user.getAllergies());
+        UserAllergies userAllergies = new UserAllergies();
+
+        userAllergies.setIdUserAllergies(user.getAllergies().getId());
+        userAllergies.setIdUser(user.getId());
+
+        userAllergies.setGluten(user.getAllergies().isGluten());
+        userAllergies.setCrustaceos(userAllergies.isCrustaceos());
+        userAllergies.setHuevos(userAllergies.isHuevos());
+        userAllergies.setPescado(userAllergies.isPescado());
+        userAllergies.setCacahuete(userAllergies.isCacahuete());
+        userAllergies.setSoja(userAllergies.isSoja());
+        userAllergies.setLeche(userAllergies.isLeche());
+        userAllergies.setFrutosCascara(userAllergies.isFrutosCascara());
+        userAllergies.setApio(userAllergies.isApio());
+        userAllergies.setMostaza(userAllergies.isMostaza());
+        userAllergies.setSesamo(userAllergies.isSesamo());
+        userAllergies.setSulfitos(userAllergies.isSulfitos());
+        userAllergies.setAltramuces(userAllergies.isAltramuces());
+        userAllergies.setMoluscos(userAllergies.isMoluscos());
+
+
+        dto.setUserAllergies(userAllergies);
 
         return dto;
     }
 
     @Override
-    public MyWedding toMyWedding(Wedding wedding) {
+    public UserWeddingDTO toMyWedding(Wedding wedding) {
 
-        MyWedding myWedding = new MyWedding();
+        UserWeddingDTO userWeddingDTO = new UserWeddingDTO();
 
-        myWedding.setIdWedding(wedding.getId());
-        myWedding.setStateWedding(wedding.getStateWedding().toString());
-        myWedding.setDate(wedding.getDateWedding());
-        myWedding.setPlace(wedding.getPlace());
+        userWeddingDTO.setIdWedding(wedding.getId());
+        userWeddingDTO.setStateWedding(wedding.getStateWedding().toString());
+        userWeddingDTO.setDate(wedding.getDateWedding());
+        userWeddingDTO.setPlace(wedding.getPlace());
 
-        return myWedding;
+        return userWeddingDTO;
     }
 
 
@@ -50,16 +71,16 @@ public class UserAppMapperImpl implements UserAppMapper{
         dto.setUserId(u.getId());
 
         for(Present p : u.getPresents()){
-            dto.getMyPresents().add(toMyPresent(p));
+            dto.getUserPresents().add(toMyPresent(p));
         }
 
         return dto;
     }
 
     @Override
-    public MyPresent toMyPresent(Present p){
+    public UserPresentDTO toMyPresent(Present p){
 
-        MyPresent dto = new MyPresent();
+        UserPresentDTO dto = new UserPresentDTO();
 
         dto.setIdPresent(p.getId() != null ? p.getId() : null);
         dto.setIdWedding(p.getWedding().getId() != null ? p.getWedding().getId() : null);
@@ -79,24 +100,24 @@ public class UserAppMapperImpl implements UserAppMapper{
 
         dto.setUserId(user.getId());
 
-        for(UserInvitationWedding invitation : user.getInvitations()){
+        for(UserInvitation invitation : user.getInvitations()){
             dto.getInvitationList().add(toMyInvitation(invitation));
         }
         return dto;
     }
 
     @Override
-    public MyInvitation toMyInvitation(UserInvitationWedding userInvitationWedding){
+    public UserInvitationDTO toMyInvitation(UserInvitation userInvitation){
 
-        MyInvitation invitation = new MyInvitation();
+        UserInvitationDTO invitation = new UserInvitationDTO();
 
-        invitation.setIdInvitation(userInvitationWedding.getId());
-        invitation.setWeddingDate(userInvitationWedding.getWedding().getDateWedding());
-        invitation.setPlace(userInvitationWedding.getWedding().getPlace());
+        invitation.setIdInvitation(userInvitation.getId());
+        invitation.setWeddingDate(userInvitation.getWedding().getDateWedding());
+        invitation.setPlace(userInvitation.getWedding().getPlace());
 
         // COUPLE
         boolean first = true;
-        for (UserWedding groom : userInvitationWedding.getWedding().getGrooms()){
+        for (UserWedding groom : userInvitation.getWedding().getGrooms()){
 
             String name = "";
 
@@ -108,11 +129,11 @@ public class UserAppMapperImpl implements UserAppMapper{
             }
         }
 
-        invitation.setConfirm(userInvitationWedding.isConfirm());
+        invitation.setConfirm(userInvitation.isConfirm());
 
-        invitation.setNotified(userInvitationWedding.isNotified());
+        invitation.setNotified(userInvitation.isNotified());
 
-        for (Companion companion : userInvitationWedding.getCompanions()){
+        for (Companion companion : userInvitation.getCompanions()){
             invitation.getCompanions().add(toMyCompanion(companion));
         }
 
@@ -120,19 +141,19 @@ public class UserAppMapperImpl implements UserAppMapper{
     }
 
     @Override
-    public MyCompanion toMyCompanion (Companion companion){
+    public UserCompanionDTO toMyCompanion (Companion companion){
 
-        MyCompanion myCompanion = new MyCompanion();
+        UserCompanionDTO userCompanionDTO = new UserCompanionDTO();
 
-        myCompanion.setIdCompanion(companion.getId());
-        myCompanion.setName(companion.getName());
-        myCompanion.setFirstSurname(companion.getFirstSurname());
-        myCompanion.setSecondSurname(companion.getSecondSurname());
-        myCompanion.setEmail(companion.getEmail());
-        myCompanion.setAdult(companion.isAdult());
-        myCompanion.setAllergies(companion.getAllergies());
+        userCompanionDTO.setIdCompanion(companion.getId());
+        userCompanionDTO.setName(companion.getName());
+        userCompanionDTO.setFirstSurname(companion.getFirstSurname());
+        userCompanionDTO.setSecondSurname(companion.getSecondSurname());
+        userCompanionDTO.setEmail(companion.getEmail());
+        userCompanionDTO.setAdult(companion.isAdult());
+        userCompanionDTO.setAllergies(companion.getAllergies());
 
-        return myCompanion;
+        return userCompanionDTO;
     }
 
 }

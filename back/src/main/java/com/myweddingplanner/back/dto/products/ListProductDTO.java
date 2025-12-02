@@ -1,4 +1,4 @@
-package com.myweddingplanner.back.dto.allergens;
+package com.myweddingplanner.back.dto.products;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,13 +8,11 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AllergenDTO {
+public class ListProductDTO {
 
-    private Long idAllergen;
-    private Long name;
-    private List<ImageAllergenDTO> images = new ArrayList<>();
+    private List<ProductDTO> products = new ArrayList<>();
 }

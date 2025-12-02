@@ -6,15 +6,15 @@ import com.myweddingplanner.back.model.*;
 public interface UserAppMapper {
 
     MyUserDTO toMyUserDTO(UserApp user);
-    MyWedding toMyWedding(Wedding wedding);
+    UserWeddingDTO toMyWedding(Wedding wedding);
 
 
     ListUserPresentDTO toListUserPresent(UserApp user);
-    MyPresent toMyPresent(Present present);
+    UserPresentDTO toMyPresent(Present present);
 
 
     ListUserInvitationDTO toListUserInvitation(UserApp user);
-    MyInvitation toMyInvitation(UserInvitationWedding userInvitationWedding);
-    MyCompanion toMyCompanion(Companion companion);
+    UserInvitationDTO toMyInvitation(UserInvitation userInvitation);
+    UserCompanionDTO toMyCompanion(Companion companion);
 
 }

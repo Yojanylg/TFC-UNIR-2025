@@ -1,10 +1,11 @@
 package com.myweddingplanner.back.service;
 
-import com.myweddingplanner.back.dto.users.MyCompanion;
-import com.myweddingplanner.back.dto.users.MyInvitation;
+import com.myweddingplanner.back.dto.users.ListUserInvitationDTO;
+import com.myweddingplanner.back.dto.users.UserCompanionDTO;
+import com.myweddingplanner.back.dto.users.UserInvitationDTO;
 import com.myweddingplanner.back.mapper.UserAppMapper;
 import com.myweddingplanner.back.model.Companion;
-import com.myweddingplanner.back.model.UserInvitationWedding;
+import com.myweddingplanner.back.model.UserInvitation;
 import com.myweddingplanner.back.repository.UserInvitationWeddingRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +26,13 @@ public class UserInvitationWeddingServiceImpl implements UserInvitationWeddingSe
 
 
     @Override
-    public List<MyInvitation> getMyListInvitations(Long userId) {
+    public ListUserInvitationDTO getMyListInvitations(Long userId) {
 
-        List<MyInvitation> dto = new ArrayList<>();
+        ListUserInvitationDTO dto = new ListUserInvitationDTO();
 
-        for (UserInvitationWedding invitation : userInvitationWeddingRepository.findByUserAppId(userId))
+        for (UserInvitation invitation : userInvitationWeddingRepository.findByUserAppId(userId))
 
-            dto.add(userAppMapper.toMyInvitation(invitation));
+            dto.getInvitationList().add(userAppMapper.toMyInvitation(invitation));
 
         return dto;
     }
@@ -39,24 +40,24 @@ public class UserInvitationWeddingServiceImpl implements UserInvitationWeddingSe
     @Override
     public boolean notified(Long id) {
 
-        UserInvitationWedding invitation = userInvitationWeddingRepository.findById(id).orElseThrow();
+        UserInvitation invitation = userInvitationWeddingRepository.findById(id).orElseThrow();
 
         invitation.setNotified(true);
 
-        UserInvitationWedding nuevo = userInvitationWeddingRepository.save(invitation);
+        UserInvitation nuevo = userInvitationWeddingRepository.save(invitation);
 
         return (nuevo.getId()!=null);
     }
 
     @Override
-    public void updateCompanion(MyInvitation myInvitation) {
+    public void updateCompanion(UserInvitationDTO userInvitationDTO) {
 
-        UserInvitationWedding invitationWedding = userInvitationWeddingRepository
-                .findById(myInvitation.getIdInvitation())
+        UserInvitation invitationWedding = userInvitationWeddingRepository
+                .findById(userInvitationDTO.getIdInvitation())
                 .orElseThrow();
 
         List<Companion> companionsEntity = invitationWedding.getCompanions();
-        List<MyCompanion> companionsDTO = myInvitation.getCompanions();
+        List<UserCompanionDTO> companionsDTO = userInvitationDTO.getCompanions();
 
         List<Companion> toRemove = new ArrayList<>();
 
@@ -64,16 +65,16 @@ public class UserInvitationWeddingServiceImpl implements UserInvitationWeddingSe
 
             boolean found = false;
 
-            for (MyCompanion myCompanion : companionsDTO){
+            for (UserCompanionDTO userCompanionDTO : companionsDTO){
 
-                if(companion.getId().equals(myCompanion.getIdCompanion())){
+                if(companion.getId().equals(userCompanionDTO.getIdCompanion())){
 
-                    companion.setName(myCompanion.getName());
-                    companion.setFirstSurname(myCompanion.getFirstSurname());
-                    companion.setSecondSurname(myCompanion.getSecondSurname());
-                    companion.setEmail(myCompanion.getEmail());
-                    companion.setAdult(myCompanion.isAdult());
-                    companion.setAllergies(myCompanion.getAllergies());
+                    companion.setName(userCompanionDTO.getName());
+                    companion.setFirstSurname(userCompanionDTO.getFirstSurname());
+                    companion.setSecondSurname(userCompanionDTO.getSecondSurname());
+                    companion.setEmail(userCompanionDTO.getEmail());
+                    companion.setAdult(userCompanionDTO.isAdult());
+                    companion.setAllergies(userCompanionDTO.getAllergies());
 
                     found = true;
                     break;
@@ -89,18 +90,18 @@ public class UserInvitationWeddingServiceImpl implements UserInvitationWeddingSe
 
         companionsEntity.removeAll(toRemove);
 
-        for (MyCompanion myCompanion : companionsDTO){
+        for (UserCompanionDTO userCompanionDTO : companionsDTO){
 
-            if (myCompanion.getIdCompanion()==null){
+            if (userCompanionDTO.getIdCompanion()==null){
 
                 Companion nueva = new Companion();
 
-                nueva.setName(myCompanion.getName());
-                nueva.setFirstSurname(myCompanion.getFirstSurname());
-                nueva.setSecondSurname(myCompanion.getSecondSurname());
-                nueva.setEmail(myCompanion.getEmail());
-                nueva.setAdult(myCompanion.isAdult());
-                nueva.setAllergies(myCompanion.getAllergies());
+                nueva.setName(userCompanionDTO.getName());
+                nueva.setFirstSurname(userCompanionDTO.getFirstSurname());
+                nueva.setSecondSurname(userCompanionDTO.getSecondSurname());
+                nueva.setEmail(userCompanionDTO.getEmail());
+                nueva.setAdult(userCompanionDTO.isAdult());
+                nueva.setAllergies(userCompanionDTO.getAllergies());
                 nueva.setUserInvitationWedding(invitationWedding);
 
                 companionsEntity.add(nueva);

@@ -1,4 +1,4 @@
-package com.myweddingplanner.back.dto.users;
+package com.myweddingplanner.back.dto.wedding;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,8 +11,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyUserInvitationWeddingDTO {
+public class ListEmailInvitation {
 
-    private Long idUser;
-    private List<MyInvitation> myInvitations;
+    private Long idWedding;
+    private List<String> listEmail;
+
+
 }

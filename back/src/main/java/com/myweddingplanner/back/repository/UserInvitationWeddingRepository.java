@@ -1,13 +1,14 @@
 package com.myweddingplanner.back.repository;
 
-import com.myweddingplanner.back.model.UserInvitationWedding;
+import com.myweddingplanner.back.model.UserInvitation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+@Repository
+public interface UserInvitationWeddingRepository extends JpaRepository<UserInvitation, Long> {
 
-public interface UserInvitationWeddingRepository extends JpaRepository<UserInvitationWedding, Long> {
-
-    List<UserInvitationWedding> findByUserAppId(Long id);
-    Optional<UserInvitationWedding> findByEmailInvitation(String email);
+    List<UserInvitation> findByUserAppId(Long id);
+    Optional<UserInvitation> findByEmailInvitation(String email);
 }

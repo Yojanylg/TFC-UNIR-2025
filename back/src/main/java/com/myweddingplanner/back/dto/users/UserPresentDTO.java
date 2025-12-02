@@ -5,18 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyWedding {
+public class UserPresentDTO {
 
+    private Long idPresent;
     private Long idWedding;
-    private String stateWedding;
-    private LocalDateTime date;
-    private String place;
-
-
+    private Long idProduct;
+    private String productName;
+    private boolean isConfirm;
+    private double price;
 }

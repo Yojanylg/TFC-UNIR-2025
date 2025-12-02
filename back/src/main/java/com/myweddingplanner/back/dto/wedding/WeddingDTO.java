@@ -24,11 +24,8 @@ public class WeddingDTO {
 
     private String stateWedding;
 
-    private List<MyWeddingEventDTO> events = new ArrayList<>();
+    private List<WeddingEventDTO> events = new ArrayList<>();
 
-    private List<UserWeddingDTO> grooms = new ArrayList<>();
-
-    private List<MyWeddingPresentDTO> presents = new ArrayList<>();
-
+    private List<WeddingUserDTO> grooms = new ArrayList<>();
 
 }

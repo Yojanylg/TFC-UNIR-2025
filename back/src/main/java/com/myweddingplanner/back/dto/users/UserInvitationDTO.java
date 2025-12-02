@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyInvitation {
+public class UserInvitationDTO {
 
     private Long idInvitation;
     private LocalDateTime weddingDate;
@@ -21,8 +21,6 @@ public class MyInvitation {
     private String couple;
     private boolean isConfirm;
     private boolean isNotified;
-    private int childCompanion;
-    private int adultCompanion;
-    private List<MyCompanion> companions = new ArrayList<>();
+    private List<UserCompanionDTO> companions = new ArrayList<>();
 
 }

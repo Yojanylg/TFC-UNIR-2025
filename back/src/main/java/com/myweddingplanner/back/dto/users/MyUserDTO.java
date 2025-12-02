@@ -1,6 +1,5 @@
 package com.myweddingplanner.back.dto.users;
 
-import com.myweddingplanner.back.model.AllergiesUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +24,8 @@ public class MyUserDTO {
 
     private String email;
 
-    private AllergiesUser userAllergies;
+    private UserAllergies userAllergies;
 
-    private List<MyWedding> myWeddings = new ArrayList<>();
+    private List<UserWeddingDTO> userWeddings = new ArrayList<>();
 
 }

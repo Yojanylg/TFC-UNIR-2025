@@ -30,6 +30,7 @@ public class Present {
     @JoinColumn(name = "user_id")
     private UserApp userApp;
 
+    @Column(name = "confirm")
     private boolean isConfirm;
 
     private double price;

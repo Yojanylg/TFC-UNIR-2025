@@ -43,9 +43,9 @@ public class UserAppServiceImpl implements UserAppService{
 
         dto.setUserId(userId);
 
-        List<UserInvitationWedding> invitations = userInvitationWeddingRepository.findByUserAppId(userId);
+        List<UserInvitation> invitations = userInvitationWeddingRepository.findByUserAppId(userId);
 
-        for (UserInvitationWedding invitation : invitations){
+        for (UserInvitation invitation : invitations){
             dto.getInvitationList().add(userAppMapper.toMyInvitation(invitation));
         }
 
@@ -60,6 +60,7 @@ public class UserAppServiceImpl implements UserAppService{
     }
 
 
+
     @Override
     public MyUserDTO updateMyUser(MyUserDTO dto) {
 
@@ -71,7 +72,7 @@ public class UserAppServiceImpl implements UserAppService{
         user.setName(dto.getName());
         user.setFirstSurname(dto.getFirstSurname());
         user.setSecondSurname(dto.getSecondSurname());
-        user.setAllergies(dto.getUserAllergies());
+        // TODO ALLERGIES
 
         return userAppMapper.toMyUserDTO(userRepository.save(user));
     }
@@ -87,20 +88,20 @@ public class UserAppServiceImpl implements UserAppService{
         // no puede add ni delete
 
         // invitaciones en bbdd
-        List<UserInvitationWedding> invitations = userInvitationWeddingRepository.findByUserAppId(dto.getUserId());
+        List<UserInvitation> invitations = userInvitationWeddingRepository.findByUserAppId(dto.getUserId());
 
-        for(UserInvitationWedding userInvitationWedding : invitations){
+        for(UserInvitation userInvitation : invitations){
 
-            for (MyInvitation myInvitation : dto.getInvitationList()){
+            for (UserInvitationDTO userInvitationDTO : dto.getInvitationList()){
 
-                if (userInvitationWedding.getId().equals(myInvitation.getIdInvitation())){
+                if (userInvitation.getId().equals(userInvitationDTO.getIdInvitation())){
 
-                    userInvitationWedding.setConfirm(myInvitation.isConfirm());
-                    userInvitationWedding.setNotified(myInvitation.isNotified());
+                    userInvitation.setConfirm(userInvitationDTO.isConfirm());
+                    userInvitation.setNotified(userInvitationDTO.isNotified());
 
-                    updateListCompanion(userInvitationWedding, myInvitation);
+                    updateListCompanion(userInvitation, userInvitationDTO);
 
-                    userInvitationWeddingRepository.save(userInvitationWedding);
+                    userInvitationWeddingRepository.save(userInvitation);
 
                     break;
                 }
@@ -111,7 +112,7 @@ public class UserAppServiceImpl implements UserAppService{
 
     }
 
-    private void updateListCompanion(UserInvitationWedding invitationWedding, MyInvitation myInvitation){
+    private void updateListCompanion(UserInvitation invitationWedding, UserInvitationDTO userInvitationDTO){
 
         // bbdd
         List<Companion> companions = invitationWedding.getCompanions();
@@ -123,17 +124,17 @@ public class UserAppServiceImpl implements UserAppService{
 
             boolean found = false;
 
-            for (MyCompanion myCompanion : myInvitation.getCompanions()){
+            for (UserCompanionDTO userCompanionDTO : userInvitationDTO.getCompanions()){
 
                 // si esta en ambas listas -> update
-                if (companion.getId().equals(myCompanion.getIdCompanion())){
+                if (companion.getId().equals(userCompanionDTO.getIdCompanion())){
 
-                    companion.setName(myCompanion.getName());
-                    companion.setFirstSurname(myCompanion.getFirstSurname());
-                    companion.setSecondSurname(myCompanion.getSecondSurname());
-                    companion.setEmail(myCompanion.getEmail());
-                    companion.setAdult(myCompanion.isAdult());
-                    companion.setAllergies(myCompanion.getAllergies());
+                    companion.setName(userCompanionDTO.getName());
+                    companion.setFirstSurname(userCompanionDTO.getFirstSurname());
+                    companion.setSecondSurname(userCompanionDTO.getSecondSurname());
+                    companion.setEmail(userCompanionDTO.getEmail());
+                    companion.setAdult(userCompanionDTO.isAdult());
+                    companion.setAllergies(userCompanionDTO.getAllergies());
 
                     found = true;
                     break;
@@ -147,11 +148,11 @@ public class UserAppServiceImpl implements UserAppService{
 
         }
 
-        for (MyCompanion myCompanion : myInvitation.getCompanions()){
+        for (UserCompanionDTO userCompanionDTO : userInvitationDTO.getCompanions()){
 
-            if (myCompanion.getIdCompanion()==null){
+            if (userCompanionDTO.getIdCompanion()==null){
 
-                Companion companion = updateCompanion(invitationWedding, myCompanion);
+                Companion companion = updateCompanion(invitationWedding, userCompanionDTO);
 
                 companions.add(companion);
 
@@ -162,16 +163,16 @@ public class UserAppServiceImpl implements UserAppService{
 
     }
 
-    private Companion updateCompanion(UserInvitationWedding invitationWedding, MyCompanion myCompanion) {
+    private Companion updateCompanion(UserInvitation invitationWedding, UserCompanionDTO userCompanionDTO) {
 
         Companion companion = new Companion();
 
-        companion.setName(myCompanion.getName());
-        companion.setFirstSurname(myCompanion.getFirstSurname());
-        companion.setSecondSurname(myCompanion.getSecondSurname());
-        companion.setEmail(myCompanion.getEmail());
-        companion.setAdult(myCompanion.isAdult());
-        companion.setAllergies(myCompanion.getAllergies());
+        companion.setName(userCompanionDTO.getName());
+        companion.setFirstSurname(userCompanionDTO.getFirstSurname());
+        companion.setSecondSurname(userCompanionDTO.getSecondSurname());
+        companion.setEmail(userCompanionDTO.getEmail());
+        companion.setAdult(userCompanionDTO.isAdult());
+        companion.setAllergies(userCompanionDTO.getAllergies());
 
         companion.setUserInvitationWedding(invitationWedding);
 
@@ -182,46 +183,23 @@ public class UserAppServiceImpl implements UserAppService{
     @Override
     public ListUserPresentDTO updateListUserPresent(ListUserPresentDTO dto) {
 
+        UserApp user = userRepository.findById(dto.getUserId()).orElseThrow();
+
         List<Present> presentsBD = presentRepository.findByUserAppId(dto.getUserId());
 
-        for (Present present : presentsBD){
-            for (MyPresent myPresent : dto.getMyPresents()){
-                if(present.getId().equals(myPresent.getIdPresent())){
-                    present.setConfirm(myPresent.isConfirm());
+        for (Present present : user.getPresents()){
+            for (UserPresentDTO userPresentDTO : dto.getUserPresents()){
+                if(present.getId().equals(userPresentDTO.getIdPresent())){
+                    present.setConfirm(userPresentDTO.isConfirm());
                     break;
                 }
             }
         }
 
-        List<Present> update = presentRepository.saveAll(presentsBD);
+        presentRepository.saveAll(presentsBD);
 
-        return userAppMapper.toListUserPresent(userRepository.findById(dto.getUserId()).orElseThrow());
+        return getListUserPresent(user.getId());
     }
-
-    public boolean updateListUserPresents(Long userId, ListUserPresentDTO dto){
-
-        UserApp user = userRepository.findById(userId).orElseThrow();
-        List<Present> actual = user.getPresents();
-        List<MyPresent> enDTO = dto.getMyPresents();
-
-        // eliminar los que han pasado a no confirmados
-        for (MyPresent mp : enDTO){
-            if (!mp.isConfirm()){
-                for (Present present : user.getPresents()){
-                    if (present.getId().equals(mp.getIdPresent())){
-                        present.setUserApp(null);
-                        present.setConfirm(false);
-                        presentRepository.save(present);
-                    }
-                }
-            }
-        }
-
-        return true;
-    }
-
-
-
 
     @Override
     public UserApp save(UserApp entity) {

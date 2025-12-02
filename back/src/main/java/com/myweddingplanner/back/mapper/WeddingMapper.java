@@ -10,13 +10,13 @@ public interface WeddingMapper {
 
     ListWeddingPresentDTO toListWeddingPresentDTO(Wedding entity);
 
-    UserWeddingDTO toUserWeddingDTO (UserWedding entity);
+    WeddingUserDTO toUserWeddingDTO (UserWedding entity);
 
-    MyWeddingEventDTO toMyWeddingEventDTO(Event entity);
+    WeddingEventDTO toMyWeddingEventDTO(Event entity);
 
-    MyWeddingPresentDTO toMyWeddingPresentDTO(Present entity);
+    WeddingPresentDTO toMyWeddingPresentDTO(Present entity);
 
-    MyWeddingInvitationDTO toMyWeddingInvitationDTO(UserInvitationWedding entity);
+    WeddingInvitationDTO toMyWeddingInvitationDTO(UserInvitation entity);
 
     ListWeddingInvitationDTO toListWeddingInvitationDTO (Wedding entity);
 

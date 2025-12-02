@@ -5,14 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyUserAllergiesDTO {
+public class UserWeddingDTO {
 
-    private Long userId;
-    private List<MyAllergy> myAllergies;
+    private Long idWedding;
+    private String stateWedding;
+    private LocalDateTime date;
+    private String place;
+
+
 }

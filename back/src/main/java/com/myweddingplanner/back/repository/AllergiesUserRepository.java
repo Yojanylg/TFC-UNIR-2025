@@ -1,12 +1,12 @@
 package com.myweddingplanner.back.repository;
 
-import com.myweddingplanner.back.model.Present;
+import com.myweddingplanner.back.model.AllergiesUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface PresentRepository extends JpaRepository<Present, Long> {
+public interface AllergiesUserRepository extends JpaRepository<AllergiesUser, Long> {
 
-    List<Present> findByUserAppId(Long userId);
+    List<AllergiesUser> findByUserAppId(Long id);
 }

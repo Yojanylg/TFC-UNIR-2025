@@ -1,6 +1,6 @@
 package com.myweddingplanner.back.mapper;
 
-import com.myweddingplanner.back.dto.users.MyCompanion;
+import com.myweddingplanner.back.dto.users.UserCompanionDTO;
 import com.myweddingplanner.back.dto.wedding.*;
 import com.myweddingplanner.back.model.*;
 import org.springframework.stereotype.Component;
@@ -22,8 +22,6 @@ public class WeddingMapperImpl implements WeddingMapper{
 
         listEvent(wedding, dto);
 
-        listPresent(wedding, dto);
-
         return dto;
     }
 
@@ -40,13 +38,6 @@ public class WeddingMapperImpl implements WeddingMapper{
             dto.getEvents().add(toMyWeddingEventDTO(e));
         }
 
-    }
-
-    private void listPresent(Wedding w, WeddingDTO dto){
-
-        for (Present p : w.getPresents()){
-            dto.getPresents().add(toMyWeddingPresentDTO(p));
-        }
     }
 
     @Override
@@ -69,23 +60,26 @@ public class WeddingMapperImpl implements WeddingMapper{
 
     public ListWeddingInvitationDTO toListWeddingInvitationDTO (Wedding entity){
 
+
         ListWeddingInvitationDTO dto = new ListWeddingInvitationDTO();
+
+        dto.setIdWedding(entity.getId());
 
         for (UserWedding u : entity.getGrooms()){
             dto.getGrooms().add(toUserWeddingDTO(u));
         }
 
-        for (UserInvitationWedding invitation : entity.getInvitations()){
+        for (UserInvitation invitation : entity.getInvitations()){
             dto.getListWeddingInvitation().add(toMyWeddingInvitationDTO(invitation));
         }
 
-        return null;
+        return dto;
     }
 
     @Override
-    public UserWeddingDTO toUserWeddingDTO(UserWedding entity) {
+    public WeddingUserDTO toUserWeddingDTO(UserWedding entity) {
 
-        UserWeddingDTO dto = new UserWeddingDTO();
+        WeddingUserDTO dto = new WeddingUserDTO();
 
         dto.setIdUserWedding(entity.getId());
         dto.setIdUser(entity.getUserApp().getId());
@@ -97,12 +91,12 @@ public class WeddingMapperImpl implements WeddingMapper{
     }
 
     @Override
-    public MyWeddingEventDTO toMyWeddingEventDTO(Event entity) {
+    public WeddingEventDTO toMyWeddingEventDTO(Event entity) {
 
-        MyWeddingEventDTO dto = new MyWeddingEventDTO();
+        WeddingEventDTO dto = new WeddingEventDTO();
 
         dto.setIdEvent(entity.getId());
-        dto.setType(entity.getEventType());
+        dto.setType(entity.getEventType().toString());
         dto.setDescription(entity.getDescription());
         dto.setTime(entity.getTime());
 
@@ -110,9 +104,9 @@ public class WeddingMapperImpl implements WeddingMapper{
     }
 
     @Override
-    public MyWeddingPresentDTO toMyWeddingPresentDTO(Present entity) {
+    public WeddingPresentDTO toMyWeddingPresentDTO(Present entity) {
 
-        MyWeddingPresentDTO dto = new MyWeddingPresentDTO();
+        WeddingPresentDTO dto = new WeddingPresentDTO();
 
         dto.setIdPresent(entity.getId());
         dto.setIdProduct(entity.getProduct().getId());
@@ -126,9 +120,9 @@ public class WeddingMapperImpl implements WeddingMapper{
     }
 
     @Override
-    public MyWeddingInvitationDTO toMyWeddingInvitationDTO(UserInvitationWedding entity) {
+    public WeddingInvitationDTO toMyWeddingInvitationDTO(UserInvitation entity) {
 
-        MyWeddingInvitationDTO dto = new MyWeddingInvitationDTO();
+        WeddingInvitationDTO dto = new WeddingInvitationDTO();
 
         dto.setIdInvitation(entity.getId());
         dto.setName(entity.getUserApp().getName());
@@ -143,9 +137,9 @@ public class WeddingMapperImpl implements WeddingMapper{
         return dto;
     }
 
-    private MyCompanion toMyCompanion (Companion entity){
+    private UserCompanionDTO toMyCompanion (Companion entity){
 
-        MyCompanion dto = new MyCompanion();
+        UserCompanionDTO dto = new UserCompanionDTO();
 
         dto.setIdCompanion(entity.getId());
         dto.setName(entity.getName());
@@ -157,7 +151,5 @@ public class WeddingMapperImpl implements WeddingMapper{
 
         return dto;
     }
-
-
 
 }

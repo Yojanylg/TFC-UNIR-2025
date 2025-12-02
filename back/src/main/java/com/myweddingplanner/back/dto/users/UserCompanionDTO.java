@@ -9,10 +9,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyAllergy {
+public class UserCompanionDTO {
 
-    private Long idAllergy;
-    private Long idAllergen;
+    private Long idCompanion;
     private String name;
-    private String image;
+    private String firstSurname;
+    private String secondSurname;
+    private String email;
+    private boolean isAdult;
+    private String allergies;
 }

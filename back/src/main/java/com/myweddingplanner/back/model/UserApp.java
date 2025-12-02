@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"allergies"})
+@ToString(exclude = {"myWeddings","invitations","presents"})
 public class UserApp {
 
     @Id
@@ -43,8 +43,9 @@ public class UserApp {
     private List<UserWedding> myWeddings = new ArrayList<>();
 
     @OneToMany(mappedBy = "userApp", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserInvitationWedding> invitations =new ArrayList<>();
+    private List<UserInvitation> invitations =new ArrayList<>();
 
+    @OneToOne(mappedBy = "userApp")
     private AllergiesUser allergies;
 
     @OneToMany(mappedBy = "userApp", cascade = CascadeType.ALL, orphanRemoval = true)

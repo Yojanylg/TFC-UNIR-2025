@@ -1,6 +1,6 @@
 package com.myweddingplanner.back.dto.wedding;
 
-import com.myweddingplanner.back.dto.users.MyCompanion;
+import com.myweddingplanner.back.dto.users.UserCompanionDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyWeddingInvitationDTO {
+public class WeddingInvitationDTO {
 
     private Long idInvitation;
     private String name;
@@ -21,7 +21,7 @@ public class MyWeddingInvitationDTO {
     private String secondSurname;
     private boolean isConfirm;
     private String emailInvitation;
-    private List<MyCompanion> companion = new ArrayList<>();
+    private List<UserCompanionDTO> companion = new ArrayList<>();
 
 
 }

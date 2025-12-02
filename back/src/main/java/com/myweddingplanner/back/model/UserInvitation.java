@@ -12,8 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"wedding"})
-public class UserInvitationWedding {
+@ToString(exclude = {"wedding", "companions"})
+public class UserInvitation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,6 @@ public class UserInvitationWedding {
 
     @Column(name = "notified")
     private boolean isNotified;
-
 
     @Column(name = "email_invitation")
     private String emailInvitation;

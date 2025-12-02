@@ -14,6 +14,6 @@ import java.util.List;
 public class ListUserInvitationDTO {
 
     private Long userId;
-    private List<MyInvitation> invitationList;
+    private List<UserInvitationDTO> invitationList;
 
 }

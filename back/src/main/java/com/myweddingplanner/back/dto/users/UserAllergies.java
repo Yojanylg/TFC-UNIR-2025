@@ -1,23 +1,20 @@
-package com.myweddingplanner.back.model;
+package com.myweddingplanner.back.dto.users;
 
-import jakarta.persistence.*;
-import lombok.*;
 
-@Entity
-@Table(name = "allergies")
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"userApp"})
-public class AllergiesUser {
+public class UserAllergies {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    @Column(name = "id")
-    private Long id;
+    private Long idUserAllergies;
+
+    private Long idUser;
 
     private boolean gluten;
 
@@ -46,9 +43,5 @@ public class AllergiesUser {
     private boolean altramuces;
 
     private boolean moluscos;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private UserApp userApp;
 
 }

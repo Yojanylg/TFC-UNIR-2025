@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyWeddingPresentDTO {
+public class WeddingPresentDTO {
 
     private Long idPresent;
     private Long idProduct;

@@ -16,28 +16,20 @@ import org.springframework.stereotype.Service;
 public class RegisterServiceImpl implements RegisterService {
 
     private final UserAppService userAppService;
-
     private final RolRepository rolRepository;
-
     private final PasswordEncoder encoder;
-
     private final WeddingService weddingService;
-
     private final UserWeddingService userWeddingService;
 
 
     @Override
     public RegisterResult registerUserApp(RegisterRequest req) {
 
-        System.out.println("Comprobando si está registrado");
         if (userAppService.existsByEmail(req.getEmail())){
             throw new EmailYaRegistradoException(req.getEmail());
         }
 
-        System.out.println("No esta registrado");
-        // continuamos con el registro de nuevo usuario
-        // instanciamos Rol
-        Rol rolUsuario = rolRepository.findByNombre("ROLE_USER")
+        Rol rolUsuario = rolRepository.findByName("ROLE_USER")
                 .orElseThrow(() -> new IllegalStateException("Rol no creado en BBDD"));
 
         System.out.println("Creando rol " + rolUsuario.getName());
@@ -45,7 +37,7 @@ public class RegisterServiceImpl implements RegisterService {
 
 
         UserApp newUser = new UserApp();
-        newUser.setName(req.getNombre());
+        newUser.setName(req.getName());
         newUser.setFirstSurname(req.getFirstSurname());
         newUser.setSecondSurname(req.getSecondSurname());
         newUser.setEmail(req.getEmail());
@@ -59,13 +51,6 @@ public class RegisterServiceImpl implements RegisterService {
         UserApp userAppCreated = userAppService.save(newUser);
 
         System.out.println("guardado " + userAppCreated.getId());
-
-        // si es novio hay que gestionarlo
-        /*if (req.isEsNovio()){
-            processGroomRegistration(req, userAppCreated);
-        }
-
-         */
 
         return new RegisterResult(userAppCreated.getId(), userAppCreated.getEmail(), userAppCreated.getName());
     }

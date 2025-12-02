@@ -1,4 +1,4 @@
-CREATE DATABASE myweddingplanner;
+CREATE DATABASE IF NOT EXISTS myweddingplanner;
 
 USE myweddingplanner;
 
@@ -22,6 +22,15 @@ CREATE TABLE bodas (
 );
 
 -- Adecuado a Modelo 2
+-- Modelo 3
+-- Add USUARIO.password
+-- Add USUARIOS.id_rol
+-- Add TABLA roles
+
+CREATE TABLE roles (
+    id BIGINT not null auto_increment PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE usuarios (
     id BIGINT not null auto_increment PRIMARY KEY,
@@ -29,7 +38,9 @@ CREATE TABLE usuarios (
     apellido_1 VARCHAR(255) NOT NULL,
     apellido_2 VARCHAR(255),
     email VARCHAR(255) NOT NULL,
-    telefono VARCHAR(255) NOT NULL
+    telefono VARCHAR(255) NOT NULL,
+    id_rol BIGINT DEFAULT 1,
+    FOREIGN KEY (id_rol) REFERENCES roles(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Adecuado a Modelo 2
@@ -134,7 +145,10 @@ CREATE TABLE novios (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
+INSERT INTO roles (nombre)
+VALUES
+("ROLE_USER"),
+("ROLE_ADMIN");
 
 INSERT INTO itinerarios (descripcion)
 VALUES 
@@ -149,12 +163,12 @@ VALUES
 ('Iglesia San Jorge y Hotel Palace', '2025-08-22', 2),
 ('Playa del Sol', '2025-09-10', 3);
 
-INSERT INTO usuarios (nombre, apellido_1, apellido_2, email, telefono)
+INSERT INTO usuarios (nombre, apellido_1, apellido_2, email, telefono, id_rol)
 VALUES
-('Laura', 'Martínez', 'Gómez', 'laura.martinez@example.com', '+34611122334'),
-('Carlos', 'Pérez', 'Ruiz', 'carlos.perez@example.com', '+34622233445'),
-('Ana', 'Santos', NULL, 'ana.santos@example.com', '+34633344556'),
-('Miguel', 'Rodríguez', 'Lopez', 'miguel.rodriguez@example.com', '+34644455667');
+('Laura', 'Martínez', 'Gómez', 'laura.martinez@example.com', '+34611122334',0),
+('Carlos', 'Pérez', 'Ruiz', 'carlos.perez@example.com', '+34622233445', 0),
+('Ana', 'Santos', NULL, 'ana.santos@example.com', '+34633344556', 0),
+('Miguel', 'Rodríguez', 'Lopez', 'miguel.rodriguez@example.com', '+34644455667', 0);
 
 INSERT INTO alergenos (nombre)
 VALUES 

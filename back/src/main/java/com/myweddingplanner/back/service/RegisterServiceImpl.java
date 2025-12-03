@@ -32,9 +32,6 @@ public class RegisterServiceImpl implements RegisterService {
         Rol rolUsuario = rolRepository.findByName("ROLE_USER")
                 .orElseThrow(() -> new IllegalStateException("Rol no creado en BBDD"));
 
-        System.out.println("Creando rol " + rolUsuario.getName());
-
-
 
         UserApp newUser = new UserApp();
         newUser.setName(req.getName());
@@ -44,13 +41,9 @@ public class RegisterServiceImpl implements RegisterService {
         newUser.setPassword(encoder.encode(req.getPassword()));
         newUser.setRol(rolUsuario);
 
-        System.out.println("Hemos creado usuario en memoria " + newUser);
-
-        System.out.println("Vamos a gaurdar");
-
         UserApp userAppCreated = userAppService.save(newUser);
-
-        System.out.println("guardado " + userAppCreated.getId());
+        
+        processGroomRegistration(req, userAppCreated);
 
         return new RegisterResult(userAppCreated.getId(), userAppCreated.getEmail(), userAppCreated.getName());
     }

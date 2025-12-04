@@ -42,7 +42,7 @@ public class RegisterServiceImpl implements RegisterService {
         newUser.setRol(rolUsuario);
 
         UserApp userAppCreated = userAppService.save(newUser);
-        
+
         processGroomRegistration(req, userAppCreated);
 
         return new RegisterResult(userAppCreated.getId(), userAppCreated.getEmail(), userAppCreated.getName());

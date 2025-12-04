@@ -1,14 +1,12 @@
 package com.myweddingplanner.back.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,13 +22,9 @@ public class RegisterRequest {
 
     private String secondSurname;
 
-    @Email
-    @NotBlank
     private String email;
 
-    @NotBlank
     private String password;
-
 
     // Datos de registro novio
 
@@ -44,7 +38,7 @@ public class RegisterRequest {
 
     private String emailGroom;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime weddingDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private LocalDate weddingDate;
 
 }

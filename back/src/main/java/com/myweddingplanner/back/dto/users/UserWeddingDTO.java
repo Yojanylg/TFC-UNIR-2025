@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -15,7 +15,7 @@ public class UserWeddingDTO {
 
     private Long idWedding;
     private String stateWedding;
-    private LocalDateTime date;
+    private LocalDate date;
     private String place;
 
 

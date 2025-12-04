@@ -41,18 +41,21 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(restAuthEntryPoint))
                 .authorizeHttpRequests(reg -> reg
-                        // jwt apagado temporal comentar para encender
-                       // .anyRequest().permitAll()
-               // );
-                        // jwt apagado temporal descomentar para arrancar
+
+                        /*
                         .requestMatchers("/api/auth/**").permitAll()
+
                         .requestMatchers("/api/users/**").authenticated()
                         .requestMatchers("/api/products/**").authenticated()
                         .requestMatchers("/api/weddings/**").authenticated()
+
                         .anyRequest().authenticated()
 
-                // jwt apagado temporal descomentar para arrancar
+                         */
+
+                        .anyRequest().permitAll()
                 )
+
                 .authenticationProvider(daoAuthenticationProvider());
 
 

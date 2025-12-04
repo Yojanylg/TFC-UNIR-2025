@@ -2,6 +2,7 @@ package com.myweddingplanner.back.controllers;
 
 import com.myweddingplanner.back.dto.*;
 import com.myweddingplanner.back.model.UserApp;
+import com.myweddingplanner.back.model.enums.StateWedding;
 import com.myweddingplanner.back.repository.UserAppRepository;
 import com.myweddingplanner.back.security.JwtService;
 import com.myweddingplanner.back.service.RegisterService;
@@ -73,6 +74,10 @@ public class AuthController {
 
         RegisterResult result = registerService.registerUserApp(req);
 
+        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_IsNotified(result.usuarioId(), true);
+        boolean hasWedding = userAppRepository.existsByIdAndMyWeddings_Wedding_StateWedding(result.usuarioId(), StateWedding.PREPARING);
+        boolean haveInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(result.usuarioId());
+
         String access = jwtService.generateToken(
                 result.usuarioEmail(), Map.of("role", result.rolNombre(), "uid", result.usuarioId()));
         String refresh = jwtService.generateRefreshToken(result.usuarioEmail());
@@ -80,7 +85,7 @@ public class AuthController {
         // 201 Created + Location (opcional)
         return ResponseEntity
                 .created(URI.create("/api/users/" + result.usuarioId()))
-                .body(new AuthResponse(access, refresh));
+                .body(new AuthResponse(access, refresh, haveNewInvitations, hasWedding, haveInvitations));
 
     }
 
@@ -122,12 +127,16 @@ public class AuthController {
         UserApp u = userAppRepository.findWithRolByEmail(req.getEmail()) //
                 .orElseThrow();
 
+        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_IsNotified(u.getId(), true);
+        boolean hasWedding = userAppRepository.existsByIdAndMyWeddings_Wedding_StateWedding(u.getId(), StateWedding.PREPARING);
+        boolean haveInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(u.getId());
+
         String access = jwtService.generateToken(
                 u.getEmail(), Map.of("role", u.getRol().getName(), "uid", u.getId()));
 
         String refresh = jwtService.generateRefreshToken(u.getEmail());
 
-        return ResponseEntity.ok(new AuthResponse(access, refresh));
+        return ResponseEntity.ok(new AuthResponse(access, refresh, haveNewInvitations, hasWedding, haveInvitations));
     }
 
     // ----------------------------------------------------

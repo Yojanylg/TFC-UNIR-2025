@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class WeddingDTO {
 
     private Long idWedding;
 
-    private LocalDateTime dateWedding;
+    private LocalDate dateWedding;
 
     private String place;
 

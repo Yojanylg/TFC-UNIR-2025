@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class UserInvitationDTO {
 
     private Long idInvitation;
-    private LocalDateTime weddingDate;
+    private LocalDate weddingDate;
     private String place;
     private String couple;
     private boolean isConfirm;

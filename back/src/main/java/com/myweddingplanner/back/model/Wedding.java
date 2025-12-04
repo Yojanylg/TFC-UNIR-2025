@@ -3,7 +3,8 @@ package com.myweddingplanner.back.model;
 import com.myweddingplanner.back.model.enums.StateWedding;
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Wedding {
     private Long id;
 
     @Column(name = "date_wedding")
-    private LocalDateTime dateWedding;
+    private LocalDate dateWedding;
 
     private String place;
 

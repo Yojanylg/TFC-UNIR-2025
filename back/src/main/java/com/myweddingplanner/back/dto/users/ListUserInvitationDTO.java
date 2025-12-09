@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,6 +15,6 @@ import java.util.List;
 public class ListUserInvitationDTO {
 
     private Long userId;
-    private List<UserInvitationDTO> invitationList;
+    private List<UserInvitationDTO> invitationList = new ArrayList<>();
 
 }

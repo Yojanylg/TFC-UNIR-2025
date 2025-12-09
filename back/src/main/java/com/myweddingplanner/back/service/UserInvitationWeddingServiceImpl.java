@@ -30,9 +30,11 @@ public class UserInvitationWeddingServiceImpl implements UserInvitationWeddingSe
 
         ListUserInvitationDTO dto = new ListUserInvitationDTO();
 
-        for (UserInvitation invitation : userInvitationWeddingRepository.findByUserAppId(userId))
+        dto.setUserId(userId);
 
+        for (UserInvitation invitation : userInvitationWeddingRepository.findByUserAppId(userId)) {
             dto.getInvitationList().add(userAppMapper.toMyInvitation(invitation));
+        }
 
         return dto;
     }

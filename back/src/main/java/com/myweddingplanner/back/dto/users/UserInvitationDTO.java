@@ -16,7 +16,7 @@ import java.util.List;
 public class UserInvitationDTO {
 
     private Long idInvitation;
-    private LocalDate weddingDate;
+    private String weddingDate;
     private String place;
     private String couple;
     private boolean isConfirm;

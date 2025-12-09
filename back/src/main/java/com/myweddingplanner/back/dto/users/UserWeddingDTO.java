@@ -15,7 +15,7 @@ public class UserWeddingDTO {
 
     private Long idWedding;
     private String stateWedding;
-    private LocalDate date;
+    private String date;
     private String place;
 
 

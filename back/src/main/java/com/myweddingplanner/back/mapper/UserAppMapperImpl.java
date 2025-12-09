@@ -117,9 +117,11 @@ public class UserAppMapperImpl implements UserAppMapper{
 
         // COUPLE
         boolean first = true;
+        String name = "";
+
         for (UserWedding groom : userInvitation.getWedding().getGrooms()){
 
-            String name = "";
+
 
             if (first) {
                 name = groom.getUserApp().getName();
@@ -128,6 +130,8 @@ public class UserAppMapperImpl implements UserAppMapper{
                 name = name + " y " + groom.getUserApp().getName();
             }
         }
+
+        invitation.setCouple(name);
 
         invitation.setConfirm(userInvitation.isConfirm());
 

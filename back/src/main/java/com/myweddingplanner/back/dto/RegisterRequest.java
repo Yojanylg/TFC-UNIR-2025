@@ -38,7 +38,7 @@ public class RegisterRequest {
 
     private String emailGroom;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private LocalDate weddingDate;
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private String weddingDate;
 
 }

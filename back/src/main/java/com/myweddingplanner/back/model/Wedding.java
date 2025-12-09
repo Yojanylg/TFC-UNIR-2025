@@ -24,7 +24,7 @@ public class Wedding {
     private Long id;
 
     @Column(name = "date_wedding")
-    private LocalDate dateWedding;
+    private String dateWedding;
 
     private String place;
 

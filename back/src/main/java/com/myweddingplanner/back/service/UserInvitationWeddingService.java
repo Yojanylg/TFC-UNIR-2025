@@ -8,11 +8,4 @@ import java.util.List;
 public interface UserInvitationWeddingService {
 
 
-    ListUserInvitationDTO getMyListInvitations(Long userId);
-
-
-
-    boolean notified(Long id);
-
-    void updateCompanion(UserInvitationDTO userInvitationDTO);
 }

@@ -2,6 +2,7 @@ package com.myweddingplanner.back.controllers;
 
 import com.myweddingplanner.back.dto.users.MyUserDTO;
 import com.myweddingplanner.back.dto.users.ListUserPresentDTO;
+import com.myweddingplanner.back.dto.users.ListUserInvitationDTO;
 import com.myweddingplanner.back.security.JwtService;
 import com.myweddingplanner.back.service.UserAppService;
 import com.myweddingplanner.back.service.UserInvitationWeddingService;
@@ -76,7 +77,7 @@ public class UserAppController {
         // Obtener Token
         String token = authorizationHeader.substring(7);
 
-        return ResponseEntity.ok(userInvitationWeddingService.getMyListInvitations(jwtService.extractUserId(token)));
+        return ResponseEntity.ok(userAppService.getListUserInvitation(jwtService.extractUserId(token)));
 
     }
 
@@ -123,18 +124,19 @@ public class UserAppController {
 
     }
     @PutMapping("/myInvitations")
-    public ResponseEntity<?> updateUserInvitations (@RequestHeader (name = "Authorization", required = true) String authorizationHeader){
+    public ResponseEntity<?> updateUserInvitations (@RequestHeader (name = "Authorization", required = true) String authorizationHeader,
+                                                    @RequestBody ListUserInvitationDTO dto){
 
-        // Tratamiento del Header sin Token
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Falta token Bearer en Authorization"));
-        }
+        System.out.println("Entrando en el endpoint undate invitations list");
+        System.out.println(dto.toString());
 
         // Obtener Token
         String token = authorizationHeader.substring(7);
+        Long userId = jwtService.extractUserId(token);
+        dto.setUserId(userId);
 
-        return ResponseEntity.ok(userInvitationWeddingService.getMyListInvitations(jwtService.extractUserId(token)));
+
+        return ResponseEntity.ok(userAppService.updateListUserInvitation(dto));
 
     }
 

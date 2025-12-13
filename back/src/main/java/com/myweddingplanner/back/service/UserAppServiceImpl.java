@@ -80,15 +80,20 @@ public class UserAppServiceImpl implements UserAppService{
     @Override
     public ListUserInvitationDTO updateListUserInvitation(ListUserInvitationDTO dto) {
 
-        Long userId = dto.getUserId();
-
-        UserApp user = userRepository.findById(userId).orElseThrow();
-
         // el usuario solo puede cambiar el estado de sus invitaciones
         // no puede add ni delete
 
         // invitaciones en bbdd
         List<UserInvitation> invitations = userInvitationWeddingRepository.findByUserAppId(dto.getUserId());
+
+        System.out.println("Invitaciones recuperadas para actualizar: " + invitations.size());
+
+        for (UserInvitation ui : invitations){
+            System.out.println(ui.isConfirm());
+        }
+        for (UserInvitationDTO ui : dto.getInvitationList()){
+            System.out.println(ui.isConfirm());
+        }
 
         for(UserInvitation userInvitation : invitations){
 

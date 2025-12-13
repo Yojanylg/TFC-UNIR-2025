@@ -111,6 +111,7 @@ public class UserAppMapperImpl implements UserAppMapper{
 
         UserInvitationDTO invitation = new UserInvitationDTO();
 
+        invitation.setIdWedding(userInvitation.getWedding().getId());
         invitation.setIdInvitation(userInvitation.getId());
         invitation.setWeddingDate(userInvitation.getWedding().getDateWedding());
         invitation.setPlace(userInvitation.getWedding().getPlace());

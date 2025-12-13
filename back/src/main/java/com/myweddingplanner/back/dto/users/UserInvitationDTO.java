@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +15,12 @@ import java.util.List;
 public class UserInvitationDTO {
 
     private Long idInvitation;
+    private Long idWedding;
     private String weddingDate;
     private String place;
     private String couple;
-    private boolean isConfirm;
-    private boolean isNotified;
+    private boolean confirm;
+    private boolean notified;
     private List<UserCompanionDTO> companions = new ArrayList<>();
 
 }

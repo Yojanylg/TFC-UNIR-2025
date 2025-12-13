@@ -21,7 +21,7 @@ public interface UserAppRepository extends JpaRepository<UserApp, Long> {
 
     boolean existsByIdAndMyWeddings_Wedding_StateWedding(Long idUser, StateWedding stateWedding);
 
-    boolean existsByIdAndInvitations_IsNotified(Long userId, boolean isNotified);
+    boolean existsByIdAndInvitations_Notified(Long userId, boolean notified);
 
     boolean existsByIdAndInvitationsIsNotEmpty(Long userId);
 

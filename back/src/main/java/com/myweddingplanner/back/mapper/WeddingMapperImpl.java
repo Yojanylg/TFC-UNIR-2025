@@ -124,6 +124,7 @@ public class WeddingMapperImpl implements WeddingMapper{
 
         WeddingInvitationDTO dto = new WeddingInvitationDTO();
 
+        dto.setIdWedding(entity.getWedding().getId());
         dto.setIdInvitation(entity.getId());
         dto.setName(entity.getUserApp().getName());
         dto.setFirstSurname(entity.getUserApp().getFirstSurname());

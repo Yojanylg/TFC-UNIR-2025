@@ -29,10 +29,10 @@ public class UserInvitation {
     private Wedding wedding;
 
     @Column(name = "confirm")
-    private boolean isConfirm;
+    private boolean confirm;
 
     @Column(name = "notified")
-    private boolean isNotified;
+    private boolean notified;
 
     @Column(name = "email_invitation")
     private String emailInvitation;

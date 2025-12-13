@@ -76,7 +76,7 @@ public class AuthController {
 
         RegisterResult result = registerService.registerUserApp(req);
 
-        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_IsNotified(result.usuarioId(), true);
+        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(result.usuarioId(), true);
         boolean hasWedding = userAppRepository.existsByIdAndMyWeddings_Wedding_StateWedding(result.usuarioId(), StateWedding.PREPARING);
         boolean haveInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(result.usuarioId());
 
@@ -129,7 +129,7 @@ public class AuthController {
         UserApp u = userAppRepository.findWithRolByEmail(req.getEmail()) //
                 .orElseThrow();
 
-        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_IsNotified(u.getId(), true);
+        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(u.getId(), true);
         boolean hasWedding = userAppRepository.existsByIdAndMyWeddings_Wedding_StateWedding(u.getId(), StateWedding.PREPARING);
         boolean haveInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(u.getId());
 

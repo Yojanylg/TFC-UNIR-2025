@@ -15,6 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class WeddingInvitationDTO {
 
+
+    private Long idWedding;
     private Long idInvitation;
     private String name;
     private String firstSurname ;

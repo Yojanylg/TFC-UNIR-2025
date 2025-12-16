@@ -171,6 +171,8 @@ public class WeddingServiceImpl implements WeddingService{
 
         Wedding wedding = weddingRepository.findById(toAdd.getIdWedding()).orElseThrow();
 
+        System.out.println("Weeding service, add invitaciones. recupero el id: " + wedding.getId());
+
         List<UserInvitation> nuevas = new ArrayList<>();
 
         for (String email : toAdd.getListEmail()){
@@ -188,6 +190,7 @@ public class WeddingServiceImpl implements WeddingService{
 
                 UserInvitation nueva = new UserInvitation();
 
+                nueva.setWedding(wedding);
                 nueva.setEmailInvitation(email);
 
                 nuevas.add(nueva);

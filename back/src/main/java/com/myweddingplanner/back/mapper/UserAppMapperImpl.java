@@ -20,7 +20,7 @@ public class UserAppMapperImpl implements UserAppMapper{
 
         // MY WEDDING
         for (UserWedding uw : user.getMyWeddings()){
-            dto.getUserWeddings().add(toMyWedding(uw.getWedding()));
+            dto.getUserWeddings().add(toMyWedding(uw.getWedding() != null ? uw.getWedding() : null));
         }
 
         UserAllergies userAllergies = new UserAllergies();

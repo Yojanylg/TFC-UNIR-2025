@@ -65,7 +65,7 @@ public class WeddingController {
     public ResponseEntity<?> getWeddingPresents (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
                                          @PathVariable Long idWedding){
 
-        // aqui podemos limitar el acceso a una boda si el usuario es novio
+        System.out.println("Weeding Controller, get presents. Llega el id: " + idWedding);
 
         return ResponseEntity.ok(weddingService.getListWeddingPresent(idWedding));
 
@@ -86,7 +86,10 @@ public class WeddingController {
                                              @PathVariable Long idWedding,
                                              @RequestBody ListEmailInvitation listEmailInvitation){
 
+
         listEmailInvitation.setIdWedding(idWedding);
+
+        System.out.println("Weeding Controller, add invitaciones. Llega el id: " + idWedding);
 
         return ResponseEntity.ok(weddingService.addInvitation(listEmailInvitation));
     }
@@ -105,6 +108,7 @@ public class WeddingController {
                                            @PathVariable Long idWedding,
                                            @RequestBody ListWeddingPresentDTO dto){
 
+        System.out.println("Weeding Controller, presents. Llega el id: " + idWedding);
         dto.setIdWedding(idWedding);
 
         return ResponseEntity.ok(weddingService.updateListWeddingPresent(dto));

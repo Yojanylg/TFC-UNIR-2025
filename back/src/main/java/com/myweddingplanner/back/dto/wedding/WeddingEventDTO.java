@@ -16,6 +16,6 @@ public class WeddingEventDTO {
     private Long idEvent;
     private String type;
     private String description;
-    private LocalDateTime time;
+    private String time;
 
 }

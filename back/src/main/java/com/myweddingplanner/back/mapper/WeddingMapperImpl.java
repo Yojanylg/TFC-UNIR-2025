@@ -3,7 +3,11 @@ package com.myweddingplanner.back.mapper;
 import com.myweddingplanner.back.dto.users.UserCompanionDTO;
 import com.myweddingplanner.back.dto.wedding.*;
 import com.myweddingplanner.back.model.*;
+import com.myweddingplanner.back.model.enums.StateWedding;
+import jakarta.persistence.GenerationType;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 
 @Component
 public class WeddingMapperImpl implements WeddingMapper{
@@ -12,27 +16,34 @@ public class WeddingMapperImpl implements WeddingMapper{
     public WeddingDTO toWeddingDTO(Wedding wedding) {
 
         WeddingDTO dto = new WeddingDTO();
+        if (wedding == null ) return dto;
 
         dto.setIdWedding(wedding.getId());
-        dto.setDateWedding(wedding.getDateWedding());
-        dto.setPlace(wedding.getPlace());
-        dto.setStateWedding(wedding.getStateWedding().toString());
 
-        listUserWedding(wedding, dto);
+        dto.setDateWedding(comprobarString(wedding.getDateWedding()));
+        dto.setPlace(comprobarString(wedding.getPlace()));
 
-        listEvent(wedding, dto);
+        dto.setStateWedding(wedding.getStateWedding() != null ? wedding.getStateWedding().toString() : StateWedding.PREPARING.toString());
+
+        if (!wedding.getGrooms().isEmpty()) {
+            procesarListUserWedding(wedding, dto);
+        }
+
+        if (!wedding.getEvents().isEmpty()){
+            procesarListEvent(wedding, dto);
+        }
 
         return dto;
     }
 
-    private void listUserWedding(Wedding w, WeddingDTO dto){
+    private void procesarListUserWedding(Wedding w, WeddingDTO dto){
 
         for (UserWedding u : w.getGrooms()){
             dto.getGrooms().add(toUserWeddingDTO(u));
         }
     }
 
-    private void listEvent (Wedding w, WeddingDTO dto){
+    private void procesarListEvent(Wedding w, WeddingDTO dto){
 
         for (Event e : w.getEvents()){
             dto.getEvents().add(toMyWeddingEventDTO(e));
@@ -44,15 +55,20 @@ public class WeddingMapperImpl implements WeddingMapper{
     public ListWeddingPresentDTO toListWeddingPresentDTO(Wedding entity) {
 
         ListWeddingPresentDTO dto = new ListWeddingPresentDTO();
+        if (entity == null) return dto;
 
         dto.setIdWedding(entity.getId());
 
-        for (UserWedding u : entity.getGrooms()){
-            dto.getGrooms().add(toUserWeddingDTO(u));
+        if (!entity.getGrooms().isEmpty()) {
+            for (UserWedding u : entity.getGrooms()){
+                dto.getGrooms().add(toUserWeddingDTO(u));
+            }
         }
 
-        for (Present p : entity.getPresents()){
-            dto.getMyWeddingPresent().add(toMyWeddingPresentDTO(p));
+        if (!entity.getPresents().isEmpty()){
+            for (Present p : entity.getPresents()){
+                dto.getMyWeddingPresent().add(toMyWeddingPresentDTO(p));
+            }
         }
 
         return dto;
@@ -62,15 +78,21 @@ public class WeddingMapperImpl implements WeddingMapper{
 
 
         ListWeddingInvitationDTO dto = new ListWeddingInvitationDTO();
+        if (entity == null) return dto;
 
         dto.setIdWedding(entity.getId());
 
-        for (UserWedding u : entity.getGrooms()){
-            dto.getGrooms().add(toUserWeddingDTO(u));
+        if (!entity.getGrooms().isEmpty()){
+            for (UserWedding u : entity.getGrooms()){
+                dto.getGrooms().add(toUserWeddingDTO(u));
+            }
         }
 
-        for (UserInvitation invitation : entity.getInvitations()){
-            dto.getListWeddingInvitation().add(toMyWeddingInvitationDTO(invitation));
+
+        if (!entity.getInvitations().isEmpty()) {
+            for (UserInvitation invitation : entity.getInvitations()){
+                dto.getListWeddingInvitation().add(toMyWeddingInvitationDTO(invitation));
+            }
         }
 
         return dto;
@@ -80,12 +102,16 @@ public class WeddingMapperImpl implements WeddingMapper{
     public WeddingUserDTO toUserWeddingDTO(UserWedding entity) {
 
         WeddingUserDTO dto = new WeddingUserDTO();
-
+        if (entity == null) return dto;
         dto.setIdUserWedding(entity.getId());
-        dto.setIdUser(entity.getUserApp().getId());
-        dto.setName(entity.getUserApp().getName());
-        dto.setFirstSurname(entity.getUserApp().getFirstSurname());
-        dto.setSecondSurname(entity.getUserApp().getSecondSurname());
+
+        UserApp user = entity.getUserApp();
+        if (user == null ) return dto;
+
+        dto.setIdUser(user.getId() != null ? user.getId() : null);
+        dto.setName(comprobarString(user.getName()));
+        dto.setFirstSurname(comprobarString(user.getFirstSurname()));
+        dto.setSecondSurname(comprobarString(user.getSecondSurname()));
 
         return dto;
     }
@@ -94,11 +120,13 @@ public class WeddingMapperImpl implements WeddingMapper{
     public WeddingEventDTO toMyWeddingEventDTO(Event entity) {
 
         WeddingEventDTO dto = new WeddingEventDTO();
+        if (entity == null) return dto;
 
         dto.setIdEvent(entity.getId());
-        dto.setType(entity.getEventType().toString());
-        dto.setDescription(entity.getDescription());
-        dto.setTime(entity.getTime());
+
+        dto.setType(entity.getEventType().toString() != null ? entity.getEventType().toString() : StateWedding.PREPARING.toString());
+        dto.setDescription(comprobarString(entity.getDescription()));
+        dto.setTime(comprobarString(entity.getTime()));
 
         return dto;
     }
@@ -107,14 +135,33 @@ public class WeddingMapperImpl implements WeddingMapper{
     public WeddingPresentDTO toMyWeddingPresentDTO(Present entity) {
 
         WeddingPresentDTO dto = new WeddingPresentDTO();
+        if (entity == null) return dto;
 
         dto.setIdPresent(entity.getId());
-        dto.setIdProduct(entity.getProduct().getId());
-        dto.setProductName(entity.getProduct().getName());
+
+        Product product = entity.getProduct();
+
+        if (product != null) {
+            dto.setIdProduct(product.getId());
+            dto.setProductName(comprobarString(product.getName()));
+        } else {
+            dto.setIdProduct(null);
+            dto.setProductName("");
+        }
+
+
         dto.setConfirm(entity.isConfirm());
         dto.setPrice(entity.getPrice());
-        dto.setUserName(entity.getUserApp().getName());
-        dto.setUserFirstSurname(entity.getUserApp().getFirstSurname());
+
+        UserApp user = entity.getUserApp();
+
+        if (user != null ){
+            dto.setUserName(comprobarString(user.getName()));
+            dto.setUserFirstSurname(comprobarString(user.getFirstSurname()));
+        } else {
+            dto.setUserName("");
+            dto.setUserFirstSurname("");
+        }
 
         return dto;
     }
@@ -123,17 +170,36 @@ public class WeddingMapperImpl implements WeddingMapper{
     public WeddingInvitationDTO toMyWeddingInvitationDTO(UserInvitation entity) {
 
         WeddingInvitationDTO dto = new WeddingInvitationDTO();
+        if (entity == null) return dto;
 
-        dto.setIdWedding(entity.getWedding().getId());
+        Wedding wedding = entity.getWedding();
+
+        dto.setIdWedding(wedding != null ? wedding.getId() : null);
+
         dto.setIdInvitation(entity.getId());
-        dto.setName(entity.getUserApp().getName());
-        dto.setFirstSurname(entity.getUserApp().getFirstSurname());
-        dto.setSecondSurname(entity.getUserApp().getSecondSurname());
-        dto.setEmailInvitation(entity.getEmailInvitation());
 
-        for (Companion c : entity.getCompanions()){
-            dto.getCompanion().add(toMyCompanion(c));
+        UserApp user = entity.getUserApp();
+
+        if (user != null){
+            dto.setName(comprobarString(user.getName()));
+            dto.setFirstSurname(comprobarString(user.getFirstSurname()));
+            dto.setSecondSurname(comprobarString(user.getSecondSurname()));
+        } else {
+            dto.setName("");
+            dto.setFirstSurname("");
+            dto.setSecondSurname("");
         }
+
+        dto.setEmailInvitation(comprobarString(entity.getEmailInvitation()));
+
+        if (entity.getCompanions() == null){
+            dto.setCompanion(new ArrayList<>());
+        } else {
+            for (Companion c : entity.getCompanions()){
+                dto.getCompanion().add(toMyCompanion(c));
+            }
+        }
+
 
         return dto;
     }
@@ -141,16 +207,21 @@ public class WeddingMapperImpl implements WeddingMapper{
     private UserCompanionDTO toMyCompanion (Companion entity){
 
         UserCompanionDTO dto = new UserCompanionDTO();
+        if (entity == null) return dto;
 
         dto.setIdCompanion(entity.getId());
-        dto.setName(entity.getName());
-        dto.setFirstSurname(entity.getFirstSurname());
-        dto.setSecondSurname(entity.getSecondSurname());
-        dto.setEmail(entity.getEmail());
+        dto.setName(entity.getName() != null ? entity.getName() : null);
+        dto.setFirstSurname(entity.getFirstSurname() != null ? entity.getFirstSurname() : null);
+        dto.setSecondSurname(entity.getSecondSurname() != null ? entity.getSecondSurname() : null);
+        dto.setEmail(entity.getEmail() != null ? entity.getEmail() : null);
         dto.setAdult(entity.isAdult());
-        dto.setAllergies(entity.getAllergies());
+        dto.setAllergies(entity.getAllergies() != null ? entity.getAllergies() : null);
 
         return dto;
+    }
+
+    private String comprobarString(String s){
+        return s == null ? "" : s;
     }
 
 }

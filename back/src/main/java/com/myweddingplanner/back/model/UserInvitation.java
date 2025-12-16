@@ -37,7 +37,6 @@ public class UserInvitation {
     @Column(name = "email_invitation")
     private String emailInvitation;
 
-
     @OneToMany(mappedBy = "userInvitationWedding")
     private List<Companion> companions;
 

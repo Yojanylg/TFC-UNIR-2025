@@ -58,6 +58,7 @@ public class WeddingServiceImpl implements WeddingService{
 
     @Override
     public ListWeddingInvitationDTO getListWeddingInvitation(Long weddingId) {
+        System.out.println("Wedding service. Get Invitacions id: " + weddingId);
         return weddingMapper.toListWeddingInvitationDTO(weddingRepository.findById(weddingId).orElseThrow());
     }
 
@@ -135,6 +136,8 @@ public class WeddingServiceImpl implements WeddingService{
             for (WeddingPresentDTO pDto : dto.getMyWeddingPresent()){
 
                 if (p.getId().equals(pDto.getIdPresent())){
+
+                    p.setConfirm(pDto.isConfirm());
 
                     found = true;
                     break;

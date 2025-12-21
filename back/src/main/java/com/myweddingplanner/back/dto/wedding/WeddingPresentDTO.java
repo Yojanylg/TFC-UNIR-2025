@@ -14,7 +14,7 @@ public class WeddingPresentDTO {
     private Long idPresent;
     private Long idProduct;
     private String productName;
-    private boolean isConfirm;
+    private boolean confirm;
     private double price;
     private String userName;
     private String userFirstSurname;

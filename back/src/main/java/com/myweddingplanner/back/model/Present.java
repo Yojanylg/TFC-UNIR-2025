@@ -31,7 +31,7 @@ public class Present {
     private UserApp userApp;
 
     @Column(name = "confirm")
-    private boolean isConfirm;
+    private boolean confirm;
 
     private double price;
 

@@ -129,7 +129,7 @@ public class AuthController {
         UserApp u = userAppRepository.findWithRolByEmail(req.getEmail()) //
                 .orElseThrow();
 
-        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(u.getId(), true);
+        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(u.getId(), false);
         boolean hasWedding = userAppRepository.existsByIdAndMyWeddings_Wedding_StateWedding(u.getId(), StateWedding.PREPARING);
         boolean haveInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(u.getId());
 

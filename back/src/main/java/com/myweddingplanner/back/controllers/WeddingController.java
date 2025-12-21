@@ -1,9 +1,9 @@
 package com.myweddingplanner.back.controllers;
 
 import com.myweddingplanner.back.dto.wedding.ListEmailInvitation;
-import com.myweddingplanner.back.dto.wedding.ListWeddingInvitationDTO;
 import com.myweddingplanner.back.dto.wedding.ListWeddingPresentDTO;
 import com.myweddingplanner.back.dto.wedding.WeddingDTO;
+import com.myweddingplanner.back.dto.wedding.WeddingPresentDTO;
 import com.myweddingplanner.back.security.JwtService;
 import com.myweddingplanner.back.service.WeddingService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -75,6 +75,8 @@ public class WeddingController {
     public ResponseEntity<?> getWeddingInvitations (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
                                                  @PathVariable Long idWedding){
 
+        System.out.println("Wedding Controller. Get Invitacions id: " + idWedding);
+
         return ResponseEntity.ok(weddingService.getListWeddingInvitation(idWedding));
 
     }
@@ -110,6 +112,11 @@ public class WeddingController {
 
         System.out.println("Weeding Controller, presents. Llega el id: " + idWedding);
         dto.setIdWedding(idWedding);
+
+        for (WeddingPresentDTO w : dto.getMyWeddingPresent()){
+            System.out.println(w.isConfirm());
+
+        }
 
         return ResponseEntity.ok(weddingService.updateListWeddingPresent(dto));
     }

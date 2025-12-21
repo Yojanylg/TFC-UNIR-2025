@@ -4,7 +4,6 @@ import com.myweddingplanner.back.dto.users.UserCompanionDTO;
 import com.myweddingplanner.back.dto.wedding.*;
 import com.myweddingplanner.back.model.*;
 import com.myweddingplanner.back.model.enums.StateWedding;
-import jakarta.persistence.GenerationType;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -78,11 +77,16 @@ public class WeddingMapperImpl implements WeddingMapper{
 
 
         ListWeddingInvitationDTO dto = new ListWeddingInvitationDTO();
-        if (entity == null) return dto;
+
+        if (entity == null) {
+            System.out.println("Wedding null");
+            return dto;
+        }
 
         dto.setIdWedding(entity.getId());
 
         if (!entity.getGrooms().isEmpty()){
+            System.out.println("Wedding novios");
             for (UserWedding u : entity.getGrooms()){
                 dto.getGrooms().add(toUserWeddingDTO(u));
             }
@@ -90,6 +94,7 @@ public class WeddingMapperImpl implements WeddingMapper{
 
 
         if (!entity.getInvitations().isEmpty()) {
+            System.out.println("Wedding invitados");
             for (UserInvitation invitation : entity.getInvitations()){
                 dto.getListWeddingInvitation().add(toMyWeddingInvitationDTO(invitation));
             }

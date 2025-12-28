@@ -89,6 +89,7 @@ public class WeddingController {
                                              @RequestBody ListEmailInvitation listEmailInvitation){
 
 
+
         listEmailInvitation.setIdWedding(idWedding);
 
         System.out.println("Weeding Controller, add invitaciones. Llega el id: " + idWedding);

@@ -7,6 +7,7 @@ import com.myweddingplanner.back.model.*;
 import com.myweddingplanner.back.model.enums.EventType;
 import com.myweddingplanner.back.model.enums.StateWedding;
 import com.myweddingplanner.back.repository.ProductRepository;
+import com.myweddingplanner.back.repository.UserAppRepository;
 import com.myweddingplanner.back.repository.WeddingRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,13 @@ import java.util.Optional;
 public class WeddingServiceImpl implements WeddingService{
 
     private final WeddingRepository weddingRepository;
+    private final UserAppRepository userAppRepository;
     private final WeddingMapper weddingMapper;
     private final ProductRepository productRepository;
 
-    public WeddingServiceImpl(WeddingRepository weddingRepository, WeddingMapper weddingMapper, ProductRepository productRepository) {
+    public WeddingServiceImpl(WeddingRepository weddingRepository, UserAppRepository userAppRepository, WeddingMapper weddingMapper, ProductRepository productRepository) {
         this.weddingRepository = weddingRepository;
+        this.userAppRepository = userAppRepository;
         this.weddingMapper = weddingMapper;
         this.productRepository = productRepository;
     }
@@ -194,6 +197,9 @@ public class WeddingServiceImpl implements WeddingService{
                 UserInvitation nueva = new UserInvitation();
 
                 nueva.setWedding(wedding);
+                if(userAppRepository.existsByEmail(email)) {
+                    nueva.setUserApp(userAppRepository.findByEmail(email).orElseThrow());
+                }
                 nueva.setEmailInvitation(email);
 
                 nuevas.add(nueva);

@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.8 Chrome/140.0.7339.240 Electron/38.4.0 Safari/537.36" version="28.2.8">
   <diagram name="Página-1" id="6JMmZu86vmVaSLb6bOyt">
-    <mxGraphModel dx="7130" dy="3206" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="839" dy="-674" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -23,10 +23,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-8" value="UserApp" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="325.4999999999999" y="1817.32" width="120" height="60" as="geometry" />
+          <mxGeometry x="340.9999999999999" y="1759.08" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-9" value="Product" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="616.9999999999999" y="1819.7500000000002" width="120" height="60" as="geometry" />
+          <mxGeometry x="604.9999999999999" y="1759.0800000000002" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-11" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="Y4ubsjJUYTUOf0jxj_3p-128" target="Y4ubsjJUYTUOf0jxj_3p-126" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -68,10 +68,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-51" value="ImageProduct" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="616.9999999999999" y="2043.3200000000004" width="120" height="60" as="geometry" />
+          <mxGeometry x="609.9999999999999" y="1980.7800000000004" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-64" value="tiene" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="636.9999999999999" y="1931.3200000000002" width="80" height="50" as="geometry" />
+          <mxGeometry x="629.9999999999999" y="1882.0000000000002" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-65" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="Y4ubsjJUYTUOf0jxj_3p-64" target="Y4ubsjJUYTUOf0jxj_3p-51" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -86,10 +86,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-97" value="Present" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="529.1099999999999" y="1574.3200000000002" width="120" height="60" as="geometry" />
+          <mxGeometry x="529.1099999999999" y="1516.6000000000001" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-98" value="tiene" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="476.9999999999999" y="1462.3199999999997" width="80" height="50" as="geometry" />
+          <mxGeometry x="529.1099999999999" y="1417.3199999999997" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-99" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="Y4ubsjJUYTUOf0jxj_3p-97" target="Y4ubsjJUYTUOf0jxj_3p-98" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -98,7 +98,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-101" value="tiene" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="596.9999999999999" y="1702.3200000000002" width="80" height="50" as="geometry" />
+          <mxGeometry x="619.9999999999999" y="1636.0000000000002" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-102" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="Y4ubsjJUYTUOf0jxj_3p-9" target="Y4ubsjJUYTUOf0jxj_3p-101" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -107,7 +107,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-109" value="hace" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="470.9999999999999" y="1702.32" width="80" height="50" as="geometry" />
+          <mxGeometry x="490.4999999999999" y="1636" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-110" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="Y4ubsjJUYTUOf0jxj_3p-8" target="Y4ubsjJUYTUOf0jxj_3p-109" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -122,10 +122,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-114" value="AllergiesUser" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="376.9999999999999" y="2043.3199999999995" width="120" height="60" as="geometry" />
+          <mxGeometry x="367.9999999999999" y="1977.9999999999995" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-121" value="tiene" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="396.9999999999999" y="1931.32" width="80" height="50" as="geometry" />
+          <mxGeometry x="390.4999999999999" y="1880" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-122" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="Y4ubsjJUYTUOf0jxj_3p-121" target="Y4ubsjJUYTUOf0jxj_3p-8" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -133,11 +133,11 @@
             <mxPoint x="670.9999999999999" y="1538.32" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Y4ubsjJUYTUOf0jxj_3p-123" value="UserInvitationWedding" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="27.499999999999893" y="1576.6" width="134.5" height="60" as="geometry" />
+        <mxCell id="Y4ubsjJUYTUOf0jxj_3p-123" value="UserInvitation" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="178.9999999999999" y="1516.6" width="134.5" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-124" value="tiene" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="207.4999999999999" y="1462.32" width="80" height="50" as="geometry" />
+          <mxGeometry x="261.9999999999999" y="1417.32" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-125" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="Y4ubsjJUYTUOf0jxj_3p-124" target="Y4ubsjJUYTUOf0jxj_3p-123" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -146,10 +146,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-126" value="UserWedding" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="287.4999999999999" y="1576.6" width="120" height="60" as="geometry" />
+          <mxGeometry x="367.9999999999999" y="1516.6" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-127" value="es" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="334.4999999999999" y="1702.32" width="80" height="50" as="geometry" />
+          <mxGeometry x="357.9999999999999" y="1636" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-129" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="Y4ubsjJUYTUOf0jxj_3p-1" target="Y4ubsjJUYTUOf0jxj_3p-128" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -158,7 +158,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-128" value="tiene" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="349.4999999999999" y="1462.32" width="80" height="50" as="geometry" />
+          <mxGeometry x="390.4999999999999" y="1417.32" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-130" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="Y4ubsjJUYTUOf0jxj_3p-126" target="Y4ubsjJUYTUOf0jxj_3p-127" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -167,7 +167,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-131" value="tiene" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="195.0599999999999" y="1700.07" width="80" height="50" as="geometry" />
+          <mxGeometry x="201.9999999999999" y="1633.12" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Y4ubsjJUYTUOf0jxj_3p-132" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="Y4ubsjJUYTUOf0jxj_3p-131" target="Y4ubsjJUYTUOf0jxj_3p-8" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -182,16 +182,16 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-1" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="358.9999999999999" y="1673.5" width="60" height="30" as="geometry" />
+          <mxGeometry x="360.9999999999999" y="1611" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-2" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="364.9999999999999" y="1752.32" width="60" height="30" as="geometry" />
+          <mxGeometry x="353.9999999999999" y="1684" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-3" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="622.9999999999999" y="1679" width="60" height="30" as="geometry" />
+          <mxGeometry x="599.9999999999999" y="1623.57" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-4" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="639.9999999999999" y="1750.07" width="60" height="30" as="geometry" />
+          <mxGeometry x="616.9999999999999" y="1683.12" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-7" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Wedding&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;id : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;dateWedding : DateTime&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;place: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;stateWedding: StateWedding&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;events : List&amp;lt;Event&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;presents : List&amp;lt;Present&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;invitations: List&amp;lt;UserInvitationWedding&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grooms: List&amp;lt;UserWedding&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1091.8899999999999" y="1207.82" width="266.22" height="154.5" as="geometry" />
@@ -199,10 +199,10 @@
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-8" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Event&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;id : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;eventType : EventType&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;description : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;time : DateTime&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;wedding : Wedding&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="880" y="1230.0700000000002" width="153.78" height="112.25" as="geometry" />
         </mxCell>
-        <mxCell id="KMyk0vTcYYK7dUr-PqMM-10" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;UserInvitationWedding&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;id : Long&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;user : User&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;wedding&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: Wedding&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;isConfirm : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;isNotified : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;emailInvitation : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;companions : List&amp;lt;Companion&amp;gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="KMyk0vTcYYK7dUr-PqMM-10" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;UserInvitation&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;id : Long&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;user : User&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;wedding&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: Wedding&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;confirm : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;notified : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;emailInvitation : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;companions : List&amp;lt;Companion&amp;gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="980.88" y="1454.32" width="231" height="136" as="geometry" />
         </mxCell>
-        <mxCell id="KMyk0vTcYYK7dUr-PqMM-12" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Present&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;id : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;wedding : Wedding&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;product : Product&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;user : User&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;isConfirm : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;price : double&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="KMyk0vTcYYK7dUr-PqMM-12" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Present&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;id : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;wedding : Wedding&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;product : Product&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;user : User&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;confirm : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;price : double&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1390" y="1454.32" width="170" height="120" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-14" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;UserWedding&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;id : Long&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;user: UserApp&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;emaiGroom : String&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;wedding: Wedding&lt;/span&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
@@ -218,22 +218,22 @@
           <mxGeometry x="880" y="1960" width="131.75" height="71" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-26" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="494.4999999999999" y="1432.32" width="60" height="30" as="geometry" />
+          <mxGeometry x="518.9999999999999" y="1399" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-27" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="235.4999999999999" y="1432.32" width="60" height="30" as="geometry" />
+          <mxGeometry x="288.9999999999999" y="1396" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-28" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="304.9999999999999" y="1317.32" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-29" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="367.9999999999999" y="1513.1" width="60" height="30" as="geometry" />
+          <mxGeometry x="416.9999999999999" y="1460.75" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-30" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="178.9999999999999" y="1317.32" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-31" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="157.4999999999999" y="1499.32" width="60" height="30" as="geometry" />
+          <mxGeometry x="231.9999999999999" y="1458" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-33" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="KMyk0vTcYYK7dUr-PqMM-10" target="KMyk0vTcYYK7dUr-PqMM-15" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -264,10 +264,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-43" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="235.4999999999999" y="1929.9999999999998" width="60" height="30" as="geometry" />
+          <mxGeometry x="238.9999999999999" y="1856.4999999999998" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-44" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="169.9999999999999" y="2058.3199999999997" width="60" height="30" as="geometry" />
+          <mxGeometry x="201.9999999999999" y="1920.7799999999997" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-46" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;ImageProduct&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;id : Long&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;link: String&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;imageType: String&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;product : Product&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1480" y="1844.8200000000002" width="146.5" height="100" as="geometry" />
@@ -325,37 +325,37 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-59" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="370.4999999999999" y="1914.8200000000002" width="60" height="30" as="geometry" />
+          <mxGeometry x="375.0599999999999" y="1860.0000000000002" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-60" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="672.9999999999999" y="1914.8200000000002" width="60" height="30" as="geometry" />
+          <mxGeometry x="655.9999999999999" y="1860.0000000000002" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-61" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="195.0599999999999" y="1980.5000000000002" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-62" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="385.4999999999999" y="1981.32" width="60" height="30" as="geometry" />
+          <mxGeometry x="383.9999999999999" y="1925" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-63" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="672.9999999999999" y="1980.5000000000002" width="60" height="30" as="geometry" />
+          <mxGeometry x="655.9999999999999" y="1925.0000000000002" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-65" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="469.1099999999999" y="1754" width="60" height="30" as="geometry" />
+          <mxGeometry x="483.9999999999999" y="1683.12" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-66" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="524.9999999999999" y="1688.82" width="60" height="30" as="geometry" />
+          <mxGeometry x="529.1099999999999" y="1623.82" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="KMyk0vTcYYK7dUr-PqMM-67" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;WeddingDTO&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;idWedding : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;dateWedding : LocalDate&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;place: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;stateWedding: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;events : List&amp;lt;MyWeddingEventDTO&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;presents : List&amp;lt;MyWeddingPresentDTO&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grooms: List&amp;lt;UserWeddingDTO&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="71.5" y="2616" width="250" height="138.5" as="geometry" />
+        <mxCell id="KMyk0vTcYYK7dUr-PqMM-67" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;WeddingDTO&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;idWedding : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;dateWedding : LocalDate&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;place: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;stateWedding: String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;events : List&amp;lt;MyWeddingEventDTO&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grooms: List&amp;lt;UserWeddingDTO&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="84" y="2616" width="250" height="123" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-68" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;WeddingEvent&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;idEvent : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;eventType : EventType&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;description : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;time : DateTime&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="557.0000000000001" y="2754.5" width="200" height="113.25" as="geometry" />
+          <mxGeometry x="556.0000000000001" y="2672" width="200" height="113.25" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-69" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;WeddingInvitation&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;idInvitation : Long&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;name : String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;firstSurname : String&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;secondSurname : String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;isConfirm : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;emailInvitation : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;companion : List&amp;lt;Companion&amp;gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1158.1100000000001" y="2591" width="200" height="138" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-71" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;UserWedding&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;idUserWedding : Long&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;idUser : Long&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;name : String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;firstSurname : String&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;secondSurname : String&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="557" y="2527.75" width="200" height="110" as="geometry" />
+          <mxGeometry x="556" y="2545" width="200" height="110" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-72" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;MyUserDTO&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;idUser : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;name : Str&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;ing&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;firstSurname&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;secondSurname&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;email&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;myWeddings :&amp;nbsp;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;List&amp;lt;&lt;/span&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;MyWedding&amp;gt;&lt;/span&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;userAllergies : AllergiesUser&lt;/span&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1709" y="1340" width="200" height="141" as="geometry" />
@@ -373,10 +373,10 @@
           <mxGeometry x="1740" y="1942.5599999999997" width="200" height="70.88" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-97" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="255.0599999999999" y="1736" width="60" height="30" as="geometry" />
+          <mxGeometry x="228.9999999999999" y="1681.32" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-98" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="181.9999999999999" y="1673.5" width="60" height="30" as="geometry" />
+          <mxGeometry x="195.0599999999999" y="1611" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KMyk0vTcYYK7dUr-PqMM-102" value="&lt;font style=&quot;font-size: 72px;&quot;&gt;WeddingController&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="61" y="2391" width="608" height="65" as="geometry" />
@@ -389,10 +389,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-4" value="Companion" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="34.7499999999999" y="1814.32" width="120" height="60" as="geometry" />
+          <mxGeometry x="41.9999999999999" y="1757.32" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-5" value="tiene" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="54.7499999999999" y="1700.07" width="80" height="50" as="geometry" />
+          <mxGeometry x="61.9999999999999" y="1631.32" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-6" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="kaUkFu_g-HQuWZv4Z0kg-4" target="kaUkFu_g-HQuWZv4Z0kg-5" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -407,10 +407,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-8" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="39.9999999999999" y="1753.5" width="60" height="30" as="geometry" />
+          <mxGeometry x="52.9999999999999" y="1679" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-9" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="34.749999999999886" y="1673.5" width="60" height="30" as="geometry" />
+          <mxGeometry x="93.99999999999989" y="1611" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-10" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;AuthController&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="2519" y="1205" width="328" height="65" as="geometry" />
@@ -427,7 +427,7 @@
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-15" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;User&lt;/b&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;WeddingDTO&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;idW&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;edding: Long&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;stateWedding : String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;date : LocalDate&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;place: String&lt;/span&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="2094" y="1360.25" width="200" height="100.5" as="geometry" />
         </mxCell>
-        <mxCell id="kaUkFu_g-HQuWZv4Z0kg-16" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;AuthResponse&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;accessToken :&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;refreshToken :&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;tokenType :&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;haveNewInvitations: Boolean&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;hasWedding : Boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;haveInvitations: Boolean&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+        <mxCell id="kaUkFu_g-HQuWZv4Z0kg-16" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;AuthResponse&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;accessToken :&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;refreshToken :&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;tokenType :&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;haveNewInvitations: Boolean&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;hasWedding : Boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;haveInvitations: Boolean&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="2549" y="1326" width="200" height="127" as="geometry" />
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-17" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;LoginRequest&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;email :&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;password :&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;String&lt;/span&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
@@ -443,7 +443,7 @@
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="kaUkFu_g-HQuWZv4Z0kg-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Companion&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;id : Long&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;userInvitationWedding : UserInvitationWedding&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;name : String&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;firstSurname&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;secondSurname&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;email&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;isAdult : boolean&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;allergies : String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="kaUkFu_g-HQuWZv4Z0kg-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Companion&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;id : Long&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;userInvitation : UserInvitation&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;name : String&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;firstSurname&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;secondSurname&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;email&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: String&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;adult : boolean&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px;&quot;&gt;allergies : String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="860" y="1653.57" width="266" height="160.75" as="geometry" />
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-22" value="&lt;font&gt;PoductController&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=48;" parent="1" vertex="1">
@@ -477,10 +477,10 @@
           <mxGeometry x="40" y="1200" width="716" height="65" as="geometry" />
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-33" value="tiene" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="162" y="1931.32" width="80" height="50" as="geometry" />
+          <mxGeometry x="212" y="1875" width="80" height="50" as="geometry" />
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-34" value="Rol" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="142" y="2043.32" width="120" height="60" as="geometry" />
+          <mxGeometry x="192" y="1978" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-35" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="kaUkFu_g-HQuWZv4Z0kg-34" target="kaUkFu_g-HQuWZv4Z0kg-33" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -495,10 +495,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-37" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="390" y="1432.32" width="60" height="30" as="geometry" />
+          <mxGeometry x="421" y="1399" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-38" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="537" y="1507.3200000000002" width="60" height="30" as="geometry" />
+          <mxGeometry x="563" y="1458.0000000000002" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="kaUkFu_g-HQuWZv4Z0kg-39" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;MyWeddingPresentDTO&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;idPresent : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;idProduct : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;productName : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;isConfirm : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;price : double&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;userName : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;userFirstSurname : String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="521" y="2964" width="200" height="140" as="geometry" />
@@ -574,7 +574,7 @@
           <mxGeometry x="341" y="2699" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="UJDs29k_XPNoJ8rZEd0s-43" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="507.0000000000002" y="2743.75" width="60" height="30" as="geometry" />
+          <mxGeometry x="474.0000000000002" y="2713.63" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="UJDs29k_XPNoJ8rZEd0s-49" value="" style="endArrow=none;html=1;rounded=0;endFill=0;startArrow=open;startFill=0;" parent="1" source="kaUkFu_g-HQuWZv4Z0kg-25" target="KMyk0vTcYYK7dUr-PqMM-69" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -605,7 +605,7 @@
         <mxCell id="UJDs29k_XPNoJ8rZEd0s-61" value="*" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="454" y="3214" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="k75KesQoz-RAnLtZHhcA-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;ListWeddingInvitationDTO&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;idWedding : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;presents : List&amp;lt;MyWeddingInvitationDTO&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grooms: List&amp;lt;UserWeddingDTO&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="k75KesQoz-RAnLtZHhcA-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;ListWeddingInvitationDTO&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;idWedding : Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;guests : List&amp;lt;MyWeddingInvitationDTO&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;grooms: List&amp;lt;UserWeddingDTO&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="851" y="2545" width="250" height="87.25" as="geometry" />
         </mxCell>
         <mxCell id="k75KesQoz-RAnLtZHhcA-2" value="" style="endArrow=none;html=1;rounded=0;endFill=0;startArrow=open;startFill=0;" parent="1" source="KMyk0vTcYYK7dUr-PqMM-69" target="k75KesQoz-RAnLtZHhcA-1" edge="1">
@@ -655,9 +655,6 @@
         </mxCell>
         <mxCell id="2wdOm2bzGNqVqZEkZq0_-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;ListEmailInvitationDTO&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;weddingId: Long&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;addInvitation:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;List&amp;lt;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;String&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="945" y="2816" width="200" height="70.88" as="geometry" />
-        </mxCell>
-        <mxCell id="O6zF8ODbid2AvTgaE9pc-2" value="tiene cambios&amp;nbsp;" style="text;html=1;whiteSpace=wrap;strokeColor=#d6b656;fillColor=#fff2cc;align=center;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="2627" y="1460.75" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

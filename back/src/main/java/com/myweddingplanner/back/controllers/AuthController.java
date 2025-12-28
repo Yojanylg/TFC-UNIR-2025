@@ -76,13 +76,15 @@ public class AuthController {
 
         RegisterResult result = registerService.registerUserApp(req);
 
-        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(result.usuarioId(), true);
+        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(result.usuarioId(), false);
         boolean hasWedding = userAppRepository.existsByIdAndMyWeddings_Wedding_StateWedding(result.usuarioId(), StateWedding.PREPARING);
         boolean haveInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(result.usuarioId());
 
         String access = jwtService.generateToken(
                 result.usuarioEmail(), Map.of("role", result.rolNombre(), "uid", result.usuarioId()));
         String refresh = jwtService.generateRefreshToken(result.usuarioEmail());
+
+        System.out.println("Nw: " + haveNewInvitations + "W: " + hasWedding + "Inv: " + haveInvitations);
 
         // 201 Created + Location (opcional)
         return ResponseEntity
@@ -132,6 +134,8 @@ public class AuthController {
         boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(u.getId(), false);
         boolean hasWedding = userAppRepository.existsByIdAndMyWeddings_Wedding_StateWedding(u.getId(), StateWedding.PREPARING);
         boolean haveInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(u.getId());
+
+        System.out.println("Nw: " + haveNewInvitations + "W: " + hasWedding + "Inv: " + haveInvitations);
 
         String access = jwtService.generateToken(
                 u.getEmail(), Map.of("role", u.getRol().getName(), "uid", u.getId()));

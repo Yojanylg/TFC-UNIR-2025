@@ -79,14 +79,12 @@ public class WeddingMapperImpl implements WeddingMapper{
         ListWeddingInvitationDTO dto = new ListWeddingInvitationDTO();
 
         if (entity == null) {
-            System.out.println("Wedding null");
             return dto;
         }
 
         dto.setIdWedding(entity.getId());
 
         if (!entity.getGrooms().isEmpty()){
-            System.out.println("Wedding novios");
             for (UserWedding u : entity.getGrooms()){
                 dto.getGrooms().add(toUserWeddingDTO(u));
             }
@@ -94,7 +92,6 @@ public class WeddingMapperImpl implements WeddingMapper{
 
 
         if (!entity.getInvitations().isEmpty()) {
-            System.out.println("Wedding invitados");
             for (UserInvitation invitation : entity.getInvitations()){
                 dto.getListWeddingInvitation().add(toMyWeddingInvitationDTO(invitation));
             }
@@ -129,7 +126,7 @@ public class WeddingMapperImpl implements WeddingMapper{
 
         dto.setIdEvent(entity.getId());
 
-        dto.setType(entity.getEventType().toString() != null ? entity.getEventType().toString() : StateWedding.PREPARING.toString());
+        dto.setType(entity.getEventType() != null ? entity.getEventType().name() : null);
         dto.setDescription(comprobarString(entity.getDescription()));
         dto.setTime(comprobarString(entity.getTime()));
 
@@ -182,6 +179,8 @@ public class WeddingMapperImpl implements WeddingMapper{
         dto.setIdWedding(wedding != null ? wedding.getId() : null);
 
         dto.setIdInvitation(entity.getId());
+
+       dto.setConfirm(entity.isConfirm());
 
         UserApp user = entity.getUserApp();
 

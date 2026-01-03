@@ -86,8 +86,6 @@ public class UserAppServiceImpl implements UserAppService{
         // invitaciones en bbdd
         List<UserInvitation> invitations = userInvitationWeddingRepository.findByUserAppId(dto.getUserId());
 
-        System.out.println("Invitaciones recuperadas para actualizar: " + invitations.size());
-
         for (UserInvitation ui : invitations){
             System.out.println(ui.isConfirm());
         }
@@ -220,6 +218,4 @@ public class UserAppServiceImpl implements UserAppService{
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
-
-
 }

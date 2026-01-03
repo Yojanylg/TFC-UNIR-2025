@@ -21,7 +21,7 @@ public class WeddingInvitationDTO {
     private String name;
     private String firstSurname ;
     private String secondSurname;
-    private boolean isConfirm;
+    private boolean confirm;
     private String emailInvitation;
     private List<UserCompanionDTO> companion = new ArrayList<>();
 

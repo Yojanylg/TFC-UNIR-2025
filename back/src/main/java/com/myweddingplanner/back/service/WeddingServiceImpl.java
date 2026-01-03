@@ -33,11 +33,8 @@ public class WeddingServiceImpl implements WeddingService{
     @Override
     public Optional<WeddingDTO> getById(Long id) {
 
-        Wedding wedding = weddingRepository.findById(id).orElseThrow();
-
-        WeddingDTO dto = weddingMapper.toWeddingDTO(wedding);
-
-        return Optional.of(dto);
+        return weddingRepository.findById(id)
+                .map(weddingMapper::toWeddingDTO);
     }
 
     @Override
@@ -46,7 +43,7 @@ public class WeddingServiceImpl implements WeddingService{
         List<Wedding> weddings = weddingRepository.findByGroomsUserAppId(userId).orElseThrow();
 
         for (Wedding w : weddings){
-            if (w.getStateWedding().toString().equals(StateWedding.PREPARING.toString())){
+            if (w.getStateWedding() == StateWedding.PREPARING){
                 return Optional.of(weddingMapper.toWeddingDTO(w));
             }
         }
@@ -61,7 +58,6 @@ public class WeddingServiceImpl implements WeddingService{
 
     @Override
     public ListWeddingInvitationDTO getListWeddingInvitation(Long weddingId) {
-        System.out.println("Wedding service. Get Invitacions id: " + weddingId);
         return weddingMapper.toListWeddingInvitationDTO(weddingRepository.findById(weddingId).orElseThrow());
     }
 
@@ -177,8 +173,6 @@ public class WeddingServiceImpl implements WeddingService{
 
         Wedding wedding = weddingRepository.findById(toAdd.getIdWedding()).orElseThrow();
 
-        System.out.println("Weeding service, add invitaciones. recupero el id: " + wedding.getId());
-
         List<UserInvitation> nuevas = new ArrayList<>();
 
         for (String email : toAdd.getListEmail()){
@@ -216,24 +210,7 @@ public class WeddingServiceImpl implements WeddingService{
     }
 
     @Override
-    public List<WeddingDTO> findAll() {
-
-        List<WeddingDTO> list = new ArrayList<>();
-
-        for (Wedding w : weddingRepository.findAll()){
-            list.add(weddingMapper.toWeddingDTO(w));
-        }
-
-        return list;
-    }
-
-    @Override
     public Wedding save(Wedding wedding) {
         return weddingRepository.save(wedding);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-
     }
 }

@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,9 +24,10 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.Map;
 
-@Tag(name = "Authentication",
+@Tag(
+        name = "Autenticación",
         description = "Controlador encargado de gestionar el registro de nuevos usuarios, la autenticación " +
-                        "de los usuarios y refrescar el token de autenticación")
+                "de los usuarios y refrescar el token de autenticación")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -70,9 +72,7 @@ public class AuthController {
             content = @Content(schema = @Schema(implementation = RegisterRequest.class))
     )
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest req) {
-
-        System.out.println(req);
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest req) {
 
         RegisterResult result = registerService.registerUserApp(req);
 
@@ -83,8 +83,6 @@ public class AuthController {
         String access = jwtService.generateToken(
                 result.usuarioEmail(), Map.of("role", result.rolNombre(), "uid", result.usuarioId()));
         String refresh = jwtService.generateRefreshToken(result.usuarioEmail());
-
-        System.out.println("Nw: " + haveNewInvitations + "W: " + hasWedding + "Inv: " + haveInvitations);
 
         // 201 Created + Location (opcional)
         return ResponseEntity
@@ -106,7 +104,9 @@ public class AuthController {
             @ApiResponse(
                     responseCode = "200",
                     description = "Usuario autenticado correctamente",
-                    content = @Content(schema = @Schema(implementation = AuthResponse.class))
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = AuthResponse.class))
             ),
             @ApiResponse(
                     responseCode = "401",
@@ -123,9 +123,9 @@ public class AuthController {
 
         try {
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword());
-                authManager.authenticate(authToken);
+            authManager.authenticate(authToken);
         } catch (BadCredentialsException ex) {
-            return ResponseEntity.status(401).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         UserApp u = userAppRepository.findWithRolByEmail(req.getEmail()) //
@@ -134,8 +134,6 @@ public class AuthController {
         boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(u.getId(), false);
         boolean hasWedding = userAppRepository.existsByIdAndMyWeddings_Wedding_StateWedding(u.getId(), StateWedding.PREPARING);
         boolean haveInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(u.getId());
-
-        System.out.println("Nw: " + haveNewInvitations + "W: " + hasWedding + "Inv: " + haveInvitations);
 
         String access = jwtService.generateToken(
                 u.getEmail(), Map.of("role", u.getRol().getName(), "uid", u.getId()));
@@ -156,7 +154,9 @@ public class AuthController {
             @ApiResponse(
                     responseCode = "200",
                     description = "Token refrescado correctamente",
-                    content = @Content(schema = @Schema(implementation = AuthResponse.class))
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = AuthResponse.class))
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -167,12 +167,17 @@ public class AuthController {
             name = "refreshToken",
             description = "Refresh token valido previamente entregado",
             required = true,
-            example = "pendiente"
+            example = "eyJhbGciOiJIUzI1NiJ9...."
     )
     @PostMapping("/refresh")
     public ResponseEntity<AuthResponse> refresh(@RequestParam String refreshToken) {
-        var username = jwtService.extractUsername(refreshToken);
-        String access = jwtService.generateToken(username, Map.of());
+
+        String email = jwtService.extractUsername(refreshToken);
+
+        UserApp u = userAppRepository.findWithRolByEmail(email).orElseThrow();
+
+        String access = jwtService.generateToken(u.getEmail(),
+                Map.of("role", u.getRol().getName(), "uid", u.getId()));
         return ResponseEntity.ok(new AuthResponse(access, refreshToken));
     }
 }

@@ -5,8 +5,6 @@ import com.myweddingplanner.back.dto.wedding.ListWeddingInvitationDTO;
 import com.myweddingplanner.back.dto.wedding.ListWeddingPresentDTO;
 import com.myweddingplanner.back.dto.wedding.WeddingDTO;
 import com.myweddingplanner.back.model.Wedding;
-
-import java.util.List;
 import java.util.Optional;
 
 public interface WeddingService {
@@ -25,10 +23,6 @@ public interface WeddingService {
 
     ListWeddingInvitationDTO addInvitation(ListEmailInvitation toAdd);
 
-    List<WeddingDTO> findAll();
-
     Wedding save(Wedding wedding);
-
-    void deleteById (Long id);
 
 }

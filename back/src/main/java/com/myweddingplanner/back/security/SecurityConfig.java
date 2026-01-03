@@ -35,25 +35,18 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(restAuthEntryPoint))
                 .authorizeHttpRequests(reg -> reg
 
-                        /*
-                        .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/v3/api-docs/**", "swagger-ui/**", "swagger-ui.html").permitAll()
+                    .anyRequest().authenticated()
 
-                        .requestMatchers("/api/users/**").authenticated()
-                        .requestMatchers("/api/products/**").authenticated()
-                        .requestMatchers("/api/weddings/**").authenticated()
-
-                        .anyRequest().authenticated()
-
-                         */
-
-                        .anyRequest().permitAll()
+                        //.anyRequest().permitAll()
                 )
 
                 .authenticationProvider(daoAuthenticationProvider());
@@ -86,9 +79,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         var config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(List.of("*")); // en prod pon tu dominio(s)
-        config.setAllowedMethods(List.of("GET","POST","PUT","PATCH","DELETE","OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization","Content-Type"));
+        config.setAllowedOriginPatterns(List.of("*"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         config.setAllowCredentials(true);
 
         var source = new UrlBasedCorsConfigurationSource();

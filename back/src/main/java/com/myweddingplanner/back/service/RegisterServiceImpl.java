@@ -5,6 +5,7 @@ import com.myweddingplanner.back.exception.EmailYaRegistradoException;
 import com.myweddingplanner.back.model.*;
 import com.myweddingplanner.back.model.enums.StateWedding;
 import com.myweddingplanner.back.repository.RolRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +24,7 @@ public class RegisterServiceImpl implements RegisterService {
 
 
     @Override
+    @Transactional
     public RegisterResult registerUserApp(RegisterRequest req) {
 
         if (userAppService.existsByEmail(req.getEmail())){
@@ -43,21 +45,20 @@ public class RegisterServiceImpl implements RegisterService {
 
         UserApp userAppCreated = userAppService.save(newUser);
 
-        processGroomRegistration(req, userAppCreated);
+        if (req.isGroom()) processGroomRegistration(req, userAppCreated);
 
-        return new RegisterResult(userAppCreated.getId(), userAppCreated.getEmail(), userAppCreated.getName());
+        return new RegisterResult(userAppCreated.getId(), userAppCreated.getEmail(), rolUsuario.getName());
     }
 
+    @Transactional
     private void processGroomRegistration(RegisterRequest req, UserApp userAppCreated) {
 
         // Caso 1: nuevo usuario registrado
         //          -> existe como novio de una boda
         //          => recuperar boda y settear como novio
         if (userWeddingService.existsByEmailGroom(userAppCreated.getEmail())){
-            System.out.println("Usuario figura como novio");
 
-            UserWedding userWeddingToUpdate = userWeddingService.findByUserEmail(userAppCreated.getEmail())
-                    .orElseThrow(() -> new IllegalStateException("Novio no encontrado"));
+            UserWedding userWeddingToUpdate = userWeddingService.findByEmailGroom(userAppCreated.getEmail());
 
             Wedding wedding = userWeddingToUpdate.getWedding();
 
@@ -79,22 +80,22 @@ public class RegisterServiceImpl implements RegisterService {
         }
 
         // Caso 2: el usuario no existe como novio => crear boda con este usuario como Novio1
-        System.out.println("creando wedding y asignando userWedding");
 
-        Wedding newWedding = new Wedding();
+        Wedding wedding = new Wedding();
 
-        newWedding.setDateWedding(null);
-        newWedding.setPlace("pendiente");
-        newWedding.setStateWedding(StateWedding.PREPARING);
+        wedding.setDateWedding(req.getWeddingDate());
+        // TODO agregar tratamiento del lugar de la boda
+        wedding.setPlace("pendiente");
+        wedding.setStateWedding(StateWedding.PREPARING);
 
-        Wedding weddingCreated = weddingService.save(newWedding);
+        //Wedding weddingCreated = weddingService.save(newWedding);
 
         UserWedding uwFirst = new UserWedding();
 
-        uwFirst.setWedding(weddingCreated);
+        uwFirst.setWedding(wedding);
         uwFirst.setUserApp(userAppCreated);
-
-        weddingCreated.getGrooms().add(uwFirst);
+        uwFirst.setEmailGroom(userAppCreated.getEmail());
+        wedding.getGrooms().add(uwFirst);
 
         // setter uwSecond
 
@@ -110,19 +111,19 @@ public class RegisterServiceImpl implements RegisterService {
                         .orElseThrow(() -> new IllegalStateException("Inconsistencia usuario novio2 no encontrado"));
 
                 uwSecond.setUserApp(u2);
-                uwSecond.setWedding(weddingCreated);
+                uwSecond.setWedding(wedding);
 
             } else {
 
                 // Novio2 no registrado
                 uwSecond.setEmailGroom(req.getEmailGroom());
+                uwSecond.setWedding(wedding);
             }
 
-            weddingCreated.getGrooms().add(uwSecond);
+            wedding.getGrooms().add(uwSecond);
         }
 
-        System.out.println("creando boda");
-        weddingService.save(weddingCreated);
+        weddingService.save(wedding);
 
     }
 

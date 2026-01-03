@@ -42,7 +42,6 @@ public class WeddingController {
 
        Optional<WeddingDTO> optWedding = weddingService.getWeddingPreparingByUserId(id);
 
-
        if (optWedding.isEmpty()){
            return ResponseEntity.status(HttpStatus.NOT_FOUND)
                    .body(Map.of("error", "no existe boda"));
@@ -57,15 +56,16 @@ public class WeddingController {
     public ResponseEntity<?> getWedding (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
                                          @PathVariable Long idWedding){
 
-        return ResponseEntity.ok(weddingService.getById(idWedding));
+        return weddingService.getById(idWedding)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
 
     }
+
     // Get presents by id wedding
     @GetMapping("/presents/{idWedding}")
     public ResponseEntity<?> getWeddingPresents (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
                                          @PathVariable Long idWedding){
-
-        System.out.println("Weeding Controller, get presents. Llega el id: " + idWedding);
 
         return ResponseEntity.ok(weddingService.getListWeddingPresent(idWedding));
 
@@ -74,8 +74,6 @@ public class WeddingController {
     @GetMapping("/invitations/{idWedding}")
     public ResponseEntity<?> getWeddingInvitations (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
                                                  @PathVariable Long idWedding){
-
-        System.out.println("Wedding Controller. Get Invitacions id: " + idWedding);
 
         return ResponseEntity.ok(weddingService.getListWeddingInvitation(idWedding));
 
@@ -88,11 +86,7 @@ public class WeddingController {
                                              @PathVariable Long idWedding,
                                              @RequestBody ListEmailInvitation listEmailInvitation){
 
-
-
         listEmailInvitation.setIdWedding(idWedding);
-
-        System.out.println("Weeding Controller, add invitaciones. Llega el id: " + idWedding);
 
         return ResponseEntity.ok(weddingService.addInvitation(listEmailInvitation));
     }
@@ -102,7 +96,11 @@ public class WeddingController {
 
     @PutMapping("/{idWedding}")
     public ResponseEntity<?> updateWedding(@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
+                                    @PathVariable Long idWedding,
                                     @RequestBody WeddingDTO dto){
+
+        dto.setIdWedding(idWedding);
+
         return ResponseEntity.ok(weddingService.updateWeddingDTO(dto));
     }
 
@@ -111,7 +109,6 @@ public class WeddingController {
                                            @PathVariable Long idWedding,
                                            @RequestBody ListWeddingPresentDTO dto){
 
-        System.out.println("Weeding Controller, presents. Llega el id: " + idWedding);
         dto.setIdWedding(idWedding);
 
         for (WeddingPresentDTO w : dto.getMyWeddingPresent()){
@@ -121,6 +118,4 @@ public class WeddingController {
 
         return ResponseEntity.ok(weddingService.updateListWeddingPresent(dto));
     }
-
-
 }

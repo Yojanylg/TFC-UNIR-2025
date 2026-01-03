@@ -13,22 +13,16 @@ Descripción: Script DDL para crear el esquema de la aplicación My Wedding (tab
 ------------------------------------------------------------------------------------
 Dependencias: 
                 - Requiere tener creada la base de datos "mywedding"
-
                 - Requiere permisos de ejecución CREATE / ALTER / FK.
 ------------------------------------------------------------------------------------
 Historial de cambios:
 
-usuarios nueva col estado 
-Agregamos tabla ROLES y relación: 1 roles * usuarios
 
 TODO 
    
-    imagen_(producto || alergeno) -> cuando definamos los tipos de imagenes, se pueden
-                                    unificar en una tabla y agregar restricción check
     usuarios.email -> UNIQUE
+    fechas de varchar a tipo fecha
  
-
-
 ------------------------------------------------------------------------------------
 */
 
@@ -64,8 +58,8 @@ CREATE TABLE products (
     link VARCHAR(255) ,
     price NUMERIC(10,2),
     product_type VARCHAR(255),
-    start_date DATETIME,
-    update_date DATETIME    
+    start_date VARCHAR(255),
+    update_date VARCHAR(255)    
 );
 
 
@@ -193,7 +187,7 @@ Notas:
 
 CREATE TABLE weddings (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    date_wedding DATETIME,
+    date_wedding VARCHAR(255),
     place VARCHAR(255),
     state_wedding VARCHAR(255)  DEFAULT "PREPARING"
 );
@@ -213,7 +207,7 @@ CREATE TABLE events (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     event_type VARCHAR(255),
     description VARCHAR(255),
-    time DATETIME,
+    time VARCHAR(255),
     wedding_id BIGINT,
     CONSTRAINT fk_events_weddings
         FOREIGN KEY (wedding_id) REFERENCES weddings(id) 

@@ -74,6 +74,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest req) {
 
+
         RegisterResult result = registerService.registerUserApp(req);
 
         boolean hasNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(result.usuarioId(), false);

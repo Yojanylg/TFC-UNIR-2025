@@ -1,12 +1,9 @@
 package com.myweddingplanner.back.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +25,7 @@ public class RegisterRequest {
 
     // Datos de registro novio
 
-    private boolean isGroom;
+    private boolean groom;
 
     private String nameGroom;
 

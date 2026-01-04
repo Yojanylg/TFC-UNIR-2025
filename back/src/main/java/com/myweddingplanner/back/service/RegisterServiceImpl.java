@@ -45,7 +45,10 @@ public class RegisterServiceImpl implements RegisterService {
 
         UserApp userAppCreated = userAppService.save(newUser);
 
-        if (req.isGroom()) processGroomRegistration(req, userAppCreated);
+        if (req.isGroom()) {
+            processGroomRegistration(req, userAppCreated);
+            System.out.println("es novio");
+        }
 
         return new RegisterResult(userAppCreated.getId(), userAppCreated.getEmail(), rolUsuario.getName());
     }

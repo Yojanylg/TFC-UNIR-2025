@@ -15,9 +15,9 @@ public class AuthResponse {
     private String refreshToken;
     private String tokenType = "Bearer";
 
-    private boolean haveNewInvitations;
+    private boolean hasNewInvitations;
     private boolean hasWedding;
-    private boolean haveInvitations;
+    private boolean hasInvitations;
 
     public AuthResponse(String accessToken, String refreshToken){
         this.accessToken = accessToken;
@@ -27,8 +27,8 @@ public class AuthResponse {
     public AuthResponse(String accessToken, String refreshToken, boolean haveNewInvitations, boolean hasWedding, boolean haveInvitations){
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
-        this.haveNewInvitations = haveNewInvitations;
-        this.hasWedding= hasWedding;
-        this.haveInvitations= haveInvitations;
+        this.hasNewInvitations = haveNewInvitations;
+        this.hasWedding = hasWedding;
+        this.hasInvitations = haveInvitations;
     }
 }

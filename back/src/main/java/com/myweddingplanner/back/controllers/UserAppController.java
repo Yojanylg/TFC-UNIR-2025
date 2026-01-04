@@ -221,9 +221,7 @@ public class UserAppController {
             )
     })
     @PutMapping("/me")
-    public ResponseEntity<?> updateUser (
-            @RequestHeader (name = "Authorization", required = true) String authorizationHeader,
-            @RequestBody MyUserDTO dto
+    public ResponseEntity<?> updateUser (@RequestBody MyUserDTO dto
     ){
 
         // TODO actualizar usuario y devolverlo actualizado
@@ -232,8 +230,7 @@ public class UserAppController {
 
 
     @PutMapping("/myPresents")
-    public ResponseEntity<?> updatePresents (@RequestHeader (name = "Authorization", required = true) String authorizationHeader,
-                                             @RequestBody ListUserPresentDTO dto){
+    public ResponseEntity<?> updatePresents (@RequestBody ListUserPresentDTO dto){
 
         return ResponseEntity.ok(userAppService.updateListUserPresent(dto));
 

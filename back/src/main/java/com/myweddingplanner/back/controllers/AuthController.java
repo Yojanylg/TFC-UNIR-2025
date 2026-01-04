@@ -25,7 +25,7 @@ import java.net.URI;
 import java.util.Map;
 
 @Tag(
-        name = "Autenticación",
+        name = "Controlador de Autenticación",
         description = "Controlador encargado de gestionar el registro de nuevos usuarios, la autenticación " +
                 "de los usuarios y refrescar el token de autenticación")
 @RestController
@@ -48,7 +48,7 @@ public class AuthController {
     // -------------------- REGISTER ----------------------
     // ----------------------------------------------------
     @Operation(
-            summary = "Registro de usuario",
+            summary = "Registro de usuarios",
             description = "Registra un usuario si no existe el email aportado y " +
                     "devuelve AuthResponse con el token de autenticación"
     )
@@ -76,9 +76,9 @@ public class AuthController {
 
         RegisterResult result = registerService.registerUserApp(req);
 
-        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(result.usuarioId(), false);
+        boolean hasNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(result.usuarioId(), false);
         boolean hasWedding = userAppRepository.existsByIdAndMyWeddings_Wedding_StateWedding(result.usuarioId(), StateWedding.PREPARING);
-        boolean haveInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(result.usuarioId());
+        boolean hasInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(result.usuarioId());
 
         String access = jwtService.generateToken(
                 result.usuarioEmail(), Map.of("role", result.rolNombre(), "uid", result.usuarioId()));
@@ -87,7 +87,7 @@ public class AuthController {
         // 201 Created + Location (opcional)
         return ResponseEntity
                 .created(URI.create("/api/users/" + result.usuarioId()))
-                .body(new AuthResponse(access, refresh, haveNewInvitations, hasWedding, haveInvitations));
+                .body(new AuthResponse(access, refresh, hasNewInvitations, hasWedding, hasInvitations));
 
     }
 
@@ -131,16 +131,16 @@ public class AuthController {
         UserApp u = userAppRepository.findWithRolByEmail(req.getEmail()) //
                 .orElseThrow();
 
-        boolean haveNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(u.getId(), false);
+        boolean hasNewInvitations = userAppRepository.existsByIdAndInvitations_Notified(u.getId(), false);
         boolean hasWedding = userAppRepository.existsByIdAndMyWeddings_Wedding_StateWedding(u.getId(), StateWedding.PREPARING);
-        boolean haveInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(u.getId());
+        boolean hasInvitations = userAppRepository.existsByIdAndInvitationsIsNotEmpty(u.getId());
 
         String access = jwtService.generateToken(
                 u.getEmail(), Map.of("role", u.getRol().getName(), "uid", u.getId()));
 
         String refresh = jwtService.generateRefreshToken(u.getEmail());
 
-        return ResponseEntity.ok(new AuthResponse(access, refresh, haveNewInvitations, hasWedding, haveInvitations));
+        return ResponseEntity.ok(new AuthResponse(access, refresh, hasNewInvitations, hasWedding, hasInvitations));
     }
 
     // ----------------------------------------------------

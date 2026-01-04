@@ -53,8 +53,7 @@ public class WeddingController {
 
     // Get One
     @GetMapping("/{idWedding}")
-    public ResponseEntity<?> getWedding (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
-                                         @PathVariable Long idWedding){
+    public ResponseEntity<?> getWedding (@PathVariable Long idWedding){
 
         return weddingService.getById(idWedding)
                 .map(ResponseEntity::ok)
@@ -64,16 +63,14 @@ public class WeddingController {
 
     // Get presents by id wedding
     @GetMapping("/presents/{idWedding}")
-    public ResponseEntity<?> getWeddingPresents (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
-                                         @PathVariable Long idWedding){
+    public ResponseEntity<?> getWeddingPresents (@PathVariable Long idWedding){
 
         return ResponseEntity.ok(weddingService.getListWeddingPresent(idWedding));
 
     }
     // Get invitations by id wedding
     @GetMapping("/invitations/{idWedding}")
-    public ResponseEntity<?> getWeddingInvitations (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
-                                                 @PathVariable Long idWedding){
+    public ResponseEntity<?> getWeddingInvitations (@PathVariable Long idWedding){
 
         return ResponseEntity.ok(weddingService.getListWeddingInvitation(idWedding));
 
@@ -82,8 +79,7 @@ public class WeddingController {
     /* ----------------- CREATE DE USERS ----------------- */
 
     @PostMapping("/invitations/{idWedding}")
-    public ResponseEntity<?> addInvitations (@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
-                                             @PathVariable Long idWedding,
+    public ResponseEntity<?> addInvitations (@PathVariable Long idWedding,
                                              @RequestBody ListEmailInvitation listEmailInvitation){
 
         listEmailInvitation.setIdWedding(idWedding);
@@ -95,8 +91,7 @@ public class WeddingController {
     /* ----------------- UPDATE DE USERS ----------------- */
 
     @PutMapping("/{idWedding}")
-    public ResponseEntity<?> updateWedding(@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
-                                    @PathVariable Long idWedding,
+    public ResponseEntity<?> updateWedding(@PathVariable Long idWedding,
                                     @RequestBody WeddingDTO dto){
 
         dto.setIdWedding(idWedding);
@@ -105,8 +100,7 @@ public class WeddingController {
     }
 
     @PutMapping("/presents/{idWedding}")
-    public ResponseEntity<?> updateWeddingPresents(@RequestHeader(name = "Authorization", required = true) String authorizationHeader,
-                                           @PathVariable Long idWedding,
+    public ResponseEntity<?> updateWeddingPresents(@PathVariable Long idWedding,
                                            @RequestBody ListWeddingPresentDTO dto){
 
         dto.setIdWedding(idWedding);

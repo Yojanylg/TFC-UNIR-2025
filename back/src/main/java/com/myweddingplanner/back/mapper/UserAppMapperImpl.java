@@ -4,6 +4,9 @@ import com.myweddingplanner.back.dto.users.*;
 import com.myweddingplanner.back.model.*;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class UserAppMapperImpl implements UserAppMapper{
 
@@ -107,36 +110,81 @@ public class UserAppMapperImpl implements UserAppMapper{
     }
 
     @Override
-    public UserInvitationDTO toMyInvitation(UserInvitation userInvitation){
+    public UserInvitationDTO toMyInvitation(UserInvitation userInvitation) {
 
         UserInvitationDTO invitation = new UserInvitationDTO();
 
-        invitation.setIdWedding(userInvitation.getWedding().getId());
-        invitation.setIdInvitation(userInvitation.getId());
-        invitation.setWeddingDate(userInvitation.getWedding().getDateWedding());
-        invitation.setPlace(userInvitation.getWedding().getPlace());
+        if (userInvitation == null) {
+            return invitation;
+        }
+
+        if (userInvitation.getId() != null) {
+            invitation.setIdInvitation(userInvitation.getId());
+        }
+
+        Wedding wedding = userInvitation.getWedding();
+
+        if (wedding != null) {
+
+            if (wedding.getId() != null ) {
+                invitation.setIdWedding(wedding.getId());
+            }
+
+        invitation.setWeddingDate(wedding.getDateWedding());
+        invitation.setPlace(wedding.getPlace());
 
         // COUPLE
         boolean first = true;
         String name = "";
 
-        for (UserWedding groom : userInvitation.getWedding().getGrooms()){
+        List<UserWedding> grooms = wedding.getGrooms();
+        if (grooms == null) {
+            grooms = new ArrayList<>();
+        }
+
+        for (UserWedding groom : grooms) {
+
+            if (groom == null) {
+                continue;
+            }
+
+            UserApp user = groom.getUserApp();
+            if (user == null) {
+                continue;
+            }
+
+            String groomName = user.getName();
+            if (groomName == null || groomName.trim().isEmpty()) {
+                continue;
+            }
 
             if (first) {
-                name = groom.getUserApp().getName();
+                name = groomName;
                 first = false;
             } else {
-                name = name + " y " + groom.getUserApp().getName();
+                name = name + " y " + groomName;
             }
         }
 
         invitation.setCouple(name);
 
-        invitation.setConfirm(userInvitation.isConfirm());
+    } else {
 
+            invitation.setCouple("");
+    }
+
+        invitation.setConfirm(userInvitation.isConfirm());
         invitation.setNotified(userInvitation.isNotified());
 
-        for (Companion companion : userInvitation.getCompanions()){
+        List<Companion> companions = userInvitation.getCompanions();
+        if (companions == null) {
+            companions = new ArrayList<>();
+        }
+
+        for (Companion companion : companions){
+            if (companion == null ){
+                continue;
+            }
             invitation.getCompanions().add(toMyCompanion(companion));
         }
 

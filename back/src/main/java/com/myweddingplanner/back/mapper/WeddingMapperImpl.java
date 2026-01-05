@@ -15,6 +15,7 @@ public class WeddingMapperImpl implements WeddingMapper{
     public WeddingDTO toWeddingDTO(Wedding wedding) {
 
         WeddingDTO dto = new WeddingDTO();
+
         if (wedding == null ) return dto;
 
         dto.setIdWedding(wedding.getId());

@@ -42,11 +42,10 @@ public class SecurityConfig {
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(restAuthEntryPoint))
                 .authorizeHttpRequests(reg -> reg
 
-                    .requestMatchers("/api/auth/**").permitAll()
-                    .requestMatchers("/v3/api-docs/**", "swagger-ui/**", "swagger-ui.html").permitAll()
-                    .anyRequest().authenticated()
-
-                        //.anyRequest().permitAll()
+                    //.requestMatchers("/api/auth/**").permitAll()
+                    //.requestMatchers("/v3/api-docs/**", "swagger-ui/**", "swagger-ui.html").permitAll()
+                    //.anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
 
                 .authenticationProvider(daoAuthenticationProvider());

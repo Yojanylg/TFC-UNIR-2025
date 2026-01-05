@@ -122,8 +122,6 @@ public class UserAppMapperImpl implements UserAppMapper{
 
         for (UserWedding groom : userInvitation.getWedding().getGrooms()){
 
-
-
             if (first) {
                 name = groom.getUserApp().getName();
                 first = false;

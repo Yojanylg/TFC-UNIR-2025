@@ -42,7 +42,7 @@ public class WeddingController {
 
        Optional<WeddingDTO> optWedding = weddingService.getWeddingPreparingByUserId(id);
 
-       if (optWedding.isEmpty()){
+        if (optWedding.isEmpty()){
            return ResponseEntity.status(HttpStatus.NOT_FOUND)
                    .body(Map.of("error", "no existe boda"));
        }
